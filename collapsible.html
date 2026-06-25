@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SSCB — De La Salle Lipa</title>
+<link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<style>
+.hyphen {
+font-family: Arial;
+font-size: 22px;
+color: var(--dlsl-green);
+}
+   /* Live Search Input Wrapper */
+    .search-wrapper {
+      margin-bottom: 30px;
+      display: flex;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 20px;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: #0f3d2e;
+      box-shadow: 0 0 0 3px rgba(15, 61, 70, 0.1);
+    }
+
+    /* Responsive Transparency Cards Roster Grid Layout */
+    .attendance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .attendance-display-card {
+      background: #fff;
+      border: 1px solid #e9ecef;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+    }
+
+    .attendance-display-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .member-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .member-name {
+      font-weight: 700;
+      color: #212529;
+      font-size: 1.1rem;
+    }
+
+    .member-role {
+      font-size: 0.85rem;
+      color: #6c757d;
+      font-weight: 500;
+      font-family: 'Livvic', sans-serif;
+    }
+
+    /* Percentage Compliance Score Labels */
+    .percentage-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-family: 'Livvic', sans-serif;
+    }
+    
+    /* Compliance Threshold Classes */
+    .pct-high { background: #e6f6f0; color: #0f3d2e; }
+    .pct-mid { background: #fff9db; color: #f08c00; }
+    .pct-low { background: #fff5f5; color: #fa5252; }
+
+    /* Visual Metrics Progress Tracks */
+    .gauge-container {
+      margin-bottom: 18px;
+    }
+    .gauge-bar-track {
+      width: 100%;
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .gauge-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .bg-high { background-color: #3bb143; }
+    .bg-mid { background-color: #f08c00; }
+    .bg-low { background-color: #fa5252; }
+
+    /* Descriptive Statistics Numerical Split */
+    .breakdown-row {
+      display: flex;
+      gap: 20px;
+      border-top: 1px solid #f1f3f5;
+      padding-top: 14px;
+      font-size: 0.85rem;
+      font-family: 'Livvic', sans-serif;
+    }
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #495057;
+    }
+    .dot-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-present { background: #3bb143; }
+    .dot-excused { background: #f08c00; }
+    .dot-absent { background: #fa5252; }
+    
+    @font-face {
+        font-family: 'Visby CF Heavy';
+        src: url('fonts/fsp-demo-visby-cf-heavy-regular.otf') format('opentype');
+    }
+    @font-face {
+        font-family: 'Livvic';
+        src: url('fonts/Livvic-Regular.otf') format('truetype');
+    }
+    section p{
+        font-family: 'Livvic';
+    }
+    .board-section-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+    .gitna {
+        text-align: center;
+    }
+
+    /* Wrapper for each row group */
+    .role-group {
+      width: 100%;
+      display: grid;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    /* PRESIDENT → single centered */
+    .role-group.single {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      max-width: 900px;
+      margin-bottom: 40px;
+      margin: 0 auto;
+      gap: 40px;
+    }
+    .role-group.single .person-card {
+      width: 100%;
+    }
+    #is-president .role-group.single {
+      margin-bottom: 50px;
+    }
+
+    #is-president .role-group.single .person-card {
+      max-width: 420px;
+      width: 100%;
+    }
+
+    #is-president .role-group.single {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto 50px auto;
+    }
+
+    #is-president .role-group.single .person-card {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    /* TREASURERS / PROS → 2 equal columns */
+    .role-group.double {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      gap: 40px;
+    }
+
+    /* PERSON CARD */
+    .person-card {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .center-row {
+      justify-content: center;
+    }
+
+    .board-grid.large-gap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 35px 40px;
+    }
+
+    .person-card.full-row {
+      grid-column: 1 / 4;
+    }
+
+    .empty-card {
+      visibility: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .hahaha {
+      color: #0f3d2e;
+      text-align: justify;
+    }
+
+    .haha {
+      font-family: "Visby CF Heavy";
+      font-size: 35px;
+      color: #ffffff;
+    }
+
+    .content {
+      min-height: 100vh;
+      margin-left: 230px;
+      transition: margin-left 0.5s cubic-bezier(.4,0,.2,1);
+    }
+
+    .content.collapsed {
+      margin-left: 0px;
+    }
+
+    .top-header {
+      position: fixed;
+      top: -80px;
+      width: 100%;
+      background: var(--dlsl-green);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 28px;
+      z-index: 9999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      backdrop-filter: blur(6px);
+      transition: top 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+
+    .header-title {
+      font-family: "Visby CF Heavy";
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .social-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .social-btn img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .social-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .top-header.active {
+      top: 0;
+      opacity: 1;
+    }
+
+    /* ==================== Sidebar ==================== */
+    .sidebar { 
+      position: fixed; top: 0; left: 0; width: 230px; height: 100vh;
+      background: var(--dlsl-green-dark); color: white; padding: 20px; box-sizing: border-box; overflow-y: auto; 
+      transition: width 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .sidebar.collapsed {
+      transform: translateX(-165px);
+      width: 60px;
+    }
+
+    .sidebar h3,
+    .sidebar .tab {
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+
+    .sidebar.collapsed h3,
+    .sidebar.collapsed .tab {
+      opacity: 0;
+      transform: translateX(-10px);
+      visibility: hidden;
+    }
+
+    .sidebar-toggle {
+      position: fixed;
+      top: 8.5px;
+      left: 20px;
+      z-index: 10000;
+      background: var(--dlsl-green-dark);
+      color: #fff;
+      border: none;
+      padding: 10px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 20px;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar-toggle:hover {
+      background: var(--dlsl-green-dark);
+    }
+
+    .sidebar h3{
+      margin-bottom: 30px;
+    }
+    .tab {
+      font-family: "Visby CF Heavy";
+      display: block;
+      width: 100%;
+      margin-bottom: 14px;
+      padding: 12px 14px;
+      background: transparent;
+      color: #fff;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      border-radius: 10px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: all 0.3s ease;
+    }
+
+    /* ==================== Tabs ==================== */
+    .tab-content{
+      display: none;
+      animation: recordsFade .7s ease;
+    }
+    .tab-content.active{
+      display: block;
+    }
+
+    /* ==================== Sections ==================== */
+    section{
+      opacity:0;
+      transform:translateY(40px);
+      transition: all 0.9s ease;
+    }
+    section.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .sidebar {
+      background: #00A0BE;
+    }
+    .sidebar-toggle {
+      background: var(--dlsl-green);
+    }
+    .tab:hover{
+      transform: translateX(4px);
+    }
+    .tab.active, .tab:hover {
+      background: var(--dlsl-green-dark);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+    }
+
+    .intro-section {
+      background: #fff;
+      color: var(--dlsl-green-dark);
+    }
+
+    .mission-vision-section, .board-section {
+      background: var(--dlsl-green);
+      color: var(--dlsl-green);
+    }
+
+    .news-section{
+      background: var(--dlsl-white);
+      color: var(--muted-text);
+    }
+
+    .email-btn, .some-button-class {
+      background: var(--dlsl-green);
+      color: var(--dlsl-white);
+    }
+    .email-btn:hover {
+      background: var(--dlsl-green-dark);
+    }
+    .button-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .role {
+      font-family: 'Livvic';
+    }
+
+    /* ==================== Colors ==================== */
+    :root{
+      --dlsl-green: #00A0BE;
+      --dlsl-green-dark: #13768b;
+      --dlsl-white: #ffffff;
+      --light-gray: #f5f6f5;
+      --soft-gray: #e9eceb;
+      --muted-text: #3a3a3a;
+      --accent-light: #dfece6;
+      --accent-soft: #daf5e9;
+      --green:#0f3d2e; 
+      --light:#f7f7f7; 
+      --accent:#1f6b47; 
+      --muted:#6b6b6b;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--light); color:var(--green); line-height:1.5;}
+
+    section{
+      width:100%;
+      padding:60px 28px;
+      box-sizing:border-box;
+    }
+
+    section + section{
+      border-top:1px solid #e6e6e6;
+    }
+    section h2{
+      font-family: "Visby CF Heavy";
+      font-size: 35px;
+      color:#fff;
+      margin-bottom:24px;
+    }
+
+    section h3{
+      font-family: "Visby CF Heavy";
+    }
+    section .container1{
+      background: var(--dlsl-green);
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    section .container{
+      background: #fff;
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    section .blablas{
+      padding: 5px;
+      border-radius: 18px;
+    }
+
+    .blablas {
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    section .blabla{
+      background: var(--dlsl-green);
+      padding: 5px;
+      border-radius: 18px;
+    }
+
+    .blabla {
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    /* ==================== Avatars & Cards ==================== */
+    .avatar img{
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      object-fit:cover;
+    }
+    .board-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:24px;
+    }
+    .avatar{
+      width: 160px !important;
+      height: 160px !important;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      outline: 2px solid var(--dlsl-green);
+      margin: 0 auto 18px;
+      background: linear-gradient(180deg,#e9efe9,#f6fbf6);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+    .person-card {
+      background: linear-gradient(145deg,#ffffff,#f0f0f0);
+      border-radius: 22px;
+      padding: 30px 22px;
+      text-align: center;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .person-card::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at top left, rgba(0, 160, 190,.2), transparent 60%);
+      opacity: 0;
+      transition: .4s;
+    }
+
+    .person-card:hover::before { opacity:1 }
+
+    .person-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    .person-card .avatar{
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .person-card:hover .avatar{
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    .person-info .name{
+      font-family: "Visby CF Heavy";
+      font-weight:600;
+      font-size:18px;
+      margin-bottom:6px;
+    }
+    .person-info .role{
+      font-size:15px;
+      color:var(--muted);
+      margin-bottom:12px;
+    }
+    .email-btn{
+      justify-content: center;
+      font-family: "Visby CF Heavy";
+      display:inline-block;
+      padding:10px 20px;
+      background:var(--dlsl-green);
+      color:#fff;
+      border-radius:8px;
+      font-size:13px;
+      text-decoration:none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .email-btn:hover{
+      transform: translateY(-2px);
+      background: var(--dlsl-green-dark);
+    }
+
+    @media(min-width:720px){
+      .board-grid{ grid-template-columns:repeat(2,1fr); }
+    }
+    @media(min-width:1024px){
+      .board-grid{ grid-template-columns:repeat(4,1fr); }
+    }
+
+    .container{ max-width:1200px; margin:0 auto; }
+    .container1{ max-width:1200px; margin:0 auto; }
+        
+    /* ==================== Cover ==================== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: url('1234.png') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyYzZjazdlbDl6dDRxeXNndHpkazN1YnBmYTZqb2M1bTd6OWVzMWZrZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3xz2BRU6WpaxKiPzuE/source.gif') center/cover no-repeat;
+      opacity: 0.25;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: 2;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.55));
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      height: 100%;
+      padding-bottom: 40px;
+    }
+
+    .hero-btn {
+      font-family: "Visby CF Heavy";
+      display: inline-block;
+      padding: 10px 36px;
+      background: var(--dlsl-green);
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 4;
+    }
+
+    .hero-btn:hover {
+      background: var(--dlsl-green-dark);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+
+    .scroll-arrow {
+      opacity: 0.8;
+      animation: slowFloat 2.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .scroll-arrow svg { transform: scale(0.9); }
+
+    @keyframes slowFloat {
+      0% { transform: translateY(0); opacity: 0.4; }
+      50% { transform: translateY(14px); opacity: 1; }
+      100% { transform: translateY(0); opacity: 0.4; }
+    }
+    .blue { color: #00A0BE;}
+
+    .cover {
+      height: 400px;
+      background: url('1234.png');
+      background-size: cover;
+      background-position: center;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      text-align: center;
+    }
+
+    .cover h1 {
+      font-family: "Visby CF Heavy";
+      font-size: 42px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    /* ==================== Intro ==================== */
+    .intro-section {
+        background: #fff;
+        padding: 80px 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .intro-wrapper {
+        max-width: 1200px;
+        width: 100%;
+    }
+
+    .intro {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        flex-wrap: wrap;
+        text-align: left;
+    }
+
+    .logo-circle {
+        font-family: "Visby CF Heavy";
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: url('logo.png') no-repeat center center;
+        background-size: 140%;
+        object-fit: cover;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 48px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .intro-desc {
+        max-width: 600px;
+        font-size: 18px;
+        line-height: 1.6;
+        color: #444;
+        text-align: justify;
+    }
+
+    .section-desc { font-family: 'Livvic'; color: #000; }
+
+    /* ==================== Mission & Vision ==================== */
+    .mv-grid{ display:grid; grid-template-columns:1fr; gap:16px; }
+    .mv-box{ background:#fbfbfb; padding:18px; border-radius:14px; border:1px solid #f0f0f0; }
+    .mv-box h3{margin:0 0 8px;color:var(--green);}
+    @media(min-width:720px){ .mv-grid{grid-template-columns:1fr 1fr;} }
+
+    /* ==================== Carousel ==================== */
+    .news-carousel{
+      position:relative;
+      overflow:hidden;
+      border-radius:14px;
+      width:100%;
+      max-width:100%;
+      height:500px;
+      margin:0 auto;
+    }
+    .news-section .container1 {
+      max-width: 1400px;
+      padding: 50px 40px;
+    }
+
+    .news-carousel-container {
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    .portrait-carousel { height: 400px; }
+
+    .news-flex {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .news-carousel-container { flex: 2; min-width: 300px; }
+    .portrait-carousel-container { flex: 1; max-width: 400px; }
+    .portrait-carousel { flex: 0 0 300px; height: 500px; }
+
+    .portrait-carousel {
+      border-radius:14px;
+      position:relative;
+      overflow:hidden;
+      height:500px;
+    }
+
+    .portrait-slide {
+      position: absolute;
+      top:0; left:0; width:100%; height:100%; opacity:0;
+      transform:translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease;
+      z-index:1; pointer-events:none; overflow:hidden;
+    }
+
+    .portrait-slide.active { opacity:1; transform:translateY(0); z-index:2; pointer-events:auto; }
+    .portrait-slide img { width:100%; height:100%; object-fit:cover; border-radius:14px; }
+    .portrait-slide .caption { position:absolute; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.6); color:#fff; padding:12px; box-sizing:border-box; }
+    .portrait-dots { position:absolute; bottom:0px; width:100%; text-align:center; z-index:5; }
+    .portrait-dots .dot { display:inline-block; width:8px; height:8px; margin:0 4px; background:#ccc; border-radius:50%; cursor:pointer; }
+
+    .slide {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;
+      transform: translateX(30px); transition: opacity 0.8s ease, transform 0.8s ease;
+      z-index: 1; pointer-events: none;
+    }
+
+    .slide.active { opacity: 1; transform: translateX(0); z-index: 2; pointer-events: auto; }
+    .slide-img { width: 100%; height: auto; border-radius: 14px; object-fit: cover; }
+    .tab-content.active section { opacity: 1; transform: translateY(0); }
+    .slide.active .slide-img{ transform: scale(1.08); }
+    
+    .caption{
+      position:absolute; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.6); color:#fff; padding:12px; box-sizing:border-box;
+    }
+    .caption .news-date{ font-family: 'Livvic'; font-size:12px;opacity:0.8;}
+    .caption .news-title{font-family: "Visby CF Heavy"; font-size:16px;opacity:0.8; font-weight:bold;margin-top:4px;}
+    .dots { position: absolute; bottom: 0px; width: 100%; text-align: center; z-index: 5; }
+    .dot { display: inline-block; width: 8px; height: 8px; margin: 0 4px; background: #ccc; border-radius: 50%; cursor: pointer; }
+
+    /* =============================== DLSL TAB SYSTEM ================================ */
+    .dlsl-switcher { width: 100%; max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+    .dlsl-switcher-menu { display: flex; justify-content: space-between; border-bottom: 2px solid #e1e1e1; }
+    .dlsl-switch { background: none; border: none; padding: 16px 40px; font-size: 10px; font-weight: 500; cursor: pointer; position: relative; color: var(--dlsl-green); }
+    .dlsl-switch::after { content: ""; position: absolute; bottom: -2px; left: 0; height: 3px; width: 0%; background: var(--dlsl-green); transition: 0.4s ease; }
+    .dlsl-switch:hover::after { width: 100%; }
+    .dlsl-switch.active { background: var(--dlsl-green); color: white; }
+    .dlsl-switch.active::after { display: none; }
+    .dlsl-switcher-body { padding: 40px 10px; }
+    .dlsl-panel { display: none; opacity: 0; transform: translateY(10px); transition: 0.35s ease; }
+    .dlsl-panel.active { display: block; opacity: 1; transform: translateY(0px); }
+
+    /* ================================ RECORDS TAB ================================ */
+    .records-visual-wrap{ padding: 60px 6%; background: #f8fdfb; min-height: 100vh; }
+    .records-visual-title{ display: flex; align-items: center; gap: 20px; margin-bottom: 35px; }
+    .records-visual-title h2{ font-family: 'Visby CF Heavy'; color: var(--dlsl-green); font-size: 2.1rem; font-weight: 700; white-space: nowrap; }
+    .records-visual-title span{ flex: 1; height: 2px; background: linear-gradient(to right, var(--dlsl-green), transparent); }
+    .records-visual-tabs{ font-family: 'Visby CF Heavy'; display: flex; gap: 15px; margin-bottom: 35px; flex-wrap: wrap; justify-content: center; }
+    .records-visual-tabs button{ font-family: 'Visby CF Heavy'; padding: 10px 22px; border-radius: 25px; border: 1.5px solid var(--dlsl-green); background: transparent; color: var(--dlsl-green); font-size: 17px; cursor: pointer; transition: .25s ease; }
+    .records-visual-tabs button.active{ background: var(--dlsl-green); color: white; }
+    .records-visual-tabs button:hover{ background: var(--dlsl-green); color: white; }
+    .records-visual-content{ background: white; padding: 35px 32px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,.05); min-height: 200px; animation: recordsFade .4s ease; line-height: 1.7; color: #2b2b2b; }
+    
+    @keyframes recordsFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ==================== Footer ==================== */
+    footer{ background: #fff; padding: 20px 10px; text-align: center; color: #000; font-family: 'Livvic'; }
+    footer h3{ margin:0 0 8px; font-weight:600; letter-spacing:1px; }
+    footer p{ margin:0 0 10px; opacity:0.9; }
+    footer small{ opacity:0.7; }
+    .email-btn { position: relative; z-index: 10; pointer-events: auto; }
+    .columns-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: start; }
+    .column { display: flex; flex-direction: column; }
+    .heading { font-size: 22px; font-weight: bold; font-family: 'Visby CF Heavy'; text-decoration: underline; margin-bottom: 25px; color: var(--dlsl-green); }
+    .club-list { list-style: none; padding: 0; margin: 0; }
+    .club-item { margin-bottom: 18px; display: flex; align-items: flex-start; font-size: 15px; font-family: 'Livvic'; line-height: 1.4; }
+    .club-item::before { content: "▶"; font-size: 10px; margin-right: 8px; margin-top: 3px; color: var(--dlsl-green-dark); flex-shrink: 0; }
+    .club-link { color: #000; text-decoration: none; cursor: pointer; }
+    .club-link:hover { text-decoration: underline; }
+    @media (max-width: 768px) { .columns-container { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* ==================== SSCB STORIES GRID LAYOUT ==================== */
+    :root { 
+      --sscb-stories-bg: #fbf7f0; --sscb-stories-dark: #2d3748; --sscb-stories-muted: #718096; --sscb-stories-blue: #0ea5e9; --sscb-stories-pink: #ec4899; 
+    }
+    .sscb-stories-wrapper { background-color: #fff; color: var(--sscb-stories-dark); padding: 0; margin: 0; width: 100%; }
+    .sscb-stories-wrapper .sscb-hidden { display: none !important; }
+    .sscb-main-container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    .sscb-controls-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; gap: 20px; flex-wrap: wrap; }
+    .sscb-search-box { flex: 1; max-width: 400px; }
+    .sscb-search-box input { width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; background-color: #fff; transition: border-color 0.2s; }
+    .sscb-search-box input:focus { border-color: var(--sscb-stories-blue); }
+    .sscb-featured-story { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 60px; cursor: pointer; transition: opacity 0.2s; }
+    @media (min-width: 768px) { .sscb-featured-story { grid-template-columns: 1.1fr 1fr; align-items: center; } }
+    .sscb-featured-story:hover { opacity: 0.95; }
+    .sscb-featured-img-wrapper { width: 100%; border-radius: 4px; overflow: hidden; aspect-ratio: 4 / 3; }
+    .sscb-featured-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+    .sscb-featured-content h1 { font-family: 'Visby CF Heavy'; font-size: 32px; line-height: 1.2; margin: 0 0 12px 0; color: #2d3748;}
+    .sscb-tag { display: inline-block; padding: 4px 8px; font-size: 11px; font-weight: bold; border-radius: 4px; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px; }
+    .sscb-tag-blue { background-color: #e0f2fe; color: #0369a1; }
+    .sscb-tag-pink { background-color: #fce7f3; color: #be185d; }
+    .sscb-meta { font-size: 13px; color: var(--sscb-stories-muted); margin-bottom: 12px; }
+    .sscb-featured-content p { font-size: 15px; line-height: 1.5; color: #4a5568; margin: 0; }
+    .sscb-regular-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+    .sscb-story-item { cursor: pointer; display: flex; flex-direction: column; transition: transform 0.2s; }
+    .sscb-story-item:hover { transform: translateY(-4px); }
+    .sscb-card-img-wrapper { width: 100%; border-radius: 4px; overflow: hidden; aspect-ratio: 4 / 3; margin-bottom: 12px; }
+    .sscb-card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+    .sscb-story-item h3 { font-family: 'Visby CF Heavy'; font-size: 18px; line-height: 1.3; margin: 0 0 8px 0; color: #2d3748; }
+    .sscb-story-item p { font-size: 14px; line-height: 1.4; color: #4a5568; margin: 0; }
+    .sscb-article-page { max-width: 700px; margin: 40px auto; padding: 0 20px; }
+    .sscb-back-btn { background: none; border: none; color: var(--sscb-stories-blue); font-size: 14px; font-weight: bold; cursor: pointer; padding: 0; margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+    .sscb-back-btn:hover { text-decoration: underline; }
+    .sscb-full-article h1 { font-family: 'Visby CF Heavy'; font-size: 36px; line-height: 1.2; margin: 0 0 16px 0; color: #2d3748;}
+    .sscb-full-article p { font-size: 16px; line-height: 1.6; color: #2d3748; margin: 0 0 20px 0; }
+</style>
+</head>
+<body>
+
+<div class="sidebar" id="mySidebar">
+    <h3 class="haha">SSCB</h3>
+    <button class="tab active" onclick="openTab(event, 'home')">Home</button>
+    <button class="tab" onclick="openTab(event, 'executive')">Executive Board</button>
+    <button class="tab" onclick="openTab(event, 'legislative')">Legislative Council</button>
+    <button class="tab" onclick="openTab(event, 'judiciary')">Judiciary Branch</button>
+    <button class="tab" onclick="openTab(event, 'clubs')">Clubs & Orgs</button>
+    <button class="tab" onclick="openTab(event, 'attendance')">Attendance</button>
+    <button class="tab" onclick="openTab(event, 'records')">Records</button>
+</div>
+
+<div class="content" id="mainContent">
+
+    <div id="home" class="tab-content active">
+         <section class="intro-section show"><h2>Welcome Home</h2></section>
+    </div>
+
+    <div id="executive" class="tab-content"></div>
+    <div id="legislative" class="tab-content"></div>
+    <div id="judiciary" class="tab-content"></div>
+    <div id="clubs" class="tab-content"></div>
+    <div id="attendance" class="tab-content"></div>
+
+    <div id="records" class="tab-content">
+         
+         <div id="sscbRecordsMainWrapper" class="records-visual-wrap">
+              
+              <div class="records-visual-title">
+                  <h2>Student Services & Concerns Bureau</h2>
+                  <span></span>
+              </div>
+
+              <div class="records-visual-tabs">
+                  <button class="active" onclick="switchRecordsTab(this, 'sscb-reports-content')">SSCB Reports</button>
+                  <button onclick="switchRecordsTab(this, 'student-concern-form')">Student Concern Form</button>
+                  <button onclick="switchRecordsTab(this, 'sscb-performance')">SSCB Performance</button>
+              </div>
+
+              <div class="records-visual-content">
+                  
+                  <div id="sscb-reports-content" class="records-tab-panel" style="display: block;">
+                       <div class="sscb-stories-wrapper">
+                            <div id="sscbStoriesHome" class="sscb-main-container">
+                                 
+                                 <div class="sscb-controls-section">
+                                      <div class="sscb-search-box">
+                                           <input type="text" id="sscbStoriesSearch" placeholder="Search articles..." onkeyup="sscbFilterStories()">
+                                      </div>
+                                 </div>
+
+                                 <div class="sscb-featured-story" data-sscb-search-title="st. la salle financial assistance grant application guidelines first semester ay 2024-2025" 
+                                      onclick="sscbShowArticleClean('CAMPUS UPDATES', 'St. La Salle Financial Assistance Grant Application Guidelines First Semester AY 2024-2025', 'June 3, 2026', '<p>The application guidelines for the St. La Salle Financial Assistance Grant for the first semester of AY 2024-2025 are now available. Eligible student applicants may follow the step-by-step documentation system below...</p>')">
+                                      <div class="sscb-featured-img-wrapper">
+                                           <img src="news1.png" alt="Featured Story Image">
+                                      </div>
+                                      <div class="sscb-featured-content">
+                                           <span class="sscb-tag sscb-tag-blue">Campus Updates</span>
+                                           <h1>St. La Salle Financial Assistance Grant Application Guidelines</h1>
+                                           <div class="sscb-meta">Published on June 3, 2026</div>
+                                           <p>The application guidelines for the St. La Salle Financial Assistance Grant for the first semester of AY 2024-2025 are now available...</p>
+                                      </div>
+                                 </div>
+
+                                 <div class="sscb-regular-grid">
+                                      
+                                      <div class="sscb-story-item" data-sscb-search-title="lasallian scholars society general assembly 2026" 
+                                           onclick="sscbShowArticleClean('STUDENT LIFE', 'Lasallian Scholars Society General Assembly 2026', 'May 28, 2026', '<p>The Lasallian Scholars Society held its annual General Assembly gathering all undergraduate scholars for a night of alignment, recognition, and vision building for upcoming student services projects.</p>')">
+                                           <div class="sscb-card-img-wrapper">
+                                                <img src="news2.png" alt="Story Image">
+                                           </div>
+                                           <span class="sscb-tag sscb-tag-pink">Student Life</span>
+                                           <h3>Lasallian Scholars Society General Assembly 2026</h3>
+                                           <div class="sscb-meta">May 28, 2026</div>
+                                           <p>The Lasallian Scholars Society successfully concluded its annual gathering...</p>
+                                      </div>
+
+                                 </div>
+
+                            </div>
+                       </div>
+                  </div>
+
+                  <div id="student-concern-form" class="records-tab-panel" style="display: none;">
+                       <h3>Student Concern Form Container</h3>
+                       <p>Your concern dynamic submission layout elements live here...</p>
+                  </div>
+
+                  <div id="sscb-performance" class="records-tab-panel" style="display: none;">
+                       <h3>SSCB Performance</h3>
+                       <button class="email-btn">View Performance Metrics</button>
+                  </div>
+
+              </div>
+         </div>
+
+         <div id="sscbCleanArticleView" style="display: none; padding: 60px 6%; background: #f8fdfb; min-height: 100vh; font-family: 'Livvic', sans-serif;">
+              <div style="max-width: 850px; margin: 0 auto;">
+                  
+                  <button onclick="sscbReturnToGridClean()" style="font-family: 'Visby CF Heavy'; padding: 10px 24px; border-radius: 25px; border: 1.5px solid var(--dlsl-green); background: transparent; color: var(--dlsl-green); font-size: 16px; cursor: pointer; margin-bottom: 35px; transition: .25s ease;" onmouseover="this.style.background='var(--dlsl-green)'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='var(--dlsl-green)'">
+                      ← Back to Stories
+                  </button>
+
+                  <article style="background: white; padding: 50px 45px; border-radius: 18px; box-shadow: 0 10px 35px rgba(0,0,0,.04);">
+                      <div id="cleanArticleCategory" style="text-transform: uppercase; font-size: 13px; font-weight: bold; letter-spacing: 1px; color: var(--dlsl-green); margin-bottom: 12px; font-family: 'Visby CF Heavy';"></div>
+                      <h1 id="cleanArticleTitle" style="font-family: 'Visby CF Heavy'; color: #2d3748; font-size: 2.6rem; line-height: 1.25; margin-bottom: 15px;"></h1>
+                      <div id="cleanArticleDate" style="color: #718096; font-size: 14px; margin-bottom: 35px; border-bottom: 1px solid #e2e8f0; padding-bottom: 18px;"></div>
+                      
+                      <div id="cleanArticleContent" style="font-size: 17px; line-height: 1.85; color: #333; text-align: justify;"></div>
+                  </article>
+                  
+              </div>
+         </div>
+
+    </div>
+</div>
+
+<script>
+    // System Tab Core Engine Controls
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active");
+        }
+        tablinks = document.getElementsByClassName("tab");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+        
+        // Safety lock: if shifting global side views, reset clean article visibility settings
+        if(tabName !== 'records') {
+            sscbReturnToGridClean();
+        }
+    }
+
+    // Interior Records Content Inner Tab Swapper
+    function switchRecordsTab(buttonElement, panelId) {
+        const buttons = document.querySelectorAll('.records-visual-tabs button');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        buttonElement.classList.add('active');
+        
+        const panels = document.querySelectorAll('.records-tab-panel');
+        panels.forEach(panel => panel.style.display = 'none');
+        
+        document.getElementById(panelId).style.display = 'block';
+        
+        // Hide the clean article if clicking standard dashboard nested modules
+        sscbReturnToGridClean();
+    }
+
+    // ================================ CLEAN ENGINE ARTICLE ROUTINES ================================
+    function sscbShowArticleClean(category, title, date, contentHtml) {
+        // 1. Fill clean view document properties
+        document.getElementById('cleanArticleCategory').innerText = category;
+        document.getElementById('cleanArticleTitle').innerText = title;
+        document.getElementById('cleanArticleDate').innerText = date;
+        document.getElementById('cleanArticleContent').innerHTML = contentHtml;
+
+        // 2. Compeletly hide the cluttered Records module wrap grid (titles, panels, tabs, forms, buttons)
+        document.getElementById('sscbRecordsMainWrapper').style.display = 'none';
+
+        // 3. Make our standalone article layout page visible
+        document.getElementById('sscbCleanArticleView').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function sscbReturnToGridClean() {
+        // 1. Hide the standalone clean page view
+        document.getElementById('sscbCleanArticleView').style.display = 'none';
+
+        // 2. Restore the original Records tab sub-system wrapper view frame
+        document.getElementById('sscbRecordsMainWrapper').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    // Search Filtering logic engine
+    function sscbFilterStories() {
+        const entryValue = document.getElementById('sscbStoriesSearch').value.toLowerCase();
+        
+        const heroBlock = document.querySelector('.sscb-featured-story');
+        if (heroBlock) {
+            const label = heroBlock.getAttribute('data-sscb-search-title');
+            if (label.includes(entryValue)) {
+                heroBlock.style.display = 'grid';
+            } else {
+                heroBlock.style.display = 'none';
+            }
+        }
+
+        const cardsCollection = document.querySelectorAll('.sscb-story-item');
+        cardsCollection.forEach(card => {
+            const description = card.getAttribute('data-sscb-search-title');
+            if (description.includes(entryValue)) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+</body>
+</html>

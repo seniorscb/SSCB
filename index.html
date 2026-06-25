@@ -1,0 +1,3972 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SSCB — De La Salle Lipa</title>
+<link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<style>
+
+.hyphen {
+font-family: Arial;
+font-size: 22px;
+color: var(--dlsl-green);
+}
+    .search-wrapper {
+      margin-bottom: 30px;
+      display: flex;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 20px;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: #0f3d2e;
+      box-shadow: 0 0 0 3px rgba(15, 61, 70, 0.1);
+    }
+
+    .attendance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .attendance-display-card {
+      background: #fff;
+      border: 1px solid #e9ecef;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+    }
+
+    .attendance-display-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .member-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .member-name {
+      font-weight: 700;
+      color: #212529;
+      font-size: 1.1rem;
+    }
+
+    .member-role {
+      font-size: 0.85rem;
+      color: #6c757d;
+      font-weight: 500;
+      font-family: 'Livvic', sans-serif;
+    }
+
+    .percentage-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-family: 'Livvic', sans-serif;
+    }
+    
+    .pct-high { background: #e6f6f0; color: #0f3d2e; }
+    .pct-mid { background: #fff9db; color: #f08c00; }
+    .pct-low { background: #fff5f5; color: #fa5252; }
+
+    .gauge-container {
+      margin-bottom: 18px;
+    }
+    .gauge-bar-track {
+      width: 100%;
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .gauge-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .bg-high { background-color: #3bb143; }
+    .bg-mid { background-color: #f08c00; }
+    .bg-low { background-color: #fa5252; }
+
+    .breakdown-row {
+      display: flex;
+      gap: 20px;
+      border-top: 1px solid #f1f3f5;
+      padding-top: 14px;
+      font-size: 0.85rem;
+      font-family: 'Livvic', sans-serif;
+    }
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #495057;
+    }
+    .dot-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-present { background: #3bb143; }
+    .dot-excused { background: #f08c00; }
+    .dot-absent { background: #fa5252; }
+
+@font-face {
+            font-family: 'Visby CF Heavy';
+            src: url('fsp-demo-visby-cf-heavy-regular.otf') format('opentype');
+        }
+@font-face {
+            font-family: 'Livvic';
+            src: url('Livvic-Regular.otf') format('truetype');
+        }
+@font-face {
+            font-family: 'soundmay';
+            src: url('soudmay.otf') format('opentype');
+        }
+section p{
+ font-family: 'Livvic';
+}
+.board-section-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 50px; 
+}
+.gitna {
+text-align: center;}
+
+.role-group {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.role-group.single {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  max-width: 900px;  
+  margin-bottom: 40px;
+  margin: 0 auto;    
+  gap: 40px;
+}
+.role-group.single .person-card {
+  width: 100%;
+}
+#is-president .role-group.single {
+  margin-bottom: 50px; 
+}
+
+#is-president .role-group.single .person-card {
+  max-width: 420px; 
+  width: 100%;
+}
+
+#is-president .role-group.single {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 50px auto; 
+}
+
+#is-president .role-group.single .person-card {
+  width: 100%;
+  max-width: 420px;  
+}
+
+.role-group.double {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 900px;     
+  margin-left: auto;
+  margin-right: auto;
+  gap: 40px;
+}
+
+.person-card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.avatar img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.center-row {
+  justify-content: center;
+}
+
+.board-grid.large-gap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px 40px;
+}
+
+.person-card.full-row {
+  grid-column: 1 / 4; 
+}
+
+.empty-card {
+  visibility: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+  margin: 0; 
+}
+
+.justify {
+color: #0f3d2e;
+text-align: justify;}
+
+.big {
+font-family: "Visby CF Heavy";
+font-size: 35px;
+color: #ffffff;}
+
+.content {
+  min-height: 100vh;
+  margin-left: 230px;
+  transition: margin-left 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+.content.collapsed {
+  margin-left: 0px;
+}
+
+.top-header {
+  position: fixed;
+  top: -80px; 
+  width: 100%;
+  background: var(--dlsl-green);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 28px;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  backdrop-filter: blur(6px);
+  transition: top 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.header-title {
+font-family: "Visby CF Heavy";
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.social-btn img {
+  width: 32px;
+  height: 32px;
+}
+
+.social-btn:hover {
+  transform: scale(1.1);
+}
+
+.top-header.active {
+  top: 0;
+  opacity: 1;
+}
+
+.sidebar { 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 230px; 
+  height: 100vh; 
+  background: var(--dlsl-green-dark); 
+  color: white; 
+  padding: 20px; 
+  box-sizing: border-box; 
+  overflow-y: auto; 
+  transition: width 0.3s ease, transform 0.3s ease, opacity 0.3s ease; 
+  z-index: 9999999;
+}
+
+.sidebar.collapsed {
+  transform: translateX(-165px);
+  width: 60px;
+}
+
+.sidebar h3,
+.sidebar .tab {
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.sidebar.collapsed h3,
+.sidebar.collapsed .tab {
+  opacity: 0;
+  transform: translateX(-10px);
+  visibility: hidden;
+}
+
+.sidebar-toggle {
+  position: fixed;
+  top: 8.5px;
+  left: 20px;
+  z-index: 19999999; 
+  background: var(--dlsl-green-dark);
+  color: #fff;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+  background: var(--dlsl-green-dark);
+}
+
+.sidebar h3{
+  margin-bottom: 30px;
+}
+.tab {
+font-family: "Visby CF Heavy";
+  display: block;
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.tab-content{
+  display: none;
+  animation: recordsFade .7s ease;
+}
+.tab-content.active{
+  display: block;
+}
+
+section{
+  opacity:0;
+  transform:translateY(40px);
+  transition: all 0.9s ease;
+}
+section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.sidebar {
+  background: #00A0BE;
+}
+.sidebar-toggle {
+  background: var(--dlsl-green);
+}
+.tab:hover{
+ transform: translateX(4px);
+}
+.tab.active, .tab:hover {
+  background: var(--dlsl-green-dark);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+
+.intro-section {
+  background: #fff;
+  color: var(--dlsl-green-dark);
+}
+
+.mission-vision-section, .board-section {
+  background: var(--dlsl-green);
+  color: var(--dlsl-green);
+}
+
+.news-section{
+  background: var(--dlsl-white);
+  color: var(--muted-text);
+}
+
+.email-btn, .some-button-class {
+  background: var(--dlsl-green);
+  color: var(--dlsl-white);
+}
+.email-btn:hover {
+  background: var(--dlsl-green-dark);
+}
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+.role {
+ font-family: 'Livvic';
+}
+
+:root{
+  --dlsl-green: #00A0BE;         
+  --dlsl-green-dark: #13768b;    
+  --dlsl-white: #ffffff;
+  --light-gray: #f5f6f5;
+  --soft-gray: #e9eceb;
+  --muted-text: #3a3a3a;
+  --accent-light: #dfece6;       
+  --accent-soft: #daf5e9;        
+
+  --green:#0f3d2e; 
+  --light:#f7f7f7; 
+  --accent:#1f6b47; 
+  --muted:#6b6b6b;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--light); color:var(--green); line-height:1.5;}
+
+section{
+  width:100%;
+  padding:60px 28px;
+  box-sizing:border-box;
+}
+
+section + section{
+  border-top:1px solid #e6e6e6;
+}
+section h2{
+font-family: "Visby CF Heavy";
+  font-size: 35px;
+  color:#fff;
+  margin-bottom:24px;
+}
+
+section h3{
+font-family: "Visby CF Heavy";
+}
+section .container1{
+  background: var(--dlsl-green);
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+section .container{
+  background: #fff;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+
+section .width{
+background: var(--dlsl-green);
+  padding: 5px;
+  border-radius: 18px;
+}
+
+.width {
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+}
+.board-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:24px;
+}
+.avatar{
+  width: 160px !important;
+  height: 160px !important;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  outline: 2px solid var(--dlsl-green);
+  margin: 0 auto 18px;
+  background: linear-gradient(180deg,#e9efe9,#f6fbf6);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+.person-card {
+  background: linear-gradient(145deg,#ffffff,#f0f0f0);
+  border-radius: 22px;
+  padding: 30px 22px;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.person-card::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at top left,
+    rgba(0, 160, 190,.2), transparent 60%);
+  opacity: 0;
+  transition: .4s;
+}
+
+.person-card:hover::before { opacity:1 }
+
+.person-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.person-card .avatar{
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.person-card:hover .avatar{
+  transform: scale(1.1);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.person-info .name{
+font-family: "Visby CF Heavy";
+  font-weight:600;
+  font-size:18px;
+  margin-bottom:6px;
+}
+.person-info .role{
+  font-size:15px;
+  color:var(--muted);
+  margin-bottom:12px;
+}
+.email-btn{
+justify-content: center;
+font-family: "Visby CF Heavy";
+  display:inline-block;
+  padding:10px 20px;
+  background:var(--dlsl-green);
+  color:#fff;
+  border-radius:8px;
+  font-size:13px;
+  text-decoration:none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.email-btn:hover{
+  transform: translateY(-2px);
+  background: var(--dlsl-green-dark);
+}
+
+.person-card:hover .avatar{
+  transform: scale(1.08);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+@media(min-width:720px){
+  .board-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+@media(min-width:1024px){
+  .board-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+}
+
+.container{
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.container1{
+  max-width:1200px;
+  margin:0 auto;
+}
+	
+.hero {
+  position: relative;
+  height: 100vh;
+  background: url('1234.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+   background: url('clouds.gif') center 90% / 101% no-repeat;
+  
+  opacity: 0.9; 
+  pointer-events: none;
+  mix-blend-mode: screen; 
+  z-index: 2;
+}
+
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+   background: url('waves.gif') center 100% / 101% no-repeat;
+  
+  opacity: 1; 
+  pointer-events: none;
+  mix-blend-mode: screen; 
+  z-index: 2;
+}
+
+.heroop{
+  position: relative;
+  height: 100vh;
+  background: url('op.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+}
+.heroop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+   background: url('clouds.gif') center 100% / 101% no-repeat;
+  
+  opacity: 0.9; 
+  pointer-events: none;
+  mix-blend-mode: screen; 
+  z-index: 2;
+}
+
+ .heroop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+   background: url('waves.gif') center 100% / 101% no-repeat;
+  
+  opacity: 1; 
+  pointer-events: none;
+  mix-blend-mode: screen; 
+  z-index: 2;
+}
+
+
+.heroovp{
+  position: relative;
+  height: 100vh;
+  background: url('ovp.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+}
+.heroovp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+   background: url('clouds.gif') center 100% / 101% no-repeat;
+  
+  opacity: 0.9; 
+  pointer-events: none;
+  mix-blend-mode: screen; 
+  z-index: 2;
+}
+.heroovp::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+   background: url('waves.gif') center 100% / 101% no-repeat;
+  
+  opacity: 1; 
+  pointer-events: none;
+  mix-blend-mode: screen; 
+  z-index: 2;
+}
+
+ @media (max-width: 900px) {
+.heroop{
+width: 100%; max-width: 1920px; height: auto; display: block; margin: 0 auto; aspect-ratio: 1920 / 1080;}
+
+.heroovp{
+width: 100%; max-width: 1920px; height: auto; display: block; margin: 0 auto; aspect-ratio: 1920 / 1080;}
+
+
+}
+
+
+ @media (max-width: 900px) {
+.hero {
+  position: relative;
+  height: 100vh;
+  background: url('12345.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+   background: url('clouds.gif') center 100% / 200% no-repeat;
+	bottom: 30%;
+  opacity: 1; 
+  pointer-events: none;
+  mix-blend-mode: screen; 
+  z-index: 2;
+}
+
+           .hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+   background: url('waves.gif') 15% 100% / 225% no-repeat;
+
+  opacity: 1; 
+  pointer-events: none;
+  mix-blend-mode: screen; 
+  z-index: 2;
+}
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; 
+  align-items: center; 
+  height: 100%; 
+  padding-bottom: 40px; 
+}
+
+.hero-btn {
+font-family: "Visby CF Heavy";
+  display: inline-block;
+  padding: 10px 36px;
+  background: var(--dlsl-green);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 4; 
+}
+
+.hero-btn:hover {
+  background: var(--dlsl-green-dark);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.scroll-arrow {
+  margin-top: 10px;
+  opacity: 0.8;
+  animation: slowFloat 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.scroll-arrow svg {
+  transform: scale(0.9);
+}
+
+@keyframes slowFloat {
+  0% { transform: translateY(0);  }
+  50% { transform: translateY(14px); }
+  100% { transform: translateY(0);  }
+}
+.blue {
+color: #00A0BE;}
+
+.cover {
+  height: 400px;
+  background: url('1234.png');
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  text-align: center;
+}
+
+.cover h1 {
+font-family: "Visby CF Heavy";
+  font-size: 42px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.intro-section {
+    background: #fff; 
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.intro-wrapper {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+.logo-circle {
+font-family: "Visby CF Heavy";
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: url('logo.png') center 30% / 100% no-repeat ;
+    background-size: 140%;
+    background-color: var(--soft-leaf); 
+    object-fit: cover;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.intro-desc {
+    max-width: 600px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444;
+    text-align: justify;
+}
+
+.section-desc {
+font-family: 'Livvic';
+color: #000;
+}
+
+.mv-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+.mv-box{
+  background:#fbfbfb;
+  padding:18px;
+  border-radius:14px;
+  border:1px solid #f0f0f0;
+}
+.mv-box h3{margin:0 0 8px;color:var(--green);}
+@media(min-width:720px){
+  .mv-grid{grid-template-columns:1fr 1fr;}
+}
+
+.news-carousel{
+  position:relative;
+  overflow:hidden;
+  border-radius:14px;
+  width:100%;
+  max-width:100%;
+  height:500px;
+  margin:0 auto;
+}
+.news-section .container1 {
+  max-width: 1400px;
+  padding: 50px 40px;
+}
+
+.news-carousel-container {
+  width: 100%;
+  margin-bottom: 40px; 
+}
+
+.portrait-carousel {
+  height: 400px;
+}
+
+.news-flex {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap; 
+}
+
+.news-carousel-container {
+  flex: 2; 
+  min-width: 300px;
+}
+
+.portrait-carousel-container {
+  flex: 1; 
+  max-width: 400px; 
+}
+
+.portrait-carousel {
+  flex: 0 0 300px; 
+  height: 500px;
+}
+
+.portrait-carousel {
+  border-radius:14px;
+  position:relative;
+  overflow:hidden;
+  height:500px;
+}
+
+.portrait-slide {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  opacity:0;
+  transform:translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  z-index:1;
+  pointer-events:none;
+  overflow:hidden; 
+}
+
+.portrait-slide.active {
+  opacity:1;
+  transform:translateY(0);
+  z-index:2;
+  pointer-events:auto;
+}
+
+.portrait-slide img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+.portrait-slide .caption {
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  padding:12px;
+  box-sizing:border-box;
+}
+
+.portrait-dots {
+  position:absolute;
+  bottom:0px;
+  width:100%;
+  text-align:center;
+  z-index:5;
+}
+
+.portrait-dots .dot {
+  display:inline-block;
+  width:8px;
+  height:8px;
+  margin:0 4px;
+  background:#ccc;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+ .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  z-index: 1;
+  pointer-events: none; 
+}
+
+ .slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.slide-img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  object-fit: cover; 
+}
+.tab-content.active section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide.active .slide-img{
+  transform: scale(1.08);
+}
+.caption{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  padding:12px;
+  box-sizing:border-box;
+}
+.caption .news-date{ font-family: 'Livvic';
+font-size:12px;opacity:0.8;}
+.caption .news-title{font-family: "Visby CF Heavy"; font-size:16px;opacity:0.8; font-weight:bold;margin-top:4px;}
+.dots {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+  z-index: 5;  
+}
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dlsl-switcher {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.dlsl-switcher-menu {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #e1e1e1;
+}
+
+.dlsl-switch {
+  background: none;
+  border: none;
+  padding: 16px 40px;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  color: var(--dlsl-green);
+}
+
+.dlsl-switch::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--dlsl-green);
+  transition: 0.4s ease;
+}
+
+.dlsl-switch:hover::after {
+  width: 100%;
+}
+
+.dlsl-switch.active {
+  background: var(--dlsl-green);
+  color: white;
+}
+
+.dlsl-switch.active::after {
+  display: none;
+}
+
+.dlsl-switcher-body {
+  padding: 40px 10px;
+}
+
+.dlsl-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.35s ease;
+}
+
+.dlsl-panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.records-visual-wrap{
+  padding: 60px 6%;
+  background: #f8fdfb;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.records-visual-title{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 35px;
+}
+
+.records-visual-title h2{
+font-family: 'Visby CF Heavy';
+  color: var(--dlsl-green);
+  font-size: 2.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.records-visual-title span{
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, var(--dlsl-green), transparent);
+}
+
+.records-visual-tabs{
+font-family: 'Visby CF Heavy';
+  display: flex;
+  gap: 15px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+  justify-content: center; 
+}
+
+.records-visual-tabs button{
+font-family: 'Visby CF Heavy';
+  padding: 10px 22px;
+  border-radius: 25px;
+  border: 1.5px solid var(--dlsl-green);
+  background: transparent;
+  color: var(--dlsl-green);
+  font-size: 17px;
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.records-visual-tabs button.active{
+  background: var(--dlsl-green);
+  color: white;
+}
+
+.records-visual-tabs button:hover{
+  background: var(--dlsl-green);
+  color: white;
+}
+
+.records-visual-content{
+  background: white;
+  padding: 35px 32px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.05);
+  min-height: 200px;
+  animation: recordsFade .4s ease;
+  line-height: 1.7;
+  color: #2b2b2b;
+}
+
+@keyframes recordsFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+footer{
+  background: var(--dlsl-green);
+  padding: 20px 10px;
+  text-align: center;
+  color: #fff;
+ font-family: 'Livvic';
+}
+
+footer h3{
+  margin:0 0 8px;
+  font-weight:600;
+  letter-spacing:1px;
+}
+
+footer p{
+  margin:0 0 10px;
+}
+
+
+.email-btn {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+.columns-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    align-items: start;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+}
+.heading {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Visby CF Heavy';
+    text-decoration: underline;
+    margin-bottom: 25px;
+    color: var(--dlsl-green);
+}
+.club-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.club-item {
+    margin-bottom: 18px;
+    display: flex;
+    align-items: flex-start;
+    font-size: 15px;
+    font-family: 'Livvic';
+    line-height: 1.4;
+}
+.club-item::before {
+    content: "➤";
+    font-size: 10px;
+    margin-right: 8px;
+    margin-top: 3px;
+    color: var(--dlsl-green-dark);
+    flex-shrink: 0;
+}
+.club-link {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.club-link:hover {
+    text-decoration: underline;
+}
+
+:root {
+    --sscb-stories-bg: #fbf7f0;
+    --sscb-stories-dark: #2d3748;
+    --sscb-stories-muted: #718096;
+    --sscb-stories-blue: #0ea5e9;
+    --sscb-stories-pink: #ec4899;
+}
+
+.sscb-stories-wrapper {
+    background-color: #fff;
+    color: var(--sscb-stories-dark);
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sscb-stories-wrapper .sscb-hidden {
+    display: none !important;
+}
+
+.sscb-main-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.sscb-controls-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.sscb-search-box {
+    flex: 1;
+    max-width: 400px;
+}
+
+.sscb-search-box input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background-color: #fff;
+    transition: border-color 0.2s;
+}
+
+.sscb-search-box input:focus {
+    border-color: var(--sscb-stories-blue);
+}
+
+.sscb-featured-story {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 60px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+@media (min-width: 768px) {
+    .sscb-featured-story {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+    }
+}
+
+.sscb-featured-story:hover {
+    opacity: 0.95;
+}
+
+.sscb-featured-img-wrapper {
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+}
+
+.sscb-featured-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sscb-featured-content h1 {
+    font-family: 'Visby CF Heavy';
+    font-size: 32px;
+    color: var(--dlsl-green);
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+.sscb-featured-content h1:hover {
+    font-family: 'Visby CF Heavy';
+    font-size: 32px;
+    color: var(--dlsl-green-dark);
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+
+.sscb-featured-meta {
+    font-size: 14px;
+    color: var(--sscb-stories-dark);
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.sscb-featured-excerpt {
+    color: var(--sscb-stories-muted);
+    font-family: 'Livvic';
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.sscb-read-more-link {
+    color: var(--dlsl-green);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.sscb-stories-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px 30px;
+}
+
+@media (min-width: 768px) {
+    .sscb-stories-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.sscb-story-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: transform 0.2s;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0e6d2;
+}
+
+.sscb-story-item:hover {
+    transform: translateY(-2px);
+}
+
+.sscb-story-thumb {
+    width: 130px;
+    height: 130px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.sscb-story-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.sscb-story-meta {
+    font-size: 13px;
+    color: var(--sscb-stories-dark);
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.sscb-story-title {
+    font-family: 'Visby CF Heavy';
+    font-size: 18px;
+    color: var(--dlsl-green);
+    line-height: 1.3;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.sscb-story-title:hover {
+    font-family: 'Visby CF Heavy';
+    font-size: 18px;
+    color: var(--dlsl-green-dark);
+    line-height: 1.3;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sscb-story-excerpt {
+    font-family: 'Livvic';
+    color: var(--sscb-stories-muted);
+    font-size: 14px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sscb-article-page {
+    background-color: #fff;
+}
+
+.sscb-article-hero-banner {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    background-color: #fff;
+}
+
+.sscb-article-hero-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+}
+
+.sscb-article-hero-overlay {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    width: 100%;
+    padding: 40px 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+    color: #ffffff;
+}
+
+.sscb-article-hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.sscb-article-badge {
+    display: inline-block;
+    font-family: 'Visby CF Heavy';
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.sscb-article-main-title {
+    font-family: 'Visby CF Heavy';
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.sscb-article-body-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px 80px 20px;
+    text-align: left;
+}
+
+.sscb-article-meta-row {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--sscb-stories-muted);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.sscb-article-author {
+    font-size: 15px;
+    color: var(--sscb-stories-dark);
+    margin-bottom: 20px;
+}
+
+.sscb-article-divider {
+    border: none;
+    border-top: 1px solid #cbd5e1;
+    margin: 20px 0;
+    max-width: 250px;
+    margin-left: 0;
+}
+
+.sscb-article-share-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.sscb-share-button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #0ea5e9;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sscb-article-body-content {
+    font-family: 'Livvic';
+    text-align: justify;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #334155;
+}
+
+.sscb-article-body-content p {
+    margin-bottom: 20px;
+}
+
+.sscb-article-body-content blockquote {
+    font-style: italic;
+    border-left: 4px solid var(--sscb-stories-blue);
+    padding-left: 20px;
+    margin: 30px 0;
+    color: var(--sscb-stories-dark);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.sscb-back-nav-bar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 20px 0 20px;
+    width: 100%;
+}
+
+.sscb-back-action-trigger {
+    color: var(--dlsl-green);
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.sscb-back-action-trigger:hover {
+    color: var(--dlsl-green-dark);
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 40px 16px;
+    }
+    section h2 {
+        font-size: 26px !important;
+    }
+    
+    .columns-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .role-group.double {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .news-flex {
+        flex-direction: column;
+    }
+    .news-carousel-container,
+    .portrait-carousel-container {
+        width: 100%;
+        max-width: 100%;
+    }
+    .news-carousel, 
+    .portrait-carousel {
+        height: 360px;
+    }
+    
+    .intro {
+        gap: 24px;
+        text-align: center;
+    }
+    .intro-desc {
+        text-align: center;
+    }
+    .logo-circle {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    }
+    
+    .attendance-grid {
+        grid-template-columns: 1fr;
+    }
+    .breakdown-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .records-visual-tabs button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    .records-visual-content {
+        padding: 20px 16px;
+    }
+    
+    .sscb-article-hero-banner {
+        height: 280px;
+    }
+    .sscb-article-main-title {
+        font-size: 22px;
+    }
+    .sscb-featured-content h1 {
+        font-size: 22px;
+    }
+}
+.cmt-interface-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            flex-direction: row;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Livvic', sans-serif;
+            background-color: #111;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .cmt-interface-container * {
+            box-sizing: border-box;
+        }
+
+        .cmt-map-viewport-box {
+            flex: 2;
+            position: relative;
+            background-color: #8ad1f0; 
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+        }
+
+        .cmt-map-canvas-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-origin: 0 0; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .cmt-map-canvas-layer:active {
+            cursor: grabbing;
+        }
+
+        .cmt-map-canvas-layer.cmt-state-dragging {
+            transition: none !important;
+        }
+
+        .cmt-map-wrapper-frame {
+            position: relative;
+            display: inline-block;
+        }
+
+        .cmt-campus-image-element {
+            display: block;
+            max-width: 100vw;
+            max-height: 100vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .cmt-map-svg-overlay-pane {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; 
+            z-index: 5;
+        }
+
+        .cmt-route-line-vector {
+            stroke: #ffd700;
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 8, 8;
+            animation: cmtRouteDashFlowAnim 2s linear infinite;
+        }
+
+        @keyframes cmtRouteDashFlowAnim {
+            to {
+                stroke-dashoffset: -20;
+            }
+        }
+
+        .cmt-controls-overlay-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 40;
+        }
+
+        .cmt-reset-btn-control {
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .cmt-reset-btn-control:hover { background: rgba(0, 0, 0, 0.95); }
+        .cmt-reset-btn-control.cmt-modifier-danger { background: rgba(180, 40, 40, 0.95); }
+        .cmt-reset-btn-control.cmt-modifier-danger:hover { background: rgb(150, 20, 20); }
+
+        .cmt-pin-dot-node {
+            position: absolute;
+            width: 22px; 
+            height: 22px;
+            border-radius: 50%;
+            border: 2.5px solid #ffffff;
+            cursor: pointer;
+            transform: translate(-50%, -50%) scale(calc(1 / var(--cmt-map-scale-var, 1)));
+            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+            transition: transform 0.2s ease, background-color 0.2s;
+            z-index: 10;
+        }
+        .cmt-pin-dot-node:hover {
+            transform: translate(-50%, -50%) scale(calc(1.3 / var(--cmt-map-scale-var, 1)));
+        }
+        .cmt-pin-dot-node.cmt-state-active {
+            transform: translate(-50%, -50%) scale(calc(1.4 / var(--cmt-map-scale-var, 1)));
+            border-color: #ffd700;
+            box-shadow: 0 0 0 calc(6px / var(--cmt-map-scale-var, 1)) rgba(255, 215, 0, 0.4);
+            z-index: 12;
+        }
+
+        .cmt-user-live-dot-element {
+            position: absolute;
+            width: 46px;
+            height: 46px;
+            transform: translate(-50%, -50%) scale(calc(1 / var(--cmt-map-scale-var, 1)));
+            transform-origin: center center;
+            z-index: 35;
+            pointer-events: none;
+            filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.45));
+        }
+
+        .cmt-user-avatar-frame-box {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3.5px solid #fff;
+            background-color: #005a43;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+        }
+
+        .cmt-user-avatar-frame-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cmt-user-live-dot-element::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px 6px 0;
+            border-style: solid;
+            border-color: #ffffff transparent;
+            display: block;
+            width: 0;
+        }
+
+        .cmt-destination-star-pin-marker {
+            position: absolute;
+            width: 75px;
+            height: 75px;
+            transform-origin: bottom center;
+            transform: translate(-50%, -85%) scale(calc(1 / var(--cmt-map-scale-var, 1)));
+            z-index: 36;
+            pointer-events: none;
+            filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.5));
+            animation: cmtBouncePinAnimation 2s infinite ease-in-out;
+        }
+
+        .cmt-destination-star-pin-marker img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes cmtBouncePinAnimation {
+            0%, 100% { transform: translate(-50%, -85%) scale(calc(1 / var(--cmt-map-scale-var, 1))); }
+            50% { transform: translate(-50%, -98%) scale(calc(1 / var(--cmt-map-scale-var, 1))); }
+        }
+
+        .cmt-color-blue { background-color: #00A0BE; }
+        .cmt-color-green { background-color: #005a43; }
+        .cmt-color-red { background-color: #b42828; }
+
+        .cmt-info-sidebar-panel {
+            flex: 1;
+            min-width: 380px;
+            max-width: 450px;
+            background-color: #ffffff;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            z-index: 50;
+            padding: 24px;
+        }
+
+        .cmt-bottom-sheet-handle-bar {
+            display: none;
+            width: 100%;
+            padding: 12px 0 6px 0;
+            cursor: grab;
+            text-align: center;
+        }
+        .cmt-bottom-sheet-handle-bar:active {
+            cursor: grabbing;
+        }
+
+        .cmt-bottom-sheet-drag-line {
+            width: 40px;
+            height: 5px;
+            background-color: #ccc;
+            border-radius: 3px;
+            margin: 0 auto 6px auto;
+        }
+
+        .cmt-bottom-sheet-arrow-indicator {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 7px solid #888;
+            transition: transform 0.3s ease;
+        }
+
+        .cmt-nav-widget-card {
+            background-color: #f5fbff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8e3;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .cmt-nav-widget-card h4 {
+            color: var(--dlsl-green-dark);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        .cmt-nav-field-group {
+            margin-bottom: 14px;
+        }
+        .cmt-nav-field-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--dlsl-green);
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        
+        .cmt-nav-field-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1.5px solid #dcdfdc;
+            background-color: #fff;
+            font-size: 15px; 
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+        .cmt-nav-field-group select:focus {
+            border-color: #005a43;
+            box-shadow: 0 0 0 3px rgba(0, 90, 67, 0.1);
+        }
+        
+        .cmt-nav-btn-action {
+            width: 100%;
+            background-color: var(--dlsl-green);
+font-family: 'Visby CF Heavy';
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 6px;
+        }
+        .cmt-nav-btn-action:hover { background-color: var(--dlsl-green-dark); }
+        .cmt-nav-btn-action:active { transform: scale(0.99); }
+
+        .cmt-directions-panel-box {
+            background-color: #fff;
+            border-left: 4px solid #1e558c;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 0 8px 8px 0;
+        }
+        .cmt-directions-panel-box h5 {
+            font-size: 14px;
+            color: #111;
+            margin-bottom: 4px;
+        }
+        .cmt-directions-list-container {
+            padding-left: 0;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #666;
+        }
+
+        .cmt-placeholder-state-view {
+            padding: 30px 20px;
+            text-align: center;
+            margin: auto 0;
+            color: #777;
+        }
+        .cmt-placeholder-state-view h3 { color: #2c3e2b; margin-bottom: 8px; }
+
+        .cmt-sidebar-content-scroll { display: flex; flex-direction: column; overflow-y: auto; }
+        .cmt-building-header-image-box { width: 100%; height: 100%; background-color: #ddd; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+        .cmt-building-header-image-box img { width: 100%; height: 100%; object-fit: cover; }
+        .cmt-details-body-wrapper { padding: 16px 0; }
+
+        .cmt-tag-badge {
+            display: inline-block;
+            background-color: #1e558c;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .cmt-building-title-text { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: #111; }
+        .cmt-section-heading-text { font-size: 12px; text-transform: uppercase; color: #666; font-weight: 600; margin-top: 16px; margin-bottom: 6px; }
+        .cmt-building-about-paragraph { font-size: 14px; line-height: 1.6; color: #444; }
+        
+        .cmt-department-list-items { list-style: none; padding: 0; margin-top: 5px; }
+        .cmt-department-list-items li { font-size: 14px; padding: 6px 0; border-bottom: 1px solid #f0f0f0; }
+
+        .cmt-utility-hidden { display: none !important; }
+
+/* Mobile Layout Split Fix Viewport Ratio Configurations */
+        @media (max-width: 900px) {
+            .cmt-interface-container { 
+                flex-direction: column !important; 
+                position: relative !important;
+                background: #8ad1f0;
+            }
+            .cmt-map-viewport-box {
+                flex: none;
+                width: 100%;
+                height: 38vh; 
+            }
+            
+            .cmt-info-sidebar-panel { 
+                position: absolute !important;
+                left: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important; 
+                max-width: 100% !important; 
+                min-width: 100% !important;
+                
+                /* FIX 1: Enforce standard mobile bounding viewport box explicitly */
+                height: 62vh !important; 
+                max-height: 62vh !important; /* Prevents text injection from pushing/jumping height layout bounds */
+                overflow-y: auto !important; /* Permits scrolling inside the sheet if content is long */
+                
+                background-color: #ffffff !important;
+                box-shadow: 0 -10px 30px rgba(0,0,0,0.25) !important; 
+                border-radius: 24px 24px 0 0 !important; 
+                padding: 18px !important;
+                
+                /* FIX 2: Dropped from 99999 to 990. This keeps it strictly beneath your main page's toggle menu button. */
+                z-index: 990 !important; 
+                
+                transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s ease, max-height 0.3s ease !important; 
+                transform: translateY(0) !important;
+            }
+
+            .cmt-bottom-sheet-handle-bar {
+                display: block !important;
+            }
+
+            /* Slides the panel upward when the state class is triggered */
+            .cmt-info-sidebar-panel.cmt-state-expanded {
+                transform: translateY(0) !important; 
+                height: 85vh !important;
+                max-height: 85vh !important; /* Adjust bounds correctly when user expands it */
+            }
+
+            /* Rotates the small arrow layout indicator */
+            .cmt-info-sidebar-panel.cmt-state-expanded .cmt-bottom-sheet-arrow-indicator {
+                transform: rotate(180deg) !important;
+            }
+
+            .cmt-nav-widget-card {
+                padding: 12px !important;
+                margin-bottom: 12px !important;
+            }
+            .cmt-nav-widget-card h4 {
+                font-size: 26px !important;
+                margin-bottom: 8px !important;
+                text-align: center !important;
+            }
+            .cmt-nav-field-group {
+                margin-bottom: 8px !important;
+            }
+            .cmt-nav-field-group select {
+                padding: 10px 12px !important;
+                font-size: 14px !important;
+            }
+            .cmt-nav-btn-action {
+                padding: 10px !important;
+                font-size: 13px !important;
+            }
+            .cmt-placeholder-state-view {
+                padding: 15px 10px !important;
+            }
+        }
+.floating-text-box {
+font-family: 'soundmay';
+  animation: slowFloat 2.2s ease-in-out infinite;
+                   position: absolute;
+            top: 30%;
+            /* Center positioning tricks */
+justify-content: center;
+                       text-align: center;
+
+        }
+
+        /* Typography inside the box */
+        .floating-text-box h2 {
+color: #00687a;
+            margin-top: 0;
+            font-size: 150px;
+        }
+
+ @media (max-width: 900px) {
+.floating-text-box {
+font-family: 'soundmay';
+                   position: relative;
+            top: 25%;
+            /* Center positioning tricks */
+justify-content: center;
+                       text-align: center;
+
+        }
+
+        /* Typography inside the box */
+        .floating-text-box h2 {
+color: #00687a;
+            margin-top: 0;
+            font-size: 50px;
+        }}
+</style>
+</head>
+<body>
+
+<header class="top-header">
+  <div class="header-left">
+    <span class="header-title"> </span>
+  </div>
+  <div class="header-right">
+    <a href="https://www.facebook.com/SSCBDLSL" target="_blank" class="social-btn">
+      <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/facebook-app-round-white-icon.png" alt="Facebook" />
+    </a>
+    <a href="https://www.instagram.com/dlsl.shs.scb/" target="_blank" class="social-btn">
+      <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/instagram-white-icon.png" alt="Instagram" />
+    </a>
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sscb.dlsl@gmail.com" target="_blank" class="social-btn">
+      <img src="https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/email-envelope-white-icon.png" alt="DLSL" />
+    </a>
+    <a href="https://www.dlsl.edu.ph/" target="_blank" class="social-btn">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Signum_Fidei_green.svg" alt="DLSL" />
+    </a>
+  </div>
+</header>
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+<div class="sidebar collapsed">
+  <h3>‎ </h3>
+  <button onclick="openTab(event,'home', 'homestart')" class="tab active">Home</button>
+<button onclick="openTab(event,'campusmap', 'campusmapstart')" class="tab">Campus Map</button>
+  <button onclick="openTab(event,'sao', 'saostart')" class="tab">Student Activities Office</button>
+  <button onclick="openTab(event,'op', 'opstart')" class="tab">Office of the Integrated School President</button>
+  <button onclick="openTab(event,'ovp', 'ovpstart')" class="tab">Office of the Vice President</button>
+  <button onclick="openTab(event,'records', 'recordsstart')" class="tab">Records</button>
+  <button onclick="openTab(event,'constitution', 'constitutionstart')" class="tab">Constitution</button>
+</div>
+
+<div class="content collapsed">
+
+<div id="home" class="tab-content active">
+<header class="hero" id="homestart">
+  <div class="hero-overlay"></div>
+<div class="hero-content">
+  <a href="#carousel-section" class="hero-btn">Click here</a>
+<div class="scroll-arrow">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+       stroke="var(--dlsl-green)" stroke-width="1.2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9l6 6 6-6"/>
+  </svg>
+</div>
+</div>
+</header>
+
+<section class="intro-section">
+    <div class="intro-wrapper">
+        <div class="intro">
+            <div class="logo-circle"></div>
+            <div class="intro-text">
+                <h2 class="blue">Senior Student Coordinating Board</h2>
+                <p class="intro-desc">
+                    The Senior Student Coordinating Board is a constituent division of the highest governing student body of De La Salle Lipa Integrated School. Recognized by the DLSL–IS administration as the sole liaison between the student body and the institution, it assumes all responsibilities inherent to student government. It serves as the principal representative body of the students, by the students, and for the students.
+
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mission-vision-section">
+  <div class="width">
+    <h2 class="big">Mission and Vision of the SSCB</h2>
+    <div class="mv-grid">
+      <div class="mv-box">
+        <h3> Mission</h3>
+        <p class="justify">The Senior Student Coordinating Board is committed to empowering the student body of De La Salle Lipa Senior High School through servant leadership, transformative social action, and student-centered representation. Guided by the Lasallian values of Faith, Service, and Communion, the SSCB advocates for student welfare, promotes holistic development, and advances nation-building through formative in-campus initiatives and responsive off-campus engagements that address contemporary Filipino and global socio-political realities.</p>
+      </div>
+      <div class="mv-box">
+        <h3>Vision</h3>
+        <p class="justify">The Senior Student Coordinating Board is among the premier basic education student governments, serving as a leading force for learner representation, youth empowerment, and student-led movements, grounded in De La Salle Lipa Senior High School’s spirit of faith, zeal for service, and communion in mission.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="carousel-section" class="news-section">
+  <div class="container1">
+    <h2 class="big">Latest </h2>
+    <div class="news-flex">
+      <div class="news-carousel-container">
+        <h3 class="big" style="margin-bottom:16px; font-size:25px;">Events</h3>
+        <div class="news-carousel">
+          <div class="slides">
+            <a href="https://www.instagram.com/p/DYhLSj_oCAr/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" class="slide">
+              <img src="carouselbca.jpg" class="slide-img">
+              <div class="caption">
+                <div class="news-date">May 9, 2026</div>
+                <div class="news-title">Eleventh Hour: Onse Upon a Time – The Grandest Day at De La Salle Lipa </div>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/p/DUZRZteEhk6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" class="slide">
+              <img src="carouselturnover.jpg" class="slide-img">
+              <div class="caption">
+                <div class="news-date">January 28, 2026</div>
+                <div class="news-title">iLAYA: The Turnover</div>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/p/DQn76uaElLZ/?igsh=MWFwODB5ODk0YW55Zg%3D%3D" class="slide">
+              <img src="carouselbingo.jpg" class="slide-img">
+              <div class="caption">
+                <div class="news-date">October 7, 9-10, 2025</div>
+                <div class="news-title">iLAYA Bingo Unites Lasallians for a Greater Cause</div>
+              </div>
+            </a>
+          </div>
+          <div class="dots"></div>
+        </div>
+      </div>
+
+      <div class="portrait-carousel-container">
+        <h3 class="big" style="margin-bottom:16px; font-size:25px;">Announcements</h3>
+        <div class="portrait-carousel">
+          <div class="portrait-slide">
+            <a href="https://www.instagram.com/p/DYZRW9DP0J_/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+              <img src="announcementvoter.jpg" class="portrait-slide-img" />
+            </a>
+            <div class="caption">
+              <div class="news-date">May 16, 2026</div>
+              <div class="news-title"> Voter Registration</div>
+            </div>
+          </div>
+          <div class="portrait-slide">
+            <a href="https://www.instagram.com/p/DXyejYUjvtv/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+              <img src="announcementelected.jpg" class="portrait-slide-img" />
+            </a>
+            <div class="caption">
+              <div class="news-date">May 1, 2026</div>
+              <div class="news-title"> Elected Leaders for the Senior Student Coordinating Board </div>
+            </div>
+          </div>
+          <div class="portrait-slide">
+            <a href="https://www.instagram.com/p/DXAyuNvkg_R/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">
+              <img src="announcementcandidates.jpg" class="portrait-slide-img" />
+            </a>
+            <div class="caption">
+              <div class="news-date">April 12, 2026</div>
+              <div class="news-title">Meet the Grade 12 SSCB Candidates</div>
+            </div>
+          </div>
+          <div class="portrait-dots"></div>
+        </div>
+      </div>
+    </div> 
+  </div> 
+</section>
+
+<section class="board-section">
+  <div class="container">
+    <h2 class="blue" style="text-align: center;">SSCB Executive Board</h2>
+    <div class="board-grid">
+      <div class="person-card">
+        <div class="avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwoepRhqL7kr97M_S5eY7QJCirLVKVh6F7IQ&s"></div>
+        <div class="person-info">
+          <div class="name">Moderator, SSCB</div>
+          <div class="role">Moderator, SSCB</div>
+          <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=ma.melissa.ishikawa@dlsl.edu.ph" target="_blank">Gmail</a>
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="avatar"><img src="tolentino.png"></div>
+        <div class="person-info">
+          <div class="name">Princess Venus B. Tolentino</div>
+          <div class="role">Integrated School President</div>
+          <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=princess_venus_tolentino@dlsl.edu.ph" target="_blank">Gmail</a>
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="avatar"><img src="pastolero.png"></div>
+        <div class="person-info">
+          <div class="name">Luis Gabriel F. Pastolero</div>
+          <div class="role">Grade 12 Vice President</div>
+          <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=luis_gabriel_pastolero@dlsl.edu.ph" target="_blank">Gmail</a>
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwoepRhqL7kr97M_S5eY7QJCirLVKVh6F7IQ&s"></div>
+        <div class="person-info">
+          <div class="name">Grade 11 Vice President</div>
+          <div class="role">Grade 11 Vice President</div>
+          <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=princess_venus_tolentino@dlsl.edu.ph" target="_blank">Gmail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<div id="campusmap" class="tab-content">
+<div class="cmt-interface-container">
+        
+        <div class="cmt-map-viewport-box" id="cmtViewportId">
+            
+            <div class="cmt-controls-overlay-panel">
+                <button class="cmt-reset-btn-control cmt-utility-hidden" id="cmtResetBtnId" onclick="cmtResetGlobalView()">
+                    🔍 Zoom Out Entire Map
+                </button>
+            </div>
+
+            <div class="cmt-map-canvas-layer" id="cmtMapCanvasId">
+                <div class="cmt-map-wrapper-frame" id="cmtMapWrapperId">
+                    
+                    <img src="map.PNG" alt="Campus Map" class="cmt-campus-image-element" id="cmtCampusImgId">
+                    
+                    <svg class="cmt-map-svg-overlay-pane" id="cmtRouteSvgId">
+                        <path id="cmtVisualPathId" class="cmt-route-line-vector" d="" fill="none"/>
+                    </svg>
+
+                    <div id="cmtUserLocationDotId" class="cmt-user-live-dot-element" style="top: 57.2%; left: 37.8%;">
+                        <div class="cmt-user-avatar-frame-box">
+                            <img src="https://inviteme.com.au/cdn/shop/files/img_work_products_01_1200x1200.png?v=1744342444" alt="Student Position Indicator">
+                        </div>
+                    </div>
+
+                    <div id="cmtDestinationStarId" class="cmt-destination-star-pin-marker cmt-utility-hidden">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/073/274/811/small/green-map-pin-location-marker-navigation-symbol-isolated-on-transparent-background-3d-illustration-modern-design-useful-for-travel-direction-and-gps-concepts-png.png" alt="Destination Target Star">
+                    </div>
+
+                <div id="pin-b1" class="cmt-pin-dot-node cmt-color-blue" style="left: 14.8%; top: 32.5%;" onclick="cmtFocusTargetBuilding('b1', 14.8, 32.5, this)"></div>
+<div id="pin-b2" class="cmt-pin-dot-node cmt-color-blue" style="left: 24.0%; top: 20%;" onclick="cmtFocusTargetBuilding('b2', 24.0, 20, this)"></div>
+<div id="pin-b3" class="cmt-pin-dot-node cmt-color-blue" style="left: 33.5%; top: 35%;" onclick="cmtFocusTargetBuilding('b3', 33.5, 35, this)"></div>
+<div id="pin-b4" class="cmt-pin-dot-node cmt-color-blue" style="left: 28.2%; top: 47.0%;" onclick="cmtFocusTargetBuilding('b4', 28.2, 47.0, this)"></div>
+<div id="pin-b5" class="cmt-pin-dot-node cmt-color-blue" style="left: 32.8%; top: 51.5%;" onclick="cmtFocusTargetBuilding('b5', 32.8, 51.5, this)"></div>
+<div id="pin-b6" class="cmt-pin-dot-node cmt-color-blue" style="left: 21.5%; top: 59.5%;" onclick="cmtFocusTargetBuilding('b6', 21.5, 59.5, this)"></div>
+<div id="pin-b7" class="cmt-pin-dot-node cmt-color-blue" style="left: 36.8%; top: 56.5%;" onclick="cmtFocusTargetBuilding('b7', 36.8, 56.5, this)"></div>
+<div id="pin-b8" class="cmt-pin-dot-node cmt-color-blue" style="left: 36.5%; top: 46%;" onclick="cmtFocusTargetBuilding('b8', 36.5, 46, this)"></div>
+<div id="pin-b9" class="cmt-pin-dot-node cmt-color-blue" style="left: 45.5%; top: 50%;" onclick="cmtFocusTargetBuilding('b9', 45.5, 50, this)"></div>
+<div id="pin-b10" class="cmt-pin-dot-node cmt-color-blue" style="left: 40.8%; top: 36.8%;" onclick="cmtFocusTargetBuilding('b10', 40.8, 36.8, this)"></div>
+<div id="pin-b11" class="cmt-pin-dot-node cmt-color-blue" style="left: 43.2%; top: 28%;" onclick="cmtFocusTargetBuilding('b11', 43.2, 28, this)"></div>
+<div id="pin-b12" class="cmt-pin-dot-node cmt-color-blue" style="left: 49.5%; top: 33%;" onclick="cmtFocusTargetBuilding('b12', 49.5, 33, this)"></div>
+<div id="pin-b13" class="cmt-pin-dot-node cmt-color-blue" style="left: 59.0%; top: 31%;" onclick="cmtFocusTargetBuilding('b13', 59.0, 31, this)"></div>
+<div id="pin-b14" class="cmt-pin-dot-node cmt-color-blue" style="left: 71.8%; top: 49.5%;" onclick="cmtFocusTargetBuilding('b14', 71.8, 49.5, this)"></div>
+<div id="pin-b15" class="cmt-pin-dot-node cmt-color-blue" style="left: 78%; top: 40.5%;" onclick="cmtFocusTargetBuilding('b15', 78, 40.5, this)"></div>
+<div id="pin-b16" class="cmt-pin-dot-node cmt-color-blue" style="left: 79.2%; top: 44.5%;" onclick="cmtFocusTargetBuilding('b16', 79.2, 44.5, this)"></div>
+<div id="pin-b17" class="cmt-pin-dot-node cmt-color-blue" style="left: 73.5%; top: 37%;" onclick="cmtFocusTargetBuilding('b17', 73.5, 37, this)"></div>
+<div id="pin-b18" class="cmt-pin-dot-node cmt-color-blue" style="left: 72%; top: 32%;" onclick="cmtFocusTargetBuilding('b18', 72, 32, this)"></div>
+<div id="pin-b19" class="cmt-pin-dot-node cmt-color-blue" style="left: 65.5%; top: 20%;" onclick="cmtFocusTargetBuilding('b19', 65.5, 20, this)"></div>
+<div id="pin-b20" class="cmt-pin-dot-node cmt-color-blue" style="left: 77%; top: 20.5%;" onclick="cmtFocusTargetBuilding('b20', 77, 20.5, this)"></div>
+<div id="pin-b21" class="cmt-pin-dot-node cmt-color-blue" style="left: 81.8%; top: 23.5%;" onclick="cmtFocusTargetBuilding('b21', 81.8, 23.5, this)"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cmt-info-sidebar-panel" id="cmtInfoSidebarId">
+            <div class="cmt-bottom-sheet-handle-bar" onclick="cmtToggleMobileSidebarView()">
+                <div class="cmt-bottom-sheet-drag-line"></div>
+                <div class="cmt-bottom-sheet-arrow-indicator"></div>
+            </div>
+            
+            <div class="cmt-nav-widget-card">
+                <h4 style="font-family: 'Visby CF Heavy'; font-size: 35px; color: var(--dlsl-green); cursor: pointer; margin: 0;" onclick="cmtToggleMobileSidebarView()">Interactive DLSL Campus Map </h4>
+                
+                <div class="cmt-nav-field-group">
+                    <label for="cmtStartLocationId">Your Current Location</label>
+                    <select id="cmtStartLocationId" onchange="cmtHandleStartLocationChange()">
+                        <option value="" disabled selected>Select building...</option>
+                    </select>
+                </div>
+
+                <div class="cmt-nav-field-group">
+                    <label for="cmtEndLocationId">Your Destination</label>
+                    <select id="cmtEndLocationId" onchange="cmtHandleEndDropdownChange()">
+                        <option value="" disabled selected>Select building...</option>
+                    </select>
+                </div>
+                <button class="cmt-nav-btn-action" onclick="cmtEngageLiveTrackingSystem()">Navigate</button>
+            </div>
+
+            <div id="cmtDirectionsCardId" class="cmt-directions-panel-box cmt-utility-hidden">
+                <h5 id="cmtLiveDistanceTextId">Distance: Selecting target...</h5>
+                <ul class="cmt-directions-list-container" style="list-style: none; padding: 0;">
+                    <li style="margin-top: 5px; color: #666; font-size: 11px;">Note: Estimated distance only. </li>
+                </ul>
+            </div>
+
+            <div id="cmtSidebarPlaceholderId" class="cmt-placeholder-state-view">
+                <h3>Select a building</h3>
+                <p>Building information will show up here.</p>
+            </div>
+
+            <div id="cmtSidebarContentId" class="cmt-sidebar-content-scroll cmt-utility-hidden">
+                <div class="cmt-building-header-image-box">
+                    <img id="cmtBuildingImageId" src="" alt="Building Image" style="width:100%; height:100%; border-radius:8px;">
+                </div>
+                <div class="cmt-details-body-wrapper">
+                    <span id="cmtBuildingTagId" class="cmt-tag-badge">Academic Zone</span>
+                    <h2 id="cmtBuildingNameId" class="cmt-building-title-text">Building Name</h2>
+                    <div class="cmt-section-heading-text">About</div>
+                    <p id="cmtBuildingAboutId" class="cmt-building-about-paragraph"></p>
+    
+                    <div class="cmt-section-heading-text">Departments</div>
+                    <ul id="cmtBuildingDepartmentsId" class="cmt-department-list-items"></ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="sao" class="tab-content">
+  <section class="board-section" >
+    <div class="container">
+      <h2 class="blue" id="saostart">Student Activities Office</h2>
+      <p class="section-desc">
+       The Senior High School (SHS) arm of the Student Activities Office (SAO) is in charge of designing, implementing, and monitoring student activities for SHS, overseeing the execution of co-curricular and extracurricular activities for the Grade 11 and Grade 12 communities.
+      </p>
+      <br>
+      <div class="role-group single">
+        <div class="person-card">
+          <div class="avatar"><img src="msjo.jpg"></div>
+          <div class="person-info">
+            <div class="name">Ms. Jocelyn Rosos</div>
+            <div class="role">Moderator, Student Activities Office</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=jocelyn.rosos@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <h2 class="blue">Clubs under the Student Activities Office</h2>
+      <div class="columns-container">
+        <div class="column">
+            <div class="heading">Special Interest Clubs</div>
+            <ul class="club-list">
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=jolo.mendoza@dlsl.edu.ph" target="_blank">Arts and Letters</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=darwin.pena@dlsl.edu.ph" target="_blank">Art Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=marivic.arteza@dlsl.edu.ph" target="_blank">ANIMO EXPRESSIONISTAS</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=mona.liza.de.villa@dlsl.edu.ph" target="_blank">BATANG KOOP</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=lireyn.de.sagun@dlsl.edu.ph" target="_blank">Booklover's Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=evangeline.sagaoinit@dlsl.edu.ph" target="_blank">Crochet Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=julius.antonio@dlsl.edu.ph" target="_blank">CosANIMO Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=randell.airand.bunye@dlsl.edu.ph" target="_blank">Gaming Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=nerissa.hernandez@dlsl.edu.ph,remelyn.punongbayan@dlsl.edu.ph,caryll.aisa.maranan@dlsl.edu.ph" target="_blank">Gourmet Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=olive.maganito@dlsl.edu.ph" target="_blank">Illumin8 Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=roger.atienza@dlsl.edu.ph,jessele.ocfemia@dlsl.edu.ph,hazel.tabagan@dlsl.edu.ph,lovely.cheska.neria@dlsl.edu.ph" target="_blank">Lasallian Traveller's Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=diana.marie.frago@dlsl.edu.ph,jocelyn.rosos@dlsl.edu.ph,olive.tan@dlsl.edu.ph" target="_blank">Lasallian Volunpeers Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=vivian.dimaculangan@dlsl.edu.ph" target="_blank">Lasallian Youth Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=kevin.lobrin@dlsl.edu.ph" target="_blank">LASALYRIKO</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=monique.rivera@dlsl.edu.ph" target="_blank">LILA (League of Integrated Lasallian Advocates)</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=victor.angelo.hermoso@dlsl.edu.ph" target="_blank">Modern Dance Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=claudine.lajarca@dlsl.edu.ph" target="_blank">Multimedia Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=ryan.puertollano@dlsl.edu.ph" target="_blank">Polyphonic Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=christie.victoria.arcega@dlsl.edu.ph" target="_blank">Science High Society Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=toni.de.jesus@dlsl.edu.ph" target="_blank">SHS EARTH CLUB</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=christian.dave.antonio@dlsl.edu.ph" target="_blank">STALLION Volleyball Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=ma.melissa.ishikawa@dlsl.edu.ph" target="_blank">SCB</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <div class="heading">Society, Culture, and Religion</div>
+            <ul class="club-list">
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=heidi.larano@dsl.edu.ph" target="_blank">ANAK</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=renemarie.fabon@dlsl.edu.ph" target="_blank">Well-being Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=xymon.king.marasigan@dlsl.edu.ph" target="_blank">Student Campus Ministry Lectors and Commentators</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=ehlysohl.elefante@dlsl.edu.ph" target="_blank">Student Campus Ministry Altar Servers</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=dimdritz.roxas@dlsl.edu.ph" target="_blank">Student Campus Ministry Choir</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=fred.amul@dlsl.edu.ph" target="_blank">Youth For Christ</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=silverio.jr.vallejo@dlsl.edu.ph" target="_blank">PAALSA</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=joey.lirio@dlsl.edu.ph" target="_blank">SHS Rover</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=ginnina.gatdula@dlsl.edu.ph" target="_blank">SHS Cadets</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=julius.ballesteros@dlsl.edu.ph,lerma.ilao@dlsl.edu.ph,merryle.marquez@dlsl.edu.ph,isidro.mark.salarda@dlsl.edu.ph" target="_blank">The SHS Knights of DLSL</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <div class="heading">Academic Varsity Club</div>
+            <ul class="club-list">
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=elldhie.caunca@dlsl.edu.ph" target="_blank">Social Science Varsity</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=jamie.delapaz@dlsl.edu.ph" target="_blank">Debate Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=ruby.angeles@dlsl.edu.ph" target="_blank">Math Varsity</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=maria.leonora.leynes@dlsl.edu.ph" target="_blank">Research Varsity Program</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=diana.rose.litan@dlsl.edu.ph" target="_blank">Biology Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=romo.sanvictores@dlsl.edu.ph" target="_blank">Physics Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=embelle.racal@dlsl.edu.ph" target="_blank">Chemistry Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=karl.anthony.perez@disl.edu.ph" target="_blank">ABMazing</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=lailanie.guitierrez@dlsl.edu.ph" target="_blank">ADLAW-SHS</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="op" class="tab-content">
+
+<header class="heroop">
+<div class="hero-content" id="opstart">
+ 
+<div class="scroll-arrow">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+       stroke="var(--dlsl-green)" stroke-width="1.2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9l6 6 6-6"/>
+  </svg>
+</div>
+</div>
+</header>
+
+ 
+<section id="officepres" class="board-section">
+    <div class="container">
+      <h2 class="blue" style="text-align: center;">Office of the IS President</h2>
+      <h3 style="text-align: center; font-size: 25px;">Functions of the Office</h3>
+      <p class="section-desc" style="text-align: center;">
+        The Office of the IS President serves as the core council of the Student Coordinating Board, representing the entire student body and spearheading the operations of student activities. The OIP oversees all internal committees and enforces that all elective officers are held to high standards of student conduct.
+      </p>
+      <br>
+      <div class="role-group single">
+        <div class="person-card">
+          <div class="avatar"><img src="tolentino.png"></div>
+          <div class="person-info">
+            <div class="name">Princess Venus B. Tolentino</div>
+            <div class="role">Integrated School President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=princess_venus_tolentino@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="role-group double">
+        <div class="person-card">
+          <div class="avatar"><img src="pastolero.png"></div>
+          <div class="person-info">
+            <div class="name">Luis Gabriel F. Pastolero</div>
+            <div class="role">Grade 12 Vice President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=luis_gabriel_pastolero@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwoepRhqL7kr97M_S5eY7QJCirLVKVh6F7IQ&s"></div>
+          <div class="person-info">
+            <div class="name">Grade 11 Vice President</div>
+            <div class="role">Grade 11 Vice President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=david_uriel_malabanan@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar"><img src="vizconde.png"></div>
+          <div class="person-info">
+            <div class="name">Marc Mackeuz L. Vizconde</div>
+            <div class="role">Junior High School Vice President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=marc_mackeuz_vizcondeo@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar"><img src="landicho.png"></div>
+          <div class="person-info">
+            <div class="name">Nayelie Anelice V. Landicho</div>
+            <div class="role">Grade School Vice President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=marc_mackeuz_vizcondeo@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="ovp" class="tab-content">
+
+<header class="heroovp" id="ovpstart">
+
+
+<div class="hero-content">
+<div class="scroll-arrow">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+       stroke="var(--dlsl-green)" stroke-width="1.2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9l6 6 6-6"/>
+  </svg>
+</div>
+</div>
+</header>
+
+  <section class="board-section">
+      <div class="container">
+      <h2 class="blue" style="text-align: center;">Office of the G12 Vice President</h2>
+      <h3 style="text-align: center; font-size: 25px;">Functions of the Office</h3>
+      <p class="section-desc" style="text-align: center;">
+       The Office of the Grade 12 Vice President supports the leadership of the OIP by ensuring smooth coordination across all student-led initiatives. The O12VP oversees the Committees on Creatives, Archives, and Communications, guiding their operations and ensuring that deliverables are aligned with the goals of the Grade 12 Community.
+      </p>
+      <br>
+      <div class="role-group single">
+        <div class="person-card">
+          <div class="avatar"><img src="pastolero.png"></div>
+          <div class="person-info">
+            <div class="name">Luis Gabriel F. Pastolero </div>
+            <div class="role">Grade 12 Vice President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=luis_gabriel_pastolero@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <h3 class="gitna">Committee on Archives</h3>
+      <p style="color:#000;" class="gitna">The Committee on Archives is in charge of drafting activity proposals, safekeeping of council repository, and all logistical requirements needed for the realization of SSCB advocacies.
+</p>
+      <br>
+      <div class="role-group single">
+        <div class="person-card">
+          <div class="avatar"><img src="para.png"></div>
+          <div class="person-info">
+            <div class="name">Princess Giannah Brielle M. Para</div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=princess_giannah_brielle_para@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="role-group double">
+        <div class="person-card">
+          <div class="avatar"><img src="andaya.png"></div>
+          <div class="person-info">
+            <div class="name">Gene Marvin B. Andaya</div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=gene_marvin_andaya@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar"><img src="sarmiento.png"></div>
+          <div class="person-info">
+            <div class="name">Sophia J. Sarmiento </div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=sophia_sarmiento@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+     
+      <div class="committee-container">
+        <h3 class="gitna">Committee on Communications</h3>
+        <p style="color:#000;" class="gitna">The Committee on Communications is in charge of managing all internal and external affairs of the SSCB, including but not limited to letters, correspondences, announcements, and social media management.</p>
+        <br>
+        <div class="role-group single">
+          <div class="person-card">
+            <div class="avatar"><img src="ibarra.png"></div>
+            <div class="person-info">
+              <div class="name">Queen Kiandra L. Ibarra</div>
+              <div class="role">Grade 12  Representative</div>
+              <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=queen_kiandra_ibarra@dlsl.edu.ph" target="_blank">Gmail</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <h3 class="gitna">Committee on Creatives</h3>
+      <p style="color:#000;" class="gitna">The Committee on Creatives is in charge of branding, designing, and operating audio-visual publication materials in pursuit of promulgating news and auxiliary information on student activities and governance.</p>
+      <br>
+      <div class="role-group single">
+        <div class="person-card">
+          <div class="avatar"><img src="cabardo.jpeg"></div>
+          <div class="person-info">
+            <div class="name">Catherine Margareth I. Cabardo</div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=catherine_margareth_cabardo@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="role-group double">
+        <div class="person-card">
+          <div class="avatar"><img src="hornilla.png"></div>
+          <div class="person-info">
+            <div class="name">Mark Justine A. Hornilla</div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=mark_justine_hornilla@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar"><img src="azores.png"></div>
+          <div class="person-info">
+            <div class="name">Ronel Albert Iosef S. Azores</div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=ronel_albert_iosef_azores@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="records" class="tab-content">
+ <div class="records-visual-wrap">
+  <div class="records-visual-title">
+    <h2 id="recordsstart">Records</h2>
+    <span></span>
+  </div>
+
+  <div class="records-visual-tabs">
+    <button class="dlsl-switch active" onclick="changeAlumniTab(event, 'sscb-reports')">Reports</button>
+    <button class="dlsl-switch" onclick="changeAlumniTab(event, 'sscb-scf')">Student Concern Form</button>
+    <button class="dlsl-switch" onclick="changeAlumniTab(event, 'sscb-performance')">SSCB Performance</button>
+  </div>
+
+  <div class="records-visual-content">
+    <div id="sscb-scf" class="dlsl-panel">
+      <div id="container">
+        <h2 style="font-family: 'Visby CF Heavy'; color: var(--dlsl-green); text-align:center;">Student Concern Form</h2>
+        <p class="section-desc" style="text-align: justify">
+          The <a href="https://docs.google.com/document/d/17qDsEyPcilcn4rKjtRQbzekIj6W4O9yDO5NcZzl-Usw/edit?usp=sharing">Student Concern Form (SCF)</a> is a document used to request assistance from the SSCB in endorsing in-campus complaints and student grievances. It serves as a mechanism for addressing concerns that may require immediate attention and action.
+          <br><br>
+          The SCF ensures that concerns are acted upon promptly, preventing delays that may arise from the fact that COSCA meetings are conducted only once per semester. Through this process, students can receive timely support and resolution for eligible concerns.
+        </p>
+        <br>
+        <div class="button-wrapper">
+          <a href="https://forms.gle/zFHtfiqs4g7G5r4e7" class="email-btn">Submit here</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="sscb-reports" class="dlsl-panel active">
+     <div class="sscb-stories-wrapper">
+      <div id="sscbStoriesHome">
+        <div class="sscb-main-container">
+            <div class="sscb-controls-section">
+                <h2 class="blue" style="font-family: 'Visby CF Heavy';">Reports</h2>
+                <div class="sscb-search-box">
+                    <input type="text" id="sscbStoriesSearch" placeholder="Search..." onkeyup="sscbFilterStories()">
+                </div>
+            </div>
+
+            <div id="sscbFeaturedWrapper">
+                <div class="sscb-featured-story" data-sscb-search-title="onse upon a time, a legacy began: grade 11 students end school year with eleventh hour" onclick="sscbShowArticle('sscb-art-0')">
+                    <div class="sscb-featured-img-wrapper">
+                        <img src="11th.jpg" alt="Once Upon A Time, A Legacy Began">
+                    </div>
+                    <div class="sscb-featured-content">
+                        <h1>Onse Upon A Time, A Legacy Began: Grade 11 students end school year with Eleventh Hour</h1>
+                        <div class="sscb-featured-meta">May 2026</div>
+                        <div class="sscb-featured-excerpt">Draped in crimson and lit in red, the De La Salle Lipa SENTRUM was a beauty to behold in its final day for Grade 11 students. Built on the stories of a fairytale, the junior community danced the noon away in elegance and music during this year’s pioneering occasion—the Eleventh Hour!</div>
+                        <span class="sscb-read-more-link">Read More »</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sscb-stories-grid" id="sscbGridContainer">
+                <div class="sscb-story-item" data-sscb-search-title="refugeling the spirit: ilaya turns over nearly p 50k for educ donations" onclick="sscbShowArticle('sscb-art-1')">
+                    <img class="sscb-story-thumb" src="turnover.jpg" alt="Hapag ng Ani">
+                    <div class="sscb-story-info">
+                        <div class="sscb-story-meta">January 2026</div>
+                        <div class="sscb-story-title">REFUGEling The Spirit: iLAYA turns over nearly P 50K for educ donations</div>
+                        <div class="sscb-story-excerpt">Set in the most humble of Lipasallian avenues, the Capilla de San Juan Bautista de La Salle stood transformed—no longer just a place of reflection, but a gathering ground for conviction and unity—as Grade 11 and Grade 12 students filled its halls. </div>
+                    </div>
+                </div>
+
+                <div class="sscb-story-item" data-sscb-search-title="cpathin natin, lasallian: ilaya 2025 charity bingo to benefit refugees under unhcr" onclick="sscbShowArticle('sscb-art-2')">
+                    <img class="sscb-story-thumb" src="bingo.png" alt="Charity Bingo">
+                    <div class="sscb-story-info">
+                        <div class="sscb-story-meta">October 2025</div>
+                        <div class="sscb-story-title">CPATHin Natin, Lasallian: ILAYA 2025 charity bingo to benefit refugees under UNHCR</div>
+                        <div class="sscb-story-excerpt">While the Philippines wrestles with corruption under the shelter of our democratic halls, another nation to the north bleeds from wounds far deeper...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div id="sscb-art-0" class="sscb-article-page sscb-hidden">
+        <div class="sscb-back-nav-bar">
+            <a class="sscb-back-action-trigger" onclick="sscbReturnToGrid()">← Back to Records </a>
+        </div>
+        <div class="sscb-article-hero-banner">
+            <br><img src="11th.jpg" alt="Banner text"><br>
+            <div class="sscb-article-hero-overlay">
+                <div class="sscb-article-hero-inner">
+                    <span class="sscb-article-badge">News and Updates</span>
+                    <h1 class="sscb-article-main-title">Onse Upon A Time, A Legacy Began: Grade 11 students end school year with Eleventh Hour</h1>
+                </div>
+            </div>
+        </div>
+        <div class="sscb-article-body-wrapper">
+            <div class="sscb-article-divider"></div>
+            <div class="sscb-article-meta-row">May 2026</div>
+            <div class="sscb-article-divider"></div>
+            <div class="sscb-article-author">Author: SSCB Executives</div>
+            <div class="sscb-article-body-content">
+                <p>Draped in crimson and lit in red, the De La Salle Lipa SENTRUM was a beauty to behold in its final day for Grade 11 students. Built on the stories of a fairytale, the junior community danced the noon away in elegance and music during this year’s pioneering occasion—the Eleventh Hour!
+                <br><br>
+                Grounded in a fresh concept of Senior High School (SHS) celebration and spirit, the Eleventh Hour: Onse Upon A Time, the Senior Student Coordinating Board held the Grade 11 culminating activity on May 9, 2026, at the SENTRUM.
+                <br><br>
+                Serving as a prologue to the tale, the Senior Student Coordinating Board welcomed the level population to the afternoon banquet with inspiring messages from the administration and social mixers to tighten the knot between the event’s main characters: the SHS juniors.
+                <br><br>
+                Setting the fairytale atmosphere ablaze, the SHS Modern Dance Company delivered a charismatic performance that was as magical as it was electrifying.
+                <br><br>
+                As the story unfolded, the Heartthrob and Sweetheart enriched the story featuring ramps of each class’ enchanting beauties and charming men. Clothed in tones of scarlet and ivory, the junior audience exalted in cheers like loyal subjects celebrating their royalties.
+                <br><br>
+                Simultaneous with The Love Feast, a live voting for the Heartthrob and Sweetheart was opened, while magical performances anchored on belts and falsetto were offered by Nash Arden Diamzon (G11-18) and Francez Priolo (G11-14).
+                <br><br>
+                After the lunch, the Grade 11 students were like spectators to a coronation as the Heartthrob and Sweetheart of the year was hailed, crowned by Giannah Para and Jay-Jay Labong, SSCB Grade 11 Representatives.
+                <br><br>
+                Sashed by the administrator-packed panel of judges led by Sir Fred Angeles, Vice Chancellor for Mission, Vaughn Clarenz Inciong (G11-15) and Lian Denise Britania (G11-06) emerged victorious and were crowned Heartthrob and Sweetheart 2026, respectively.<br><br>
+                Following the pageant segment, the awarding of winners for Class Logo Making and Lens of Love were recognized and handed the trophy, signifying their rising candidacies to be the next recipient of Class Spirit of the Year Award.<br><br>
+                Adding to the evening's romantic finale, Grade 11 bands Terrafry and Shibuyas serenaded the student body with a lineup of nostalgic and crowd-favorite songs, including Kabisado, Shut Up and Dance, and Purple Rain. <br><br>
+                As the final chapter came to a close, the afterparty officially began. DJ Paps took over the stage from the Grade 11 SSCB, energizing the crowd and drawing students to the stage, resembling a rave-like atmosphere.<br><br>
+                Indeed, the first Eleventh Hour was more than just a culminating activity—it was a celebration of friendships forged, memories created, and a legacy begun, marking a magical end to the Grade 11 journey and an opening to the next.</p>
+            </div>
+        </div>
+      </div>
+
+      <div id="sscb-art-1" class="sscb-article-page sscb-hidden">
+        <div class="sscb-back-nav-bar">
+            <a class="sscb-back-action-trigger" onclick="sscbReturnToGrid()">← Back to Records</a>
+        </div>
+        <div class="sscb-article-hero-banner">
+            <br><img src="turnover.jpg" alt="Banner text">
+            <div class="sscb-article-hero-overlay">
+                <div class="sscb-article-hero-inner">
+                    <span class="sscb-article-badge">News and Updates</span>
+                    <h1 class="sscb-article-main-title">REFUGEling The Spirit: iLAYA turns over nearly P 50K for educ donations</h1>
+                </div>
+            </div>
+        </div>
+        <div class="sscb-article-body-wrapper">
+            <div class="sscb-article-divider"></div>
+            <div class="sscb-article-meta-row">January 2026</div>
+            <div class="sscb-article-divider"></div>
+            <div class="sscb-article-author">Author: SSCB Executives</div>
+            <div class="sscb-article-body-content">
+                <p>Set in the most humble of Lipasallian avenues, the Capilla de San Juan Bautista de La Salle stood transformed—no longer just a place of reflection, but a gathering ground for conviction and unity—as Grade 11 and Grade 12 students filled its halls.  <br><br>
+                Turning a humble chapel into a powerful witness of memory and resolve, the Senior High School (SHS) community takes a collective stand against racial persecution.<br><br>
+                Through a formal handing of donations, the SSCB along with student-representatives from the Senior High School community turned over P47,250.00 to Rohingya refugees under Complementary Pathways (CPath) in January 28, 2026 at the DLSL Capilla.<br><br>
+                This student-led collection will benefit students in CPath, a program of the United Nations High Commissioner for Refugees (UNHCR), studying in selected schools of the De La Salle Philippines network.<br><br>
+                In the turnover ceremony, the SSCB organized a holistic program featuring interactive talks by the UNHCR and Sir Andyo Abusmas, Deputy Director of DLSBI-SAU, awarding ceremonies, and letter-making activity to beneficiaries.<br><br>
+                According to Sir Andyo Abusmas, this cash donation by the SHS community will benefit refugees in the form of student allowances and other educational materials.<br><br>
+                In the simultaneous competition under iLAYA, G11-12 and S12-02 were hailed champions and acted as student-representatives to the formal turnover.<br><br>
+                Runners-up were also recognized with G11-04 and S12-01, and G11-02 and S12-03 as second-places and third-placers respectively for Grade 11 and Grade 12 batches.<br><br>
+                The ceremony closed on a quiet note, realizing that what was turned over that day was not only assistance, but a promise of continued solidarity with Rohingya refugees under CPath—a commitment that calls the community to keep turning awareness into action.</p>
+            </div>
+        </div>
+      </div>
+
+      <div id="sscb-art-2" class="sscb-article-page sscb-hidden">
+        <div class="sscb-back-nav-bar">
+            <a class="sscb-back-action-trigger" onclick="sscbReturnToGrid()">← Back to Records</a>
+        </div>
+        <div class="sscb-article-hero-banner"><br>
+            <img src="bingo.png" alt="Banner text">
+            <div class="sscb-article-hero-overlay">
+                <div class="sscb-article-hero-inner">
+                    <span class="sscb-article-badge">NEWS AND UPDATES</span>
+                    <h1 class="sscb-article-main-title">CPATHin Natin, Lasallian: ILAYA 2025 charity bingo to benefit refugees under UNHCR</h1>
+                </div>
+            </div>
+        </div>
+        <div class="sscb-article-body-wrapper">
+            <div class="sscb-article-divider"></div>
+            <div class="sscb-article-meta-row">October 2025</div>
+            <div class="sscb-article-divider"></div>
+            <div class="sscb-article-author">Author: Student Council Core</div>
+            <div class="sscb-article-body-content">
+                <p>While the Philippines wrestles with corruption under the shelter of our democratic halls, another nation to the north bleeds from wounds far deeper. Beneath its temples, rivers, and rich cultural heritage, the people of Myanmar sits on a history marred by oppression and exclusion. <br><br>
+                For the longest time, it bled giving justice to the few and inequality to the many—especially the Rohingya.<br><br>
+                In response to the ongoing humanitarian crisis faced by the Rohingya people, the Senior Student Coordinating Board (SSCB), in partnership with the Community Involvement Office (CIO) and the De La Salle Brothers, Inc. – Social Action Unit (DLSBI-SAU), organized a three-day fundraising bingo event in Hasyenda on October 7, 9, and 10, 2025. The initiative aimed to raise financial support and awareness for Rohingya refugees residing in the Philippines.<br><br>
+                According to United Nations High Commissioner for Refugees (UNHCR), the Rohingya people have endured a cycle of persecution that has stripped many of their homes, livelihoods, and sense of belonging for decades. Forced to flee state-sponsored violence and discrimination in Myanmar, hundreds of thousands have sought refuge in overcrowded camps and unfamiliar countries, carrying with them stories of loss and survival. <br><br>
+                Up to date, families remain separated by borders, children grow up with little to no access to education, and the threat of gender-based violence continues to loom over their daily life.<br><br>
+                Under the UNHCR, the Complementary Pathways programme selects Rohingya refugees who faced displacement in order to charitably provide them with their basic needs like safety and quality schooling.<br><br>
+                This activity was launched in celebration of Peace Month wherein the selling period of bingo cards started around early September, mobilizing strong Lasallian participation across Senior High School (SHS) classes, with some attaining 100% engagement.<br><br>
+                In a span of two weeks, the initiative successfully raised P 52,500, highlighting the Lasallian community’s collective spirit of service and impact.<br><br>
+                “Bilang Lasalyano, nararapat pong sipatin natin hindi lamang ang ating mga pansarili o pambansang pangangailangan, kundi makibaka rin sa ating mga isyung pandaigdig. We, Lasallians, are known not because of our global name, but because we can respond to global needs. We are very proud of what we’ve done for iLAYA, and we hope to see you at the Turnover,” Luis Gabriel Pastolero, iLAYA Project Head says.<br><br>
+                As the fundraising efforts draw to a close, anticipation now turns toward the SSCB’s formal turnover of donations and the impact that this humble collection will carry forward.</p>
+            </div>
+        </div>
+      </div>
+     </div>  
+    </div>
+
+    <div id="sscb-performance" class="dlsl-panel">
+        <div class="container">
+          <h2 class="blue" style="font-family: 'Visby CF Heavy';">SSCB Attendance Tracker</h2>
+          <p style="font-family:Livvic;">In line with its commitment to transparency and accountability in student governance, the Senior Student Coordinating Board (SSCB) hereby publishes this tracker to provide the student body with access to SSCB attendance records and student assessments of the Board’s performance across designated evaluation periods.
+</p>
+          <br>
+          <div class="search-wrapper">
+            <input type="text" id="attendanceSearch" class="search-input" onkeyup="filterAttendance()" placeholder="Search by member name or position...">
+          </div>
+
+          <div class="attendance-grid" id="attendanceGrid">
+            <div class="attendance-display-card">
+              <div class="card-header-row">
+                <div class="member-details">
+                  <span class="member-name">Princess Venus B. Tolentino</span>
+                  <span class="member-role">IS President</span>
+                </div>
+                <span class="percentage-badge pct-high">100%</span>
+              </div>
+              <div class="gauge-container">
+                <div class="gauge-bar-track">
+                  <div class="gauge-fill bg-high" style="width: 100%;"></div>
+                </div>
+              </div>
+              <div class="breakdown-row">
+                <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>20</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>0</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-excused"></span>Excused: <b>0</b></div>
+              </div>
+            </div>
+
+            <div class="attendance-display-card">
+              <div class="card-header-row">
+                <div class="member-details">
+                  <span class="member-name">Luis Gabriel F. Pastolero</span>
+                  <span class="member-role">Grade 12 Vice President</span>
+                </div>
+                <span class="percentage-badge pct-low">5%</span>
+              </div>
+              <div class="gauge-container">
+                <div class="gauge-bar-track">
+                  <div class="gauge-fill bg-low" style="width: 5%;"></div>
+                </div>
+              </div>
+              <div class="breakdown-row">
+                <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>1</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>19</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-excused"></span>Excused: <b>0</b></div>
+              </div>
+            </div>
+
+            <div class="attendance-display-card">
+              <div class="card-header-row">
+                <div class="member-details">
+                  <span class="member-name">Princess Giannah Brielle M. Para</span>
+                  <span class="member-role">Grade 12 Representative</span>
+                </div>
+                <span class="percentage-badge pct-mid">80%</span>
+              </div>
+              <div class="gauge-container">
+                <div class="gauge-bar-track">
+                  <div class="gauge-fill bg-mid" style="width: 80%;"></div>
+                </div>
+              </div>
+              <div class="breakdown-row">
+                <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>16</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>4</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-excused"></span>Excused: <b>0</b></div>
+              </div>
+            </div>
+
+            <div class="attendance-display-card">
+              <div class="card-header-row">
+                <div class="member-details">
+                  <span class="member-name">Gene Marvin B. Andaya</span>
+                  <span class="member-role">Grade 12 Representative</span>
+                </div>
+                <span class="percentage-badge pct-high">100%</span>
+              </div>
+              <div class="gauge-container">
+                <div class="gauge-bar-track">
+                  <div class="gauge-fill bg-high" style="width: 100%;"></div>
+                </div>
+              </div>
+              <div class="breakdown-row">
+                <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>20</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>0</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-excused"></span>Excused: <b>0</b></div>
+              </div>
+            </div>
+            
+            <div class="attendance-display-card">
+              <div class="card-header-row">
+                <div class="member-details">
+                  <span class="member-name">Ronel Albert Iosef S. Azores</span>
+                  <span class="member-role">Grade 12 Representative</span>
+                </div>
+                <span class="percentage-badge pct-mid">80%</span>
+              </div>
+              <div class="gauge-container">
+                <div class="gauge-bar-track">
+                  <div class="gauge-fill bg-mid" style="width: 80%;"></div>
+                </div>
+              </div>
+              <div class="breakdown-row">
+                <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>16</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>4</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-excused"></span>Excused: <b>0</b></div>
+              </div>
+            </div>
+
+            <div class="attendance-display-card">
+              <div class="card-header-row">
+                <div class="member-details">
+                  <span class="member-name">Sophia J. Sarmiento</span>
+                  <span class="member-role">Grade 12 Representative</span>
+                </div>
+                <span class="percentage-badge pct-low">5%</span>
+              </div>
+              <div class="gauge-container">
+                <div class="gauge-bar-track">
+                  <div class="gauge-fill bg-low" style="width: 5%;"></div>
+                </div>
+              </div>
+              <div class="breakdown-row">
+                <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>1</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>19</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-excused"></span>Excused: <b>0</b></div>
+              </div>
+            </div>
+
+            <div class="attendance-display-card">
+              <div class="card-header-row">
+                <div class="member-details">
+                  <span class="member-name">Queen Kiandra L. Ibarra</span>
+                  <span class="member-role">Grade 12 Representative</span>
+                </div>
+                <span class="percentage-badge pct-mid">80%</span>
+              </div>
+              <div class="gauge-container">
+                <div class="gauge-bar-track">
+                  <div class="gauge-fill bg-mid" style="width: 80%;"></div>
+                </div>
+              </div>
+              <div class="breakdown-row">
+                <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>16</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>4</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-excused"></span>Excused: <b>0</b></div>
+              </div>
+            </div>      
+
+            <div class="attendance-display-card">
+              <div class="card-header-row">
+                <div class="member-details">
+                  <span class="member-name">Mark Justine A. Hornilla </span>
+                  <span class="member-role">Grade 12 Representative</span>
+                </div>
+                <span class="percentage-badge pct-low">5%</span>
+              </div>
+              <div class="gauge-container">
+                <div class="gauge-bar-track">
+                  <div class="gauge-fill bg-low" style="width: 5%;"></div>
+                </div>
+              </div>
+              <div class="breakdown-row">
+                <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>1</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>19</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-excused"></span>Excused: <b>0</b></div>
+              </div>
+            </div>
+
+            <div class="attendance-display-card">
+              <div class="card-header-row">
+                <div class="member-details">
+                  <span class="member-name">Catherine Margareth I. Cabardo</span>
+                  <span class="member-role">Grade 12 Representative</span>
+                </div>
+                <span class="percentage-badge pct-high">100%</span>
+              </div>
+              <div class="gauge-container">
+                <div class="gauge-bar-track">
+                  <div class="gauge-fill bg-high" style="width: 100%;"></div>
+                </div>
+              </div>
+              <div class="breakdown-row">
+                <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>20</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>0</b></div>
+                <div class="stat-item"><span class="dot-indicator dot-excused"></span>Excused: <b>0</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+ </div>
+
+</div>
+
+</div>
+
+<footer>
+
+<svg viewBox="0 0 1200 120" preserveAspectRatio="none" style="width: 100%; height: 60px;">
+  <path d="M0,60 C150,100 350,20 500,60 C650,100 850,20 1000,60 C1150,100 1250,60 1300,60" 
+        fill="none" 
+        stroke="#fff" 
+        stroke-width="5" 
+        stroke-linecap="round"/>
+</svg>
+  <p>Senior Student Coordinating Board</p>
+  <small>© 2026 | Operated by the Committee on Creatives</small>
+</footer>
+
+<script>
+function toggleSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const content = document.querySelector('.content');
+  sidebar.classList.toggle('collapsed');
+  content.classList.toggle('collapsed');
+}
+
+function openTab(evt, tabId, scrollToId) {
+    // 1. Deactivate all tabs and hide content containers
+    const tabContents = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+    }
+    
+    const tabs = document.getElementsByClassName("tab");
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+    }
+    
+    // 2. Activate target tab container
+    const targetContent = document.getElementById(tabId);
+    if (targetContent) {
+        targetContent.classList.add("active");
+        
+        // Handle reveal fade-in animations on sections
+        const childSections = targetContent.querySelectorAll('section');
+        childSections.forEach(sec => {
+            sec.classList.add('show');
+            sec.style.opacity = "1";
+            sec.style.transform = "translateY(0)";
+        });
+    }
+    
+    if (evt && evt.currentTarget) {
+        evt.currentTarget.classList.add("active");
+    }
+    
+    // 3. Close the global navigation sidebar automatically after clicking a tab
+    const mainSidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.content');
+    
+    if (mainSidebar && mainContent) {
+        // Option A: If your website uses the "collapsed" class structure to hide the sidebar
+        mainSidebar.classList.add('collapsed');
+        mainContent.classList.add('collapsed');
+        
+        // Option B: If your website toggles an "active" class to open/close it on mobile, uncomment below instead:
+        // mainSidebar.classList.remove('active');
+    }
+    
+    // 4. Scroll seamlessly to the specific target element ID
+    if (scrollToId) {
+        // A slight timeout ensures the tab is fully rendered and visible before scrolling
+        setTimeout(() => {
+            const element = document.getElementById(scrollToId);
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }
+        }, 100); 
+    }
+    
+    // 5. Map lifecycle rules if switching to campusmap
+    if (tabId === 'campusmap') {
+        setTimeout(() => {
+            if (typeof cmtApplyCanvasTransformation === 'function') {
+                cmtApplyCanvasTransformation();
+            }
+        }, 50);
+    }
+}
+function changeAlumniTab(evt, panelId) {
+  const panels = document.getElementsByClassName("dlsl-panel");
+  for (let i = 0; i < panels.length; i++) {
+    panels[i].classList.remove("active");
+  }
+  const switches = document.querySelectorAll(".records-visual-tabs .dlsl-switch");
+  switches.forEach(sw => sw.classList.remove("active"));
+  
+  document.getElementById(panelId).classList.add("active");
+  evt.currentTarget.classList.add("active");
+}
+
+function sscbShowArticle(artId) {
+  document.getElementById('sscbStoriesHome').classList.add('sscb-hidden');
+  const articles = document.getElementsByClassName('sscb-article-page');
+  for(let i=0; i<articles.length; i++) {
+    articles[i].classList.add('sscb-hidden');
+  }
+  document.getElementById(artId).classList.remove('sscb-hidden');
+}
+
+function sscbReturnToGrid() {
+  const articles = document.getElementsByClassName('sscb-article-page');
+  for(let i=0; i<articles.length; i++) {
+    articles[i].classList.add('sscb-hidden');
+  }
+  document.getElementById('sscbStoriesHome').classList.remove('sscb-hidden');
+}
+
+function sscbFilterStories() {
+  const input = document.getElementById('sscbStoriesSearch').value.toLowerCase();
+  const items = document.getElementsByClassName('sscb-story-item');
+  const featured = document.getElementById('sscbFeaturedWrapper');
+  
+  if (input.length > 0 && featured) {
+    featured.style.display = 'none';
+  } else if (featured) {
+    featured.style.display = 'block';
+  }
+  
+  for (let i = 0; i < items.length; i++) {
+    let title = items[i].getAttribute('data-sscb-search-title') || '';
+    if (title.toLowerCase().includes(input)) {
+      items[i].style.display = 'flex';
+    } else {
+      items[i].style.display = 'none';
+    }
+  }
+}
+
+function filterAttendance() {
+  const input = document.getElementById('attendanceSearch').value.toLowerCase();
+  const cards = document.getElementsByClassName('attendance-display-card');
+  for (let i = 0; i < cards.length; i++) {
+    let name = cards[i].querySelector('.member-name').innerText.toLowerCase();
+    let role = cards[i].querySelector('.member-role').innerText.toLowerCase();
+    if (name.includes(input) || role.includes(input)) {
+      cards[i].style.display = 'block';
+    } else {
+      cards[i].style.display = 'none';
+    }
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const mainSlides = document.querySelectorAll('.news-carousel .slide');
+  const mainDotsContainer = document.querySelector('.news-carousel .dots');
+  let mainIndex = 0;
+  
+  if(mainSlides.length > 0) {
+    mainSlides[0].classList.add('active');
+    mainSlides.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if(i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        mainSlides[mainIndex].classList.remove('active');
+        mainIndex = i;
+        mainSlides[mainIndex].classList.add('active');
+        updateDots('.news-carousel .dot', mainIndex);
+      });
+      mainDotsContainer.appendChild(dot);
+    });
+    
+    setInterval(() => {
+      if(mainSlides.length === 0) return;
+      mainSlides[mainIndex].classList.remove('active');
+      mainIndex = (mainIndex + 1) % mainSlides.length;
+      mainSlides[mainIndex].classList.add('active');
+      updateDots('.news-carousel .dot', mainIndex);
+    }, 5000);
+  }
+
+  const portSlides = document.querySelectorAll('.portrait-carousel .portrait-slide');
+  const portDotsContainer = document.querySelector('.portrait-carousel .portrait-dots');
+  let portIndex = 0;
+  
+  if(portSlides.length > 0) {
+    portSlides[0].classList.add('active');
+    portSlides.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if(i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        portSlides[portIndex].classList.remove('active');
+        portIndex = i;
+        portSlides[portIndex].classList.add('active');
+        updateDots('.portrait-carousel .dot', portIndex);
+      });
+      portDotsContainer.appendChild(dot);
+    });
+
+    setInterval(() => {
+      if(portSlides.length === 0) return;
+      portSlides[portIndex].classList.remove('active');
+      portIndex = (portIndex + 1) % portSlides.length;
+      portSlides[portIndex].classList.add('active');
+      updateDots('.portrait-carousel .dot', portIndex);
+    }, 6000);
+  }
+
+  function updateDots(selector, currentIdx) {
+    const dots = document.querySelectorAll(selector);
+    dots.forEach((d, idx) => {
+      if(idx === currentIdx) d.style.background = '#00A0BE';
+      else d.style.background = '#ccc';
+    });
+  }
+  
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('.top-header');
+    if(window.scrollY > 150) {
+      header.classList.add('active');
+    } else {
+      header.classList.remove('active');
+    }
+    
+    const sections = document.querySelectorAll('section');
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if(top < window.innerHeight - 100) {
+        sec.classList.add('show');
+      }
+    });
+  });
+});
+const cmtBuildingNamesConfig = {
+    b1: "Sports Complex", b2: "Retreat Complex", b3: "Gregorio Zara Hall", b4: "Jose Rizal El Fili (JRF)",
+    b5: "Jose Rizal Noli (JRN)", b6: "CBEAM Building", b7: "Mabini Building (MB)", b8: "Gazebos",
+    b9: "Chez Rafael", b10: "Sen. Jose W. Diokno", b11: "Br. Miguel Malvar", b12: "Sentrum",
+    b13: "Capilla", b14: "Claro M. Recto (CMR)", b15: "Hasyenda", b16: "St. Brother Miguel (BM)",
+    b17: "St. Mutien Marie (MM)", b18: "Centen A and B", b19: "Oval", b20: "St. Brother Jaime Hilario (JH)",
+    b21: "St. Brother Benilde (BB)"
+};
+
+// Detailed definitions for the sidebar UI (Departments removed)
+const cmtBuildingExtendedProfiles = {
+    b1: {
+        pic: "sportscomplex.png",
+        tag: "Nearest Gate: CBEAM Gate",
+        about: "The multi-purpose gymnasium at DLSL is designed to accommodate both Senior High School and College students, boasting a seating capacity of 1,500. The court area caters to 1,000 individuals, while the bleachers area accommodates an additional 500. This versatile facility serves as a dynamic space for various sports activities, events and gatherings, providing ample seating for spectators and participants."
+    },
+    b2: {
+        pic: "retreatcomplex.png",
+        tag: "Nearest Gate: CBEAM Gate",
+        about: "The Retreat Complex is the main formation center of DLSL and was designed by Arch. Antonio Gutierrez Jr. and Arch. Barry Del Rosario. It comprises a chapel, two mess halls and four cabanas. The complex features three session halls, a one-story dormitory, a mess hall, comfort rooms, an open activity area, and a chapel, serving as a venue for various formation activities for the 11,000 DLSL population. The structures prioritize eco-friendliness by using less electricity and paint. The main buildings are open-air, maximizing natural light during the day. Indigenous materials like bamboo and sawali are integrated, reflecting the campus' commitment to environmental care and nurturance."
+    },
+    b3: {
+        pic: "gregorio.png",
+        tag: "", 
+        about: "The 2-storey main IT building is a specialized DLSL facility equipped with two office spaces, one conference room and a dedicated Computer Laboratory. This purpose-built structure serves as a central hub for information technology-related activities, providing a conducive environment for administrative work, meetings and hands-on learning experiences for students in the Computer Laboratory."
+    },
+    b4: {
+        pic: "jr.png",
+        tag: "Nearest Gate: CBEAM Gate",
+        about: "The Noli Me Tangere and El Filibusterismo Building is a distinguished 4-storey twin structure, designed as a dedicated learning area for Senior High School (SHS) students. Comprising 15 classrooms, each with a corresponding office space, along with four regular office spaces, the building provides a conducive environment for academic pursuits. Named after the iconic novels of National Hero Dr. Jose Rizal, the building serves as the home for SHS classrooms. It hosts the offices of the SHS Assistant Principal and SHS Moderators. This significant facility was inaugurated in May 1999, marking a milestone in the institution's commitment to quality education."
+    },
+    b5: {
+        pic: "jr.png",
+        tag: "Nearest Gate: CBEAM Gate",
+        about: "The Noli Me Tangere and El Filibusterismo Building is a distinguished 4-storey twin structure, designed as a dedicated learning area for Senior High School (SHS) students. Comprising 15 classrooms, each with a corresponding office space, along with four regular office spaces, the building provides a conducive environment for academic pursuits. Named after the iconic novels of National Hero Dr. Jose Rizal, the building serves as the home for SHS classrooms. It hosts the offices of the SHS Assistant Principal and SHS Moderators. This significant facility was inaugurated in May 1999, marking a milestone in the institution's commitment to quality education."
+    },
+    b6: {
+        pic: "cbeam.png",
+        tag: "Nearest Gate: CBEAM Gate",
+        about: "The CBEAM Hall is strategically designed, comprising four classrooms on the first floor, eight on both the second and third floors, and four additional classrooms on the fourth floor. This purpose-built facility serves as a dedicated space for Business, Accountancy and Graduate School programs. Positioned between Mabini Hall and the Brothers Community residence, it acts as a central hub, fostering a conducive environment for students pursuing excellence in these fields, further enhancing the collaborative and learning experience within the college community."
+    },
+    b7: {
+        pic: "mabini.png",
+        tag: "Nearest Gate: CBEAM Gate",
+        about: "The 6-storey Multi-Purpose Building, designed by Br. Dindo Maralit FSC, serves the College of Nursing and the College of Information Technology and Engineering. Housing 27 classrooms, 4 Nursing labs, 8 Science labs, 4 Engineering labs, an auditorium (155 seats), and an amphitheater (96 seats), it features the College of Law’s moot court, SMART wireless technology lab, Mac lab, and offices for College Deans. Notable for its rock garden, spiral stairs, and roofed deck with a view of Lipa City, it is a dynamic hub for academic and technological pursuits, fostering a conducive learning environment."
+    },
+    b8: {
+        pic: "",
+        tag: "",
+        about: ""
+    },
+    b9: {
+        pic: "chezrafael.png",
+        tag: "Nearest Gate: Front Gate",
+        about: "The 4-storey hotel and café at DLSL are versatile facilities for HRM, Tourism, and Culinary Arts students. It encompasses four kitchen labs, one dining area, one canteen, two storage rooms, eight hotel rooms, a Spa area on the 4th floor, two conference rooms, and three office spaces. This comprehensive setup provides hands-on learning experiences for students in various hospitality and culinary disciplines, offering a realistic environment to hone their skills and prepare for their future careers."
+    },
+    b10: {
+        pic: "diokno.png",
+        tag: "Nearest Gate: Front Gate",
+        about: "The 5-storey main administrative building, formerly the Management Training Development Center (MTDC), is a central hub featuring 15 office spaces, one boardroom, four conference rooms, and an E-library on the lower floor. Additionally, the ground floor hosts three commercial spaces. The building includes a 175-seat auditorium on the 5th floor. This structure is home to the Office of the President, Vice Chancellors and C-Suites, Executive Offices, Administrative Offices, and the Learning Resource Center, providing a cohesive space for crucial administrative functions and academic resources."
+    },
+    b11: {
+        pic: "",
+        tag: "",
+        about: ""
+    },
+    b12: {
+        pic: "sentrum.png",
+        tag: "Nearest Gate: Front Gate",
+        about: "The multi-purpose covered gymnasium at DLSL, named SAMAHAN AT TIPANAN NG MGA MAG-AARAL or SENTRUM, boasts a seating capacity of 3,400 and features state-of-the-art AV equipment and a LED Wall. Under the leadership of former President Br. Rafael S. Donato FSC, SENTRUM was inaugurated in December 1995. It is a cultural and sports hub in Batangas, envisioned to host various events. This multi-purpose facility, equipped with NBA standard collapsible goals and electronic scoreboards, is a testament to DLSL's commitment to providing top-notch facilities for its students and the community."
+    },
+    b13: {
+        pic: "capilla.png",
+        tag: "Nearest Gate: College Lobby",
+        about: "Designed by Architect Joselito Gutierrez Jr., the Capilla de San Juan Bautista de La Salle stands majestically at the heart of De La Salle Lipa's campus. With dimensions of 38.30 meters in length and 22.50 meters in width, this sacred space offers a serene venue for worship and a tranquil spot to bask in the cool Lipa breeze. Additionally, the Capilla, accommodating 544 individuals, hosts regular masses, contributing to the spiritual richness that enhances the holistic development of the campus community and fosters a sense of unity and tranquility."
+    },
+    b14: {
+        pic: "",
+        tag: "",
+        about: ""
+    },
+    b15: {
+        pic: "",
+        tag: "",
+        about: ""
+    },
+    b16: {
+        pic: "",
+        tag: "",
+        about: ""
+    },
+    b17: {
+        pic: "",
+        tag: "",
+        about: ""
+    },
+    b18: {
+        pic: "centen.png",
+        tag: "Nearest Gate: College Lobbg or Side Gate",
+        about: "Nestled within the DLSL campus, the multi-purpose covered gymnasium is a dynamic hub for sports and events. Boasting three versatile courts, the facility caters to basketball and volleyball enthusiasts, with the flexibility to host various activities. Although primarily designed for sports, the gymnasium transforms into a vibrant venue for campus events, further enhancing its utility. The thoughtfully designed seating capacity of 300, divided into 100 seats for each court, ensures an immersive experience for spectators. This versatile space exemplifies DLSL's commitment to fostering a vibrant and inclusive campus culture."
+    },
+    b19: {
+        pic: "oval.png",
+        tag: "Nearest Gate: Side Gate",
+        about: "The expansive oval field at DLSL is a multifaceted sports facility designed to accommodate various athletic activities. Equipped with top-notch track and field tracks, the field serves as a perfect venue for sprinting, relay races and other track events. The softball diamond, meticulously laid out, invites players to engage in thrilling softball matches. The well-maintained football field provides a dynamic space for intense soccer games. This versatile sports complex caters to the diverse interests of athletes, creating an environment conducive to both competitive sports and recreational activities."
+    },
+    b20: {
+        pic: "jh.png",
+        tag: "",
+        about: ""
+    },
+    b21: {
+        pic: "bb.png",
+        tag: "Nearest Gate: Side Gate",
+        about: "Completed in June 2011, the BB Hall is a three-story building with a roof deck designed for Grade School pupils from Nursery to Grade 6. The structure encompasses ten office spaces, 39 classrooms, 2 Computer Labs, 1 Robolab, 1 Speech Lab, 2 Multi-purpose Rooms, 1 Playroom, 3 Conference Rooms, 1 Internet Room, and a ground-floor Canteen. This comprehensive facility houses various offices and rooms, including preschool, grade school, assistant principal, guidance center, PAASCU, grade school academic units, Bakas Publication, laboratories, grade school library, and the canteen. Br. Dindo Maralit FSC, an alumnus and former DLSL Services Director, designed the BB Hall."
+    }
+};
+
+const cmtCampusDatabase = {};
+
+// Clean database generation loop mapping custom metadata to your 21 active sidebar profiles
+for (let i = 1; i <= 21; i++) {
+    const bId = `b${i}`;
+    const profile = cmtBuildingExtendedProfiles[bId];
+    
+    cmtCampusDatabase[bId] = {
+        pctX: 0,
+        pctY: 0,
+        pinId: `pin-${bId}`,
+        name: cmtBuildingNamesConfig[bId], 
+        pic: profile ? profile.pic : "default.png",
+        tag: profile ? profile.tag : "DLSL Campus",
+        about: profile ? profile.about : "Information profile details regarding this campus structure."
+    };
+}
+
+
+const cmtCoordinateDataset = {
+    b1: [14.8, 32.5],   // Sports Complex
+    b2: [24.0, 20],   // Retreat Complex
+    b3: [33.5, 35],   // Gregorio Zara Hall
+    b4: [28.2, 47.0],   // Jose Rizal El Fili (JRF)
+    b5: [32.8, 51.5],   // Jose Rizal Noli (JRN)
+    b6: [21.5, 59.5],   // CBEAM Building
+    b7: [36.8, 56.5],   // Mabini Building (MB - Dark Green Pin)
+    b8: [36.5, 46],   // Gazebos
+    b9: [45.5, 50],   // Chez Rafael
+    b10: [40.8, 36.8],  // Sen. Jose W. Diokno
+    b11: [43.2, 28],  // Br. Miguel Malvar
+    b12: [49.5, 33],  // Sentrum
+    b13: [59.0, 31],  // Capilla
+    b14: [71.8, 49.5],  // Claro M. Recto (CMR)
+    b15: [78, 40.5],  // Hasyenda
+    b16: [79.2, 44.5],  // St. Brother Miguel (BM)
+    b17: [73.5, 37],  // St. Mutien Marie (MM)
+    b18: [72, 32],  // Centen A and B
+    b19: [65.5, 20],  // Oval
+    b20: [77, 20.5],  // St. Brother Jaime Hilario (JH)
+    b21: [81.8, 23.5]   // St. Brother Benilde (BB)
+};
+// Map structural layout arrays into active database properties
+for (const [key, coords] of Object.entries(cmtCoordinateDataset)) {
+    if (cmtCampusDatabase[key]) {
+        cmtCampusDatabase[key].pctX = coords[0];
+        cmtCampusDatabase[key].pctY = coords[1];
+    }
+}
+
+// Retaining specific admin detail structure overridden for MB (Mabini Building is now b7)
+cmtCampusDatabase.b7.tag = "Administrative";
+cmtCampusDatabase.b7.about = "The Administration Building serves as the operational nerve center of De La Salle Lipa. It houses the offices of the President, Vice Chancellors, and key administrative departments responsible for the university's governance and strategic direction.";
+cmtCampusDatabase.b7.departments = ["Office of the President", "Office of the Vice Chancellor for Academics", "Human Resources"];
+
+window.addEventListener('DOMContentLoaded', () => {
+    const startSelect = document.getElementById('cmtStartLocationId');
+    const endSelect = document.getElementById('cmtEndLocationId');
+    
+    if (endSelect && startSelect) {
+        endSelect.innerHTML = '<option value="" disabled selected>Select building...</option>';
+        startSelect.innerHTML = '<option value="" disabled selected>Select building...</option>';
+        
+        for (let i = 1; i <= 21; i++) {
+            const key = `b${i}`;
+            if (cmtCampusDatabase[key]) {
+                const name = cmtCampusDatabase[key].name;
+                
+                const optionEnd = document.createElement('option');
+                optionEnd.value = key;
+                optionEnd.textContent = name;
+                endSelect.appendChild(optionEnd);
+
+                const optionStart = document.createElement('option');
+                optionStart.value = key;
+                optionStart.textContent = name;
+                startSelect.appendChild(optionStart);
+            }
+        }
+    }
+    cmtApplyCanvasTransformation();
+});
+
+const cmtCanvasDOM = document.getElementById('cmtMapCanvasId');
+const cmtViewportDOM = document.getElementById('cmtViewportId');
+const cmtCampusImgDOM = document.getElementById('cmtCampusImgId');
+const cmtVisualPathDOM = document.getElementById('cmtVisualPathId');
+const cmtResetBtnDOM = document.getElementById('cmtResetBtnId');
+const cmtUserDotDOM = document.getElementById('cmtUserLocationDotId');
+const cmtDestStarDOM = document.getElementById('cmtDestinationStarId');
+const cmtSidebarDOM = document.getElementById('cmtInfoSidebarId');
+
+let cmtUserCurrentPos = { pctX: 41.5, pctY: 68.0 }; // Default initial position set to MB (b7)
+let cmtCurrentEndKey = null;
+let cmtIsTrackingMode = false;
+let cmtActiveBuildingKey = null;
+
+let cmtCurrentZoomLevel = 1;
+let cmtPanOffsetX = 0;
+let cmtPanOffsetY = 0;
+let cmtIsDraggingActive = false;
+let cmtDragStartX = 0, cmtDragStartY = 0;
+let cmtInitialPinchDistance = 0;
+let cmtInitialPinchZoom = 1;
+
+cmtViewportDOM.addEventListener('mousedown', cmtStartDragGesture);
+cmtViewportDOM.addEventListener('mousemove', cmtProcessDragMove);
+window.addEventListener('mouseup', cmtEndDragGesture);
+
+cmtViewportDOM.addEventListener('touchstart', cmtTouchStartHandler, { passive: false });
+cmtViewportDOM.addEventListener('touchmove', cmtTouchMoveHandler, { passive: false });
+window.addEventListener('touchend', cmtEndDragGesture);
+cmtViewportDOM.addEventListener('wheel', cmtMouseWheelZoomHandler, { passive: false });
+
+function cmtToggleMobileSidebarView() {
+    const mobileSidebarTarget = document.getElementById('cmtInfoSidebarId');
+    if (window.innerWidth <= 900 && mobileSidebarTarget) {
+        mobileSidebarTarget.classList.toggle('cmt-state-expanded');
+    }
+}
+
+function cmtStartDragGesture(e) {
+    cmtIsDraggingActive = true;
+    cmtCanvasDOM.classList.add('cmt-state-dragging');
+    cmtDragStartX = e.clientX - cmtPanOffsetX;
+    cmtDragStartY = e.clientY - cmtPanOffsetY;
+}
+
+function cmtProcessDragMove(e) {
+    if (!cmtIsDraggingActive) return;
+    if (e.preventDefault) e.preventDefault();
+    
+    cmtPanOffsetX = e.clientX - cmtDragStartX;
+    cmtPanOffsetY = e.clientY - cmtDragStartY;
+    
+    cmtApplyCanvasTransformation();
+}
+
+function cmtEndDragGesture() {
+    cmtIsDraggingActive = false;
+    cmtInitialPinchDistance = 0;
+    cmtCanvasDOM.classList.remove('cmt-state-dragging');
+}
+
+function cmtTouchStartHandler(e) {
+    if (e.touches.length === 1) {
+        cmtIsDraggingActive = true;
+        cmtCanvasDOM.classList.add('cmt-state-dragging');
+        cmtDragStartX = e.touches[0].clientX - cmtPanOffsetX;
+        cmtDragStartY = e.touches[0].clientY - cmtPanOffsetY;
+    } else if (e.touches.length === 2) {
+        cmtIsDraggingActive = false;
+        cmtCanvasDOM.classList.add('cmt-state-dragging');
+        cmtInitialPinchDistance = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+        );
+        cmtInitialPinchZoom = cmtCurrentZoomLevel;
+    }
+}
+
+function cmtTouchMoveHandler(e) {
+    if (e.preventDefault) e.preventDefault();
+    if (e.touches.length === 1 && cmtIsDraggingActive) {
+        cmtPanOffsetX = e.touches[0].clientX - cmtDragStartX;
+        cmtPanOffsetY = e.touches[0].clientY - cmtDragStartY;
+        cmtApplyCanvasTransformation();
+    } else if (e.touches.length === 2) {
+        const currentDistance = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+        );
+        if (cmtInitialPinchDistance > 0) {
+            const pinchScale = currentDistance / cmtInitialPinchDistance;
+            let targetZoom = cmtInitialPinchZoom * pinchScale;
+            
+            if (targetZoom < 0.8) targetZoom = 0.8;
+            if (targetZoom > 5) targetZoom = 5;
+            const touchCenterX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+            const touchCenterY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+            cmtZoomToCoordinatesPoint(touchCenterX, touchCenterY, targetZoom);
+        }
+    }
+}
+
+function cmtMouseWheelZoomHandler(e) {
+    e.preventDefault();
+    const zoomIntensity = 0.12;
+    let targetZoom = cmtCurrentZoomLevel + (e.deltaY < 0 ? zoomIntensity : -zoomIntensity);
+    if (targetZoom < 0.8) targetZoom = 0.8;
+    if (targetZoom > 5) targetZoom = 5;
+
+    cmtZoomToCoordinatesPoint(e.clientX, e.clientY, targetZoom);
+}
+
+function cmtZoomToCoordinatesPoint(clientX, clientY, targetZoom) {
+    const viewportRect = cmtViewportDOM.getBoundingClientRect();
+    const mouseX = clientX - viewportRect.left;
+    const mouseY = clientY - viewportRect.top;
+    cmtPanOffsetX = mouseX - (mouseX - cmtPanOffsetX) * (targetZoom / cmtCurrentZoomLevel);
+    cmtPanOffsetY = mouseY - (mouseY - cmtPanOffsetY) * (targetZoom / cmtCurrentZoomLevel);
+    cmtCurrentZoomLevel = targetZoom;
+
+    cmtApplyCanvasTransformation();
+    cmtEvaluateResetButtonDisplay();
+}
+
+function cmtApplyCanvasTransformation() {
+    cmtCanvasDOM.style.transform = `translate(${cmtPanOffsetX}px, ${cmtPanOffsetY}px) scale(${cmtCurrentZoomLevel})`;
+    document.body.style.setProperty('--cmt-map-scale-var', cmtCurrentZoomLevel);
+}
+
+function cmtEvaluateResetButtonDisplay() {
+    if (cmtCurrentZoomLevel !== 1 || cmtPanOffsetX !== 0 || cmtPanOffsetY !== 0 || cmtIsTrackingMode) {
+        if (!cmtIsTrackingMode) {
+            cmtResetBtnDOM.innerText = "🔍 Zoom Out Entire Map";
+            cmtResetBtnDOM.className = "cmt-reset-btn-control";
+        }
+        cmtResetBtnDOM.classList.remove('cmt-utility-hidden');
+    } else {
+        cmtResetBtnDOM.classList.add('cmt-utility-hidden');
+    }
+}
+
+function cmtHandleStartLocationChange() {
+    const startVal = document.getElementById('cmtStartLocationId').value;
+    if (!startVal) return;
+
+    const selectedBuilding = cmtCampusDatabase[startVal];
+    if (selectedBuilding) {
+        cmtUserCurrentPos.pctX = selectedBuilding.pctX;
+        cmtUserCurrentPos.pctY = selectedBuilding.pctY;
+        
+        cmtUserDotDOM.style.left = `${cmtUserCurrentPos.pctX}%`;
+        cmtUserDotDOM.style.top = `${cmtUserCurrentPos.pctY}%`;
+        cmtUserDotDOM.classList.remove('cmt-utility-hidden');
+    }
+
+    if (cmtIsTrackingMode && cmtCurrentEndKey) {
+        cmtRecomputeVectorRouteLine();
+    }
+}
+
+function cmtHandleEndDropdownChange() {
+    const end = document.getElementById('cmtEndLocationId').value;
+    if (!end) return;
+
+    const destinationNode = cmtCampusDatabase[end];
+    if (destinationNode) {
+        if (cmtIsTrackingMode) {
+            cmtVisualPathDOM.setAttribute('d', '');
+            cmtDestStarDOM.classList.add('cmt-utility-hidden');
+            document.getElementById('cmtDirectionsCardId').classList.add('cmt-utility-hidden');
+            cmtIsTrackingMode = false;
+        }
+        cmtFocusTargetBuilding(end, destinationNode.pctX, destinationNode.pctY, document.getElementById(destinationNode.pinId));
+    }
+}
+
+function cmtFocusTargetBuilding(key, pctX, pctY, dotElement) {
+    if (cmtActiveBuildingKey === key) {
+        cmtResetGlobalView();
+        return;
+    }
+
+    const data = cmtCampusDatabase[key];
+    if (!data) return;
+    cmtActiveBuildingKey = key;
+
+    document.querySelectorAll('.cmt-pin-dot-node').forEach(p => p.classList.remove('cmt-state-active'));
+    if (dotElement) dotElement.classList.add('cmt-state-active');
+
+    cmtCanvasDOM.classList.remove('cmt-state-dragging'); 
+
+    cmtCurrentZoomLevel = 2.8; 
+    const wrapperWidth = cmtCampusImgDOM.clientWidth;
+    const wrapperHeight = cmtCampusImgDOM.clientHeight;
+    const viewportRect = cmtViewportDOM.getBoundingClientRect();
+
+    const targetX = (pctX / 100) * wrapperWidth;
+    const targetY = (pctY / 100) * wrapperHeight;
+
+    cmtPanOffsetX = (viewportRect.width / 2) - (targetX * cmtCurrentZoomLevel);
+    cmtPanOffsetY = (viewportRect.height / 2) - (targetY * cmtCurrentZoomLevel);
+
+    cmtApplyCanvasTransformation();
+    if (!cmtIsTrackingMode) {
+        cmtResetBtnDOM.innerText = "🔍 Zoom Out Entire Map";
+        cmtResetBtnDOM.className = "cmt-reset-btn-control";
+        cmtResetBtnDOM.classList.remove('cmt-utility-hidden');
+    }
+
+    cmtPopulateSidebarDataDetails(data);
+}
+
+function cmtEngageLiveTrackingSystem() {
+    const start = document.getElementById('cmtStartLocationId').value;
+    const end = document.getElementById('cmtEndLocationId').value;
+    
+    if (!start) {
+        alert("Pili ka muna kung saan ka magsisimula te!");
+        document.getElementById('cmtEndLocationId').value = "";
+        return;
+    }
+    if (!end) return;
+    cmtCurrentEndKey = end;
+    cmtIsTrackingMode = true;
+
+    document.querySelectorAll('.cmt-pin-dot-node').forEach(p => p.classList.remove('cmt-state-active'));
+    const destinationNode = cmtCampusDatabase[end];
+    if (destinationNode) {
+        const nodeEl = document.getElementById(destinationNode.pinId);
+        if (nodeEl) nodeEl.classList.add('cmt-state-active');
+        
+        cmtDestStarDOM.style.left = `${destinationNode.pctX}%`;
+        cmtDestStarDOM.style.top = `${destinationNode.pctY}%`;
+        cmtDestStarDOM.classList.remove('cmt-utility-hidden');
+    }
+
+    document.getElementById('cmtDirectionsCardId').classList.remove('cmt-utility-hidden');
+    
+    cmtRecomputeVectorRouteLine();
+    
+    cmtCurrentZoomLevel = 1;
+    cmtPanOffsetX = 0;
+    cmtPanOffsetY = 0;
+    cmtApplyCanvasTransformation();
+
+    cmtResetBtnDOM.innerText = "❌ Clear Route Path";
+    cmtResetBtnDOM.className = "cmt-reset-btn-control cmt-modifier-danger";
+    cmtResetBtnDOM.classList.remove('cmt-utility-hidden');
+
+    if (destinationNode) cmtPopulateSidebarDataDetails(destinationNode);
+}
+
+function cmtRecomputeVectorRouteLine() {
+    if (!cmtIsTrackingMode || !cmtCurrentEndKey) return;
+    const destNode = cmtCampusDatabase[cmtCurrentEndKey];
+    const mapWidth = cmtCampusImgDOM.clientWidth;
+    const mapHeight = cmtCampusImgDOM.clientHeight;
+
+    const x1 = (cmtUserCurrentPos.pctX / 100) * mapWidth;
+    const y1 = (cmtUserCurrentPos.pctY / 100) * mapHeight;
+    const x2 = (destNode.pctX / 100) * mapWidth;
+    const y2 = (destNode.pctY / 100) * mapHeight;
+
+    cmtVisualPathDOM.setAttribute('d', `M ${x1} ${y1} L ${x2} ${y2}`);
+    const distancePercent = Math.sqrt(Math.pow(destNode.pctX - cmtUserCurrentPos.pctX, 2) + Math.pow(destNode.pctY - cmtUserCurrentPos.pctY, 2));
+    const approximateMeters = Math.round(distancePercent * 6.1);
+    const textEl = document.getElementById('cmtLiveDistanceTextId');
+    if (approximateMeters <= 5) {
+        textEl.innerHTML = "<strong>Arrival state reached!</strong> Object targets are aligned.";
+    } else {
+        textEl.innerHTML = " Est. Walk Distance: <strong>" + approximateMeters + " meters</strong>";
+    }
+}
+
+function cmtSyncDropdownValueToPin(key) {
+    const selectEl = document.getElementById('cmtEndLocationId');
+    if (selectEl) {
+        selectEl.value = key;
+    }
+}
+
+function cmtPopulateSidebarDataDetails(data) {
+    document.getElementById('cmtSidebarPlaceholderId').classList.add('cmt-utility-hidden');
+    document.getElementById('cmtSidebarContentId').classList.remove('cmt-utility-hidden');
+    
+    // Updates Name and Text Content
+    document.getElementById('cmtBuildingNameId').innerText = data.name;
+    document.getElementById('cmtBuildingAboutId').innerText = data.about;
+    
+    // Updates the Tag pill (Hides if empty, like b3)
+    const tag = document.getElementById('cmtBuildingTagId');
+    if (tag) {
+        if (data.tag) {
+            tag.innerText = data.tag;
+            tag.style.display = "inline-block";
+        } else {
+            tag.style.display = "none";
+        }
+    }
+
+    // Updates Image Source
+    const picElement = document.getElementById('cmtBuildingImageId');
+    if (picElement && data.pic) {
+        picElement.src = data.pic;; 
+        picElement.alt = data.name;
+    }
+    
+    cmtSyncDropdownValueToPin(data.pinId.replace('pin-', ''));
+}
+
+function cmtResetGlobalView() {
+    cmtCanvasDOM.classList.remove('cmt-state-dragging');
+    cmtCurrentZoomLevel = 1;
+    cmtPanOffsetX = 0;
+    cmtPanOffsetY = 0;
+    cmtApplyCanvasTransformation();
+    
+    cmtIsTrackingMode = false;
+    cmtCurrentEndKey = null;
+    cmtActiveBuildingKey = null;
+    cmtVisualPathDOM.setAttribute('d', ''); 
+    cmtDestStarDOM.classList.add('cmt-utility-hidden');
+    document.getElementById('cmtDirectionsCardId').classList.add('cmt-utility-hidden');
+    cmtResetBtnDOM.classList.add('cmt-utility-hidden');
+    document.querySelectorAll('.cmt-pin-dot-node').forEach(p => p.classList.remove('cmt-state-active'));
+    document.getElementById('cmtSidebarPlaceholderId').classList.remove('cmt-utility-hidden');
+    document.getElementById('cmtSidebarContentId').classList.add('cmt-utility-hidden');
+    document.getElementById('cmtEndLocationId').value = ""; 
+    document.getElementById('cmtStartLocationId').value = "";
+    cmtUserDotDOM.classList.add('cmt-utility-hidden');
+    
+    cmtSidebarDOM.classList.remove('cmt-state-expanded');
+}
+
+window.addEventListener('resize', () => {
+    if (cmtIsTrackingMode) cmtRecomputeVectorRouteLine();
+});
+
+</script>
+</body>
+</html>
