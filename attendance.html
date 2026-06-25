@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Council Attendance Transparency Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@400;500;600;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Global Base Reset matching your main site design */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background: #f8f9fa;
+      font-family: 'Raleway', sans-serif;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      box-sizing: border-box;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: #0f3d2e; /* Institutional Green */
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: #6c757d;
+      margin-hidden: 0;
+      margin-bottom: 40px;
+      max-width: 600px;
+      line-height: 1.5;
+      font-family: 'Livvic', sans-serif;
+    }
+
+    /* Live Search Input Wrapper */
+    .search-wrapper {
+      margin-bottom: 30px;
+      display: flex;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 20px;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: #0f3d2e;
+      box-shadow: 0 0 0 3px rgba(15, 61, 70, 0.1);
+    }
+
+    /* Responsive Transparency Cards Roster Grid Layout */
+    .attendance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .attendance-display-card {
+      background: #fff;
+      border: 1px solid #e9ecef;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+    }
+
+    .attendance-display-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .member-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .member-name {
+      font-weight: 700;
+      color: #212529;
+      font-size: 1.1rem;
+    }
+
+    .member-role {
+      font-size: 0.85rem;
+      color: #6c757d;
+      font-weight: 500;
+      font-family: 'Livvic', sans-serif;
+    }
+
+    /* Percentage Compliance Score Labels */
+    .percentage-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-family: 'Livvic', sans-serif;
+    }
+    
+    /* Compliance Threshold Classes */
+    .pct-high { background: #e6f6f0; color: #0f3d2e; }
+    .pct-mid { background: #fff9db; color: #f08c00; }
+    .pct-low { background: #fff5f5; color: #fa5252; }
+
+    /* Visual Metrics Progress Tracks */
+    .gauge-container {
+      margin-bottom: 18px;
+    }
+    .gauge-bar-track {
+      width: 100%;
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .gauge-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .bg-high { background-color: #0f3d2e; }
+    .bg-mid { background-color: #f08c00; }
+    .bg-low { background-color: #fa5252; }
+
+    /* Descriptive Statistics Numerical Split */
+    .breakdown-row {
+      display: flex;
+      gap: 20px;
+      border-top: 1px solid #f1f3f5;
+      padding-top: 14px;
+      font-size: 0.85rem;
+      font-family: 'Livvic', sans-serif;
+    }
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #495057;
+    }
+    .dot-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-present { background: #0f3d2e; }
+    .dot-absent { background: #fa5252; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2 class="section-title">Council Attendance Panel</h2>
+    <p class="section-subtitle">A transparent, read-only system detailing the cumulative attendance metric compliance for all active general council members.</p>
+
+    <div class="search-wrapper">
+      <input type="text" id="attendanceSearch" class="search-input" onkeyup="filterAttendance()" placeholder="Search council roster by member name or position...">
+    </div>
+
+    <div class="attendance-grid" id="attendanceGrid">
+      
+      <div class="attendance-display-card">
+        <div class="card-header-row">
+          <div class="member-details">
+            <span class="member-name">De Silva, Marcus V.</span>
+            <span class="member-role">Executive Committee</span>
+          </div>
+          <span class="percentage-badge pct-high">95%</span>
+        </div>
+        <div class="gauge-container">
+          <div class="gauge-bar-track">
+            <div class="gauge-fill bg-high" style="width: 95%;"></div>
+          </div>
+        </div>
+        <div class="breakdown-row">
+          <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>19</b></div>
+          <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>1</b></div>
+        </div>
+      </div>
+
+      <div class="attendance-display-card">
+        <div class="card-header-row">
+          <div class="member-details">
+            <span class="member-name">Aquino, Helena M.</span>
+            <span class="member-role">Public Relations Head</span>
+          </div>
+          <span class="percentage-badge pct-mid">80%</span>
+        </div>
+        <div class="gauge-container">
+          <div class="gauge-bar-track">
+            <div class="gauge-fill bg-mid" style="width: 80%;"></div>
+          </div>
+        </div>
+        <div class="breakdown-row">
+          <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>16</b></div>
+          <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>4</b></div>
+        </div>
+      </div>
+
+      <div class="attendance-display-card">
+        <div class="card-header-row">
+          <div class="member-details">
+            <span class="member-name">Dimaculangan, Juan Carlo</span>
+            <span class="member-role">Logistics Committee</span>
+          </div>
+          <span class="percentage-badge pct-low">60%</span>
+        </div>
+        <div class="gauge-container">
+          <div class="gauge-bar-track">
+            <div class="gauge-fill bg-low" style="width: 60%;"></div>
+          </div>
+        </div>
+        <div class="breakdown-row">
+          <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>12</b></div>
+          <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>8</b></div>
+        </div>
+      </div>
+
+      <div class="attendance-display-card">
+        <div class="card-header-row">
+          <div class="member-details">
+            <span class="member-name">Recto, Clara A.</span>
+            <span class="member-role">Secretariat Head</span>
+          </div>
+          <span class="percentage-badge pct-high">100%</span>
+        </div>
+        <div class="gauge-container">
+          <div class="gauge-bar-track">
+            <div class="gauge-fill bg-high" style="width: 100%;"></div>
+          </div>
+        </div>
+        <div class="breakdown-row">
+          <div class="stat-item"><span class="dot-indicator dot-present"></span>Present: <b>20</b></div>
+          <div class="stat-item"><span class="dot-indicator dot-absent"></span>Absent: <b>0</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Handles real-time search filtering as the user types
+    function filterAttendance() {
+      const input = document.getElementById('attendanceSearch').value.toLowerCase();
+      const grid = document.getElementById('attendanceGrid');
+      const cards = grid.getElementsByClassName('attendance-display-card');
+
+      for (let i = 0; i < cards.length; i++) {
+        const nameText = cards[i].querySelector('.member-name').textContent.toLowerCase();
+        const roleText = cards[i].querySelector('.member-role').textContent.toLowerCase();
+        
+        // Displays card if either name or position matching criteria holds true
+        if (nameText.includes(input) || roleText.includes(input)) {
+          cards[i].style.display = "";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
