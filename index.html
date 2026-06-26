@@ -3859,7 +3859,7 @@ function cmtEngageLiveTrackingSystem() {
     const end = document.getElementById('cmtEndLocationId').value;
     
     if (!start) {
-        alert("Pili ka muna kung saan ka magsisimula te!");
+        alert("Select your current location and destination first.");
         document.getElementById('cmtEndLocationId').value = "";
         return;
     }
