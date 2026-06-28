@@ -2106,7 +2106,7 @@ font-family: 'Visby CF Heavy';
 
         .cmt-tag-badge {
             display: inline-block;
-            background-color: (--dlsl-green-dark);
+            background-color: var(--dlsl-green-dark);
             color: white;
             font-size: 11px;
             font-weight: 600;
@@ -3465,12 +3465,14 @@ const cmtBuildingExtendedProfiles = {
     b3: {
         pic: "gregorio.png",
         tag: "", 
-        about: "The 2-storey main IT building is a specialized DLSL facility equipped with two office spaces, one conference room and a dedicated Computer Laboratory. This purpose-built structure serves as a central hub for information technology-related activities, providing a conducive environment for administrative work, meetings and hands-on learning experiences for students in the Computer Laboratory."
+        about: "The 2-storey main IT building is a specialized DLSL facility equipped with two office spaces, one conference room and a dedicated Computer Laboratory. This purpose-built structure serves as a central hub for information technology-related activities, providing a conducive environment for administrative work, meetings and hands-on learning experiences for students in the Computer Laboratory.",
+		departments: "Technology Operations and Innovation Center"
     },
     b4: {
         pic: "jr.png",
         tag: "Nearest Gate: CBEAM Gate",
-        about: "The Noli Me Tangere and El Filibusterismo Building is a distinguished 4-storey twin structure, designed as a dedicated learning area for Senior High School (SHS) students. Comprising 15 classrooms, each with a corresponding office space, along with four regular office spaces, the building provides a conducive environment for academic pursuits. Named after the iconic novels of National Hero Dr. Jose Rizal, the building serves as the home for SHS classrooms. It hosts the offices of the SHS Assistant Principal and SHS Moderators. This significant facility was inaugurated in May 1999, marking a milestone in the institution's commitment to quality education."
+        about: "The Noli Me Tangere and El Filibusterismo Building is a distinguished 4-storey twin structure, designed as a dedicated learning area for Senior High School (SHS) students. Comprising 15 classrooms, each with a corresponding office space, along with four regular office spaces, the building provides a conducive environment for academic pursuits. Named after the iconic novels of National Hero Dr. Jose Rizal, the building serves as the home for SHS classrooms. It hosts the offices of the SHS Assistant Principal and SHS Moderators. This significant facility was inaugurated in May 1999, marking a milestone in the institution's commitment to quality education.",
+		departments: "Office of the SHS Assistant Principal Office of the Grade 12 Student Formation Office"
     },
     b5: {
         pic: "jr.png",
@@ -3489,8 +3491,8 @@ const cmtBuildingExtendedProfiles = {
     },
     b8: {
         pic: "gazebo.jpg",
-        tag: "",
-        about: ""
+        tag: "Nearest Gate: Front Gate",
+        about: "Located near the Grade 11 buildings, this area is home to The Crunch and other food stalls where students can buy snacks and meals during breaks. It is one of the convenient food areas you'll pass by throughout the school day."
     },
     b9: {
         pic: "chezrafael.png",
@@ -3504,8 +3506,9 @@ const cmtBuildingExtendedProfiles = {
     },
     b11: {
         pic: "miguel.jpg",
-        tag: "",
-        about: ""
+        tag: "Nearest Gate: Front Gate",
+        about: "Located behind the Sentrum, this building houses the General Services Department (GSD), where students and offices may request materials and other logistical support when needed.",
+		departments: "General Services Department"
     },
     b12: {
         pic: "sentrum.png",
@@ -3515,31 +3518,35 @@ const cmtBuildingExtendedProfiles = {
     b13: {
         pic: "capilla.png",
         tag: "Nearest Gate: College Lobby",
-        about: "Designed by Architect Joselito Gutierrez Jr., the Capilla de San Juan Bautista de La Salle stands majestically at the heart of De La Salle Lipa's campus. With dimensions of 38.30 meters in length and 22.50 meters in width, this sacred space offers a serene venue for worship and a tranquil spot to bask in the cool Lipa breeze. Additionally, the Capilla, accommodating 544 individuals, hosts regular masses, contributing to the spiritual richness that enhances the holistic development of the campus community and fosters a sense of unity and tranquility."
+        about: "Designed by Architect Joselito Gutierrez Jr., the Capilla de San Juan Bautista de La Salle stands majestically at the heart of De La Salle Lipa's campus. With dimensions of 38.30 meters in length and 22.50 meters in width, this sacred space offers a serene venue for worship and a tranquil spot to bask in the cool Lipa breeze. Additionally, the Capilla, accommodating 544 individuals, hosts regular masses, contributing to the spiritual richness that enhances the holistic development of the campus community and fosters a sense of unity and tranquility.",
+		departments: "Institutional Lasallian Formation Office, Community Involvement Office"
     },
     b14: {
         pic: "cmr.jpg",
-        tag: "",
-        about: ""
+        tag: "Nearest Gate: College Lobby",
+        about: "CMR is a two-storey building. On the ground floor, you'll find the Registrar's Office, while the second floor houses classrooms used by Grade 11 and some Grade 12 sections, along with offices such as the Human Resources Department (HRD), Financial Resource Department (FRD), and Central Procurement Department (CPD).",
+		departments: "Human Resources Department, Financial Resource Department, Central Procurement Department"
     },
+	
     b15: {
         pic: "hasyenda.jpg",
-        tag: "",
-        about: ""
+        tag: "Nearest Gate: College Lobby",
+        about: "Located between Brother Miguel (BM) and Mutien Marie (MM), Hacienda is a student dining area with several food stalls. It's a popular place where students can eat, relax, or stay during their vacant periods."
     },
     b16: {
         pic: "bm.jpg",
-        tag: "",
-        about: ""
+        tag: "Nearest Gate: College Lobby or Side Gate",
+        about: "Brother Miguel is a two-storey building primarily occupied by Grade 11 students. It also houses the Student Formation Office on the first floor and the Guidance Office on the second floor."
     },
     b17: {
         pic: "mm.jpg",
-        tag: "",
-        about: ""
+        tag: "Nearest Gate: College Lobby or Side Gate",
+        about: "Mutien Marie is a two-storey building. The ground floor is home to the TLE Department, including facilities for baking, robotics, and drafting, while the second floor contains classrooms primarily used by Grade 8 students.",
+		departments: "Technology and Livelihood Education Department"
     },
     b18: {
         pic: "centen.png",
-        tag: "Nearest Gate: College Lobbg or Side Gate",
+        tag: "Nearest Gate: College Lobby or Side Gate",
         about: "Nestled within the DLSL campus, the multi-purpose covered gymnasium is a dynamic hub for sports and events. Boasting three versatile courts, the facility caters to basketball and volleyball enthusiasts, with the flexibility to host various activities. Although primarily designed for sports, the gymnasium transforms into a vibrant venue for campus events, further enhancing its utility. The thoughtfully designed seating capacity of 300, divided into 100 seats for each court, ensures an immersive experience for spectators. This versatile space exemplifies DLSL's commitment to fostering a vibrant and inclusive campus culture."
     },
     b19: {
@@ -3549,8 +3556,8 @@ const cmtBuildingExtendedProfiles = {
     },
     b20: {
         pic: "jh.jpg",
-        tag: "",
-        about: ""
+        tag: "Nearest Gate: Side Gate",
+        about: "Jaime Hilario (JH) is one of the newest buildings on campus and has four storeys. It is occupied by Grades 7 to 10 and houses classrooms, laboratories, a library, as well as its own canteen and dining area where Junior High students can eat and spend their breaks."
     },
     b21: {
         pic: "bb.png",
