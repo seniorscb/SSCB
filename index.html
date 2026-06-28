@@ -3568,7 +3568,6 @@ const cmtBuildingExtendedProfiles = {
 
 const cmtCampusDatabase = {};
 
-// Clean database generation loop mapping custom metadata to your 21 active sidebar profiles
 for (let i = 1; i <= 21; i++) {
     const bId = `b${i}`;
     const profile = cmtBuildingExtendedProfiles[bId];
@@ -3580,7 +3579,8 @@ for (let i = 1; i <= 21; i++) {
         name: cmtBuildingNamesConfig[bId], 
         pic: profile ? profile.pic : "default.png",
         tag: profile ? profile.tag : "DLSL Campus",
-        about: profile ? profile.about : "Information profile details regarding this campus structure."
+        about: profile ? profile.about : "Information profile details regarding this campus structure.",
+        departments: profile && profile.departments ? profile.departments : [] // Restores department injection tracking mapping safely
     };
 }
 
