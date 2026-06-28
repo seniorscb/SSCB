@@ -2121,7 +2121,7 @@ font-family: 'Visby CF Heavy';
         .cmt-building-about-paragraph { font-size: 14px; line-height: 1.6; color: #444; }
         
         .cmt-department-list-items { list-style: none; padding: 0; margin-top: 5px; }
-        .cmt-department-list-items li { font-size: 14px; padding: 6px 0; border-bottom: 1px solid #f0f0f0; }
+        .cmt-department-list-items li { font-size: 14px; padding: 6px 0; border-bottom: 1px solid #000; }
 
         .cmt-utility-hidden { display: none !important; }
 
@@ -3937,6 +3937,7 @@ function cmtPopulateSidebarDataDetails(data) {
     // Updates Name and Text Content
     document.getElementById('cmtBuildingNameId').innerText = data.name;
     document.getElementById('cmtBuildingAboutId').innerText = data.about;
+	document.getElementById('cmtBuildingDeoartmentsId').innerText = data.departments;
     
     // Updates the Tag pill (Hides if empty, like b3)
     const tag = document.getElementById('cmtBuildingTagId');
