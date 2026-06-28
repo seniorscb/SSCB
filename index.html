@@ -3466,13 +3466,13 @@ const cmtBuildingExtendedProfiles = {
         pic: "gregorio.png",
         tag: "", 
         about: "The 2-storey main IT building is a specialized DLSL facility equipped with two office spaces, one conference room and a dedicated Computer Laboratory. This purpose-built structure serves as a central hub for information technology-related activities, providing a conducive environment for administrative work, meetings and hands-on learning experiences for students in the Computer Laboratory.",
-		departments: "Technology Operations and Innovation Center"
+		departments: ["Technology Operations and Innovation Center"]
     },
     b4: {
         pic: "jr.png",
         tag: "Nearest Gate: CBEAM Gate",
         about: "The Noli Me Tangere and El Filibusterismo Building is a distinguished 4-storey twin structure, designed as a dedicated learning area for Senior High School (SHS) students. Comprising 15 classrooms, each with a corresponding office space, along with four regular office spaces, the building provides a conducive environment for academic pursuits. Named after the iconic novels of National Hero Dr. Jose Rizal, the building serves as the home for SHS classrooms. It hosts the offices of the SHS Assistant Principal and SHS Moderators. This significant facility was inaugurated in May 1999, marking a milestone in the institution's commitment to quality education.",
-		departments: "Office of the SHS Assistant Principal Office of the Grade 12 Student Formation Office"
+		departments: ["Office of the SHS Assistant Principal', 'Office of the Grade 12 Student Formation Office"]
     },
     b5: {
         pic: "jr.png",
@@ -3508,7 +3508,7 @@ const cmtBuildingExtendedProfiles = {
         pic: "miguel.jpg",
         tag: "Nearest Gate: Front Gate",
         about: "Located behind the Sentrum, this building houses the General Services Department (GSD), where students and offices may request materials and other logistical support when needed.",
-		departments: "General Services Department"
+		departments: ["General Services Department"]
     },
     b12: {
         pic: "sentrum.png",
@@ -3519,13 +3519,13 @@ const cmtBuildingExtendedProfiles = {
         pic: "capilla.png",
         tag: "Nearest Gate: College Lobby",
         about: "Designed by Architect Joselito Gutierrez Jr., the Capilla de San Juan Bautista de La Salle stands majestically at the heart of De La Salle Lipa's campus. With dimensions of 38.30 meters in length and 22.50 meters in width, this sacred space offers a serene venue for worship and a tranquil spot to bask in the cool Lipa breeze. Additionally, the Capilla, accommodating 544 individuals, hosts regular masses, contributing to the spiritual richness that enhances the holistic development of the campus community and fosters a sense of unity and tranquility.",
-		departments: "Institutional Lasallian Formation Office, Community Involvement Office"
+		departments: ["Institutional Lasallian Formation Office", "Community Involvement Office"]
     },
     b14: {
         pic: "cmr.jpg",
         tag: "Nearest Gate: College Lobby",
         about: "CMR is a two-storey building. On the ground floor, you'll find the Registrar's Office, while the second floor houses classrooms used by Grade 11 and some Grade 12 sections, along with offices such as the Human Resources Department (HRD), Financial Resource Department (FRD), and Central Procurement Department (CPD).",
-		departments: "Human Resources Department, Financial Resource Department, Central Procurement Department"
+		departments: ["Human Resources Department", "Financial Resource Department", "Central Procurement Department"]
     },
 	
     b15: {
@@ -3542,7 +3542,7 @@ const cmtBuildingExtendedProfiles = {
         pic: "mm.jpg",
         tag: "Nearest Gate: College Lobby or Side Gate",
         about: "Mutien Marie is a two-storey building. The ground floor is home to the TLE Department, including facilities for baking, robotics, and drafting, while the second floor contains classrooms primarily used by Grade 8 students.",
-		departments: "Technology and Livelihood Education Department"
+		departments: ["Technology and Livelihood Education Department"]
     },
     b18: {
         pic: "centen.png",
@@ -3956,6 +3956,14 @@ function cmtPopulateSidebarDataDetails(data) {
         picElement.src = data.pic;; 
         picElement.alt = data.name;
     }
+	
+	const list = document.getElementById('cmtBuildingDepartmentsId');
+    list.innerHTML = '';
+    data.departments.forEach(d => {
+        const li = document.createElement('li');
+        li.innerText = d;
+        list.appendChild(li);
+    });
     
     cmtSyncDropdownValueToPin(data.pinId.replace('pin-', ''));
 }
