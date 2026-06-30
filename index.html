@@ -2238,6 +2238,19 @@ color: #00687a;
             margin-top: 0;
             font-size: 50px;
         }}
+	@media (max-width: 600px) {
+  #ovp11 .elections-container .display-grid, 
+  #ovp11 div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Optional: Reduce container paddings slightly on mobile so text has more room */
+  #ovp11 .container, 
+  #ovp11 style*="padding: 35px",
+  #ovp11 div[style*="padding: 35px"] {
+    padding: 15px !important;
+  }
+}
 </style>
 </head>
 <body>
