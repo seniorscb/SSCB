@@ -2125,7 +2125,6 @@ font-family: 'Visby CF Heavy';
 
         .cmt-utility-hidden { display: none !important; }
 
-/* Mobile Layout Split Fix Viewport Ratio Configurations */
         @media (max-width: 900px) {
             .cmt-interface-container { 
                 flex-direction: column !important; 
@@ -2146,17 +2145,16 @@ font-family: 'Visby CF Heavy';
                 max-width: 100% !important; 
                 min-width: 100% !important;
                 
-                /* FIX 1: Enforce standard mobile bounding viewport box explicitly */
                 height: 62vh !important; 
-                max-height: 62vh !important; /* Prevents text injection from pushing/jumping height layout bounds */
-                overflow-y: auto !important; /* Permits scrolling inside the sheet if content is long */
+                max-height: 62vh !important; 
+                overflow-y: auto !important; 
                 
                 background-color: #ffffff !important;
                 box-shadow: 0 -10px 30px rgba(0,0,0,0.25) !important; 
                 border-radius: 24px 24px 0 0 !important; 
                 padding: 18px !important;
                 
-                /* FIX 2: Dropped from 99999 to 990. This keeps it strictly beneath your main page's toggle menu button. */
+               
                 z-index: 990 !important; 
                 
                 transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s ease, max-height 0.3s ease !important; 
@@ -2167,14 +2165,12 @@ font-family: 'Visby CF Heavy';
                 display: block !important;
             }
 
-            /* Slides the panel upward when the state class is triggered */
             .cmt-info-sidebar-panel.cmt-state-expanded {
                 transform: translateY(0) !important; 
                 height: 85vh !important;
-                max-height: 85vh !important; /* Adjust bounds correctly when user expands it */
+                max-height: 85vh !important; 
             }
 
-            /* Rotates the small arrow layout indicator */
             .cmt-info-sidebar-panel.cmt-state-expanded .cmt-bottom-sheet-arrow-indicator {
                 transform: rotate(180deg) !important;
             }
@@ -2208,13 +2204,11 @@ font-family: 'soundmay';
   animation: slowFloat 2.2s ease-in-out infinite;
                    position: absolute;
             top: 30%;
-            /* Center positioning tricks */
 justify-content: center;
                        text-align: center;
 
         }
 
-        /* Typography inside the box */
         .floating-text-box h2 {
 color: #00687a;
             margin-top: 0;
@@ -2226,13 +2220,11 @@ color: #00687a;
 font-family: 'soundmay';
                    position: relative;
             top: 25%;
-            /* Center positioning tricks */
 justify-content: center;
                        text-align: center;
 
         }
 
-        /* Typography inside the box */
         .floating-text-box h2 {
 color: #00687a;
             margin-top: 0;
@@ -2244,7 +2236,6 @@ color: #00687a;
     grid-template-columns: 1fr !important;
   }
   
-  /* Optional: Reduce container paddings slightly on mobile so text has more room */
   #ovp11 .container, 
   #ovp11 style*="padding: 35px",
   #ovp11 div[style*="padding: 35px"] {
@@ -3414,7 +3405,6 @@ function toggleSidebar() {
 }
 
 function openTab(evt, tabId, scrollToId) {
-    // 1. Deactivate all tabs and hide content containers
     const tabContents = document.getElementsByClassName("tab-content");
     for (let i = 0; i < tabContents.length; i++) {
         tabContents[i].classList.remove("active");
@@ -3425,12 +3415,10 @@ function openTab(evt, tabId, scrollToId) {
         tabs[i].classList.remove("active");
     }
     
-    // 2. Activate target tab container
     const targetContent = document.getElementById(tabId);
     if (targetContent) {
         targetContent.classList.add("active");
         
-        // Handle reveal fade-in animations on sections
         const childSections = targetContent.querySelectorAll('section');
         childSections.forEach(sec => {
             sec.classList.add('show');
@@ -3443,22 +3431,17 @@ function openTab(evt, tabId, scrollToId) {
         evt.currentTarget.classList.add("active");
     }
     
-    // 3. Close the global navigation sidebar automatically after clicking a tab
     const mainSidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('.content');
     
     if (mainSidebar && mainContent) {
-        // Option A: If your website uses the "collapsed" class structure to hide the sidebar
         mainSidebar.classList.add('collapsed');
         mainContent.classList.add('collapsed');
         
-        // Option B: If your website toggles an "active" class to open/close it on mobile, uncomment below instead:
-        // mainSidebar.classList.remove('active');
+        
     }
     
-    // 4. Scroll seamlessly to the specific target element ID
     if (scrollToId) {
-        // A slight timeout ensures the tab is fully rendered and visible before scrolling
         setTimeout(() => {
             const element = document.getElementById(scrollToId);
             if (element) {
@@ -3470,7 +3453,6 @@ function openTab(evt, tabId, scrollToId) {
         }, 100); 
     }
     
-    // 5. Map lifecycle rules if switching to campusmap
     if (tabId === 'campusmap') {
         setTimeout(() => {
             if (typeof cmtApplyCanvasTransformation === 'function') {
@@ -3634,7 +3616,6 @@ const cmtBuildingNamesConfig = {
     b21: "St. Brother Benilde (BB)"
 };
 
-// Detailed definitions for the sidebar UI (Departments removed)
 const cmtBuildingExtendedProfiles = {
     b1: {
         pic: "sportscomplex.png",
@@ -3764,7 +3745,7 @@ for (let i = 1; i <= 21; i++) {
         pic: profile ? profile.pic : "default.png",
         tag: profile ? profile.tag : "DLSL Campus",
         about: profile ? profile.about : "Information profile details regarding this campus structure.",
-        departments: profile && profile.departments ? profile.departments : [] // Restores department injection tracking mapping safely
+        departments: profile && profile.departments ? profile.departments : [] 
     };
 }
 
@@ -3792,7 +3773,6 @@ const cmtCoordinateDataset = {
     b20: [77, 20.5],  // St. Brother Jaime Hilario (JH)
     b21: [81.8, 23.5]   // St. Brother Benilde (BB)
 };
-// Map structural layout arrays into active database properties
 for (const [key, coords] of Object.entries(cmtCoordinateDataset)) {
     if (cmtCampusDatabase[key]) {
         cmtCampusDatabase[key].pctX = coords[0];
@@ -3800,7 +3780,6 @@ for (const [key, coords] of Object.entries(cmtCoordinateDataset)) {
     }
 }
 
-// Retaining specific admin detail structure overridden for MB (Mabini Building is now b7)
 cmtCampusDatabase.b7.tag = "Administrative";
 cmtCampusDatabase.b7.about = "The Administration Building serves as the operational nerve center of De La Salle Lipa. It houses the offices of the President, Vice Chancellors, and key administrative departments responsible for the university's governance and strategic direction.";
 cmtCampusDatabase.b7.departments = ["Office of the President", "Office of the Vice Chancellor for Academics", "Human Resources"];
@@ -3842,7 +3821,7 @@ const cmtUserDotDOM = document.getElementById('cmtUserLocationDotId');
 const cmtDestStarDOM = document.getElementById('cmtDestinationStarId');
 const cmtSidebarDOM = document.getElementById('cmtInfoSidebarId');
 
-let cmtUserCurrentPos = { pctX: 41.5, pctY: 68.0 }; // Default initial position set to MB (b7)
+let cmtUserCurrentPos = { pctX: 41.5, pctY: 68.0 }; 
 let cmtCurrentEndKey = null;
 let cmtIsTrackingMode = false;
 let cmtActiveBuildingKey = null;
@@ -4118,11 +4097,9 @@ function cmtPopulateSidebarDataDetails(data) {
     document.getElementById('cmtSidebarPlaceholderId').classList.add('cmt-utility-hidden');
     document.getElementById('cmtSidebarContentId').classList.remove('cmt-utility-hidden');
     
-    // Updates Name and Text Content
     document.getElementById('cmtBuildingNameId').innerText = data.name;
     document.getElementById('cmtBuildingAboutId').innerText = data.about;
     
-    // Updates the Tag pill (Hides if empty, like b3)
     const tag = document.getElementById('cmtBuildingTagId');
     if (tag) {
         if (data.tag) {
@@ -4133,7 +4110,6 @@ function cmtPopulateSidebarDataDetails(data) {
         }
     }
 
-    // Updates Image Source
     const picElement = document.getElementById('cmtBuildingImageId');
     if (picElement && data.pic) {
         picElement.src = data.pic;; 
