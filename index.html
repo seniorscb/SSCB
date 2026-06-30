@@ -4161,11 +4161,11 @@ function cmtResetGlobalView() {
     
     cmtSidebarDOM.classList.remove('cmt-state-expanded');
 }
-window.addEventListener("load", () => {
-    const hash = window.location.hash.substring(1);
+window.addEventListener("DOMContentLoaded", () => {
+    const articleId = window.location.hash.substring(1);
 
-    if (hash && document.getElementById(hash)) {
-        sscbShowArticle(hash);
+    if (articleId) {
+        sscbShowArticle(articleId);
     }
 });
 window.addEventListener('resize', () => {
