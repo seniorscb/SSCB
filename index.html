@@ -4161,7 +4161,13 @@ function cmtResetGlobalView() {
     
     cmtSidebarDOM.classList.remove('cmt-state-expanded');
 }
+window.addEventListener("load", () => {
+    const hash = window.location.hash.substring(1);
 
+    if (hash && document.getElementById(hash)) {
+        sscbShowArticle(hash);
+    }
+});
 window.addEventListener('resize', () => {
     if (cmtIsTrackingMode) cmtRecomputeVectorRouteLine();
 });
