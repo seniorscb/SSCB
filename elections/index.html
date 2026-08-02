@@ -2253,6 +2253,23 @@ color: #00687a;
     padding: 15px !important;
   }
 }
+.responsive-form-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .responsive-form-container iframe {
+    width: 100%;
+    height: 600px; /* Perfect fit for standard single-page forms on desktop */
+    border: none;
+  }
+
+  /* Custom adjustment for mobile screens */
+  @media (max-width: 600px) {
+    .responsive-form-container iframe {
+      height: 800px; /* Slightly taller for mobile text wrapping */
+    }
+  }
 </style>
 </head>
 <body>
@@ -2297,17 +2314,15 @@ color: #00687a;
 
 
    <div class="container">
-<iframe 
-  src="https://docs.google.com/forms/d/e/1FAIpQLSe3609fMw8ba9Cazx3Ytif9yCYSgkKhdYUrR5PvdCxsK3OKJA/viewform?embedded=true" 
-  width="100%" 
-  height="2200" 
-  frameborder="0" 
-  marginheight="0" 
-  marginwidth="0"
-  style="border: none; overflow: hidden;">
-  Loading…
-</iframe>
-</div></br>
+<div class="responsive-form-container">
+  <iframe 
+    src="https://docs.google.com/forms/d/e/1FAIpQLSe3609fMw8ba9Cazx3Ytif9yCYSgkKhdYUrR5PvdCxsK3OKJA/viewform?embedded=true" 
+    frameborder="0" 
+    marginheight="0" 
+    marginwidth="0">
+    Loading…
+  </iframe>
+</div></div></br>
     <div class="container">
 
   <div class="form-wrapper">
@@ -3715,7 +3730,14 @@ window.addEventListener("DOMContentLoaded", () => {
 window.addEventListener('resize', () => {
     if (cmtIsTrackingMode) cmtRecomputeVectorRouteLine();
 });
-
+const iframe = document.getElementById('google-form-iframe');
+  
+  // Resizes container automatically on message from Google Forms
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'resize') {
+      iframe.style.height = e.data.height + 'px';
+    }
+  });
 </script>
 </body>
 </html>
