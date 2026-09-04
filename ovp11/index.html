@@ -757,6 +757,42 @@ font-family: "Visby CF Heavy";
   z-index: 2;
 }
 
+.heroovp11{
+  position: relative;
+  height: 100vh;
+  background: url('../o11vp.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+}
+.heroovp11::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+   background: url('../clouds.gif') center 100% / 101% no-repeat;
+  
+  opacity: 0.9; 
+  pointer-events: none;
+  mix-blend-mode: screen; 
+  z-index: 2;
+}
+.heroovp11::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  
+   background: url('../waves.gif') center 100% / 101% no-repeat;
+  
+  opacity: 1; 
+  pointer-events: none;
+  mix-blend-mode: screen; 
+  z-index: 2;
+}
+
+
+
  @media (max-width: 900px) {
 .heroop{
 width: 100%; max-width: 1920px; height: auto; display: block; margin: 0 auto; aspect-ratio: 1920 / 1080;}
@@ -2283,7 +2319,7 @@ color: #00687a;
 
 <div id="ovp" class="tab-content-active">
 
-<header class="heroovp" id="ovpstart">
+<header class="heroovp11" id="ovpstart">
 
 
 <div class="hero-content">
