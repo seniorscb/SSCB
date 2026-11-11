@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="shortcut icon" type="image" href="../logo.png">
+<link rel="shortcut icon" type="image" href="logo.png">
 <title>SSCB — De La Salle Lipa</title>
 	<meta property="og:type" content="website">
     <meta property="og:url" content="https://seniorscb.github.io/SSCB/">
@@ -20,18 +20,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 <style>
-iframe {
-  width: 100%;
-  height: 650px;
-  border: none; /* Replaces frameborder="0" */
-  margin: 0;     /* Replaces marginheight and marginwidth */
-  padding: 0;
-}
-@media screen and (max-width: 767px) {
-  iframe {
-    height: 250px; /* Adjust height for smaller phone screens */
-  }
-}
 
 .hyphen {
 font-family: Arial;
@@ -162,7 +150,7 @@ color: var(--dlsl-green);
 
 @font-face {
             font-family: 'Visby CF Heavy';
-            src: url('../fsp-demo-visby-cf-heavy-regular.otf') format('opentype');
+            src: url('fsp-demo-visby-cf-heavy-regular.otf') format('opentype');
         }
 @font-face {
             font-family: 'Livvic';
@@ -247,12 +235,12 @@ text-align: center;}
 
 .board-grid.large-gap {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1.5fr);
   gap: 35px 40px;
 }
 
 .person-card.full-row {
-  grid-column: 1 / 4; 
+  grid-column: 1 / 3; 
 }
 
 .empty-card {
@@ -426,14 +414,20 @@ font-family: "Visby CF Heavy";
 
 .tab-content{
   display: none;
+  animation: recordsFade .7s ease;
 }
 .tab-content.active{
   display: block;
 }
 
-section {
-  opacity: 1;
-  transform: none;
+section{
+  opacity:0;
+  transform:translateY(40px);
+  transition: all 0.9s ease;
+}
+section.show{
+  opacity:1;
+  transform:translateY(0);
 }
 .sidebar {
   background: #00A0BE;
@@ -552,7 +546,7 @@ background: var(--dlsl-green);
 }
 .board-grid{
   display:grid;
-  grid-template-columns:1fr;
+  grid-template-columns:repeat(4,1fr);
   gap:24px;
 }
 .avatar{
@@ -643,7 +637,7 @@ font-family: "Visby CF Heavy";
 }
 @media(min-width:1024px){
   .board-grid{
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
   }
 }
 
@@ -2248,30 +2242,6 @@ color: #00687a;
     padding: 15px !important;
   }
 }
-.responsive-form-container {
-    width: 100%;
-    margin: 0 auto;
-  }
-  
-  .responsive-form-container iframe {
-    width: 100%;
-    height: 700px; /* Perfect fit for standard single-page forms on desktop */
-    border: none;
-  }
-
-  /* Custom adjustment for mobile screens */
-
-@media (max-width: 1366px) {
-    .responsive-form-container iframe {
-      height: 1000px; /* Slightly taller for mobile text wrapping */
-    }
-  }
-
-  @media (max-width: 600px) {
-    .responsive-form-container iframe {
-      height: 800px; /* Slightly taller for mobile text wrapping */
-    }
-  }
 </style>
 </head>
 <body>
@@ -2299,45 +2269,562 @@ color: #00687a;
 <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 <div class="sidebar collapsed">
   <h3>‎ </h3>
-<button onclick="window.location.href='/'" class="tab">Home</button>
-<button onclick="window.location.href='/elections/'" class="tab active">Elections</button>
+<button onclick="window.location.href='/'" class="tab active">Home</button>
 <button onclick="window.location.href='/campus-map/'" class="tab">Campus Map</button>
-<button onclick="window.location.href='/sao/'" class="tab">Student Activities Office</button>
+<button onclick="window.location.href='/scope/'" class="tab">Campus Map</button>
+<button onclick="window.location.href='/sao/'" class="tab">Student Activities Office</button>    
 <button onclick="window.location.href='/op/'" class="tab">Office of the Integrated School President</button>
 <button onclick="window.location.href='/ovp12/'" class="tab">Office of the Grade 12 Vice President</button>
+<button onclick="window.location.href='/ovp11/'" class="tab">Office of the Grade 11 Vice President</button>
 <button onclick="window.location.href='/records/'" class="tab">Records</button>
 <button onclick="window.location.href='/constitution/'" class="tab">Constitution</button>
 </div>
 
 <div class="content collapsed">
 
-<div id="ovp11" class="tab-content-active">
- <section style="background: #fff;" class="board-section" >
-<div class="responsive-form-container">
-  <iframe 
-    src="https://docs.google.com/forms/d/e/1FAIpQLSe3609fMw8ba9Cazx3Ytif9yCYSgkKhdYUrR5PvdCxsK3OKJA/viewform?embedded=true" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0">
-    Loading…
-  </iframe>
+<div id="home" class="tab-content active">
+<header class="hero" id="homestart">
+  <div class="hero-overlay"></div>
+<div class="hero-content">
+  <a href="#carousel-section" class="hero-btn">Click here</a>
+<div class="scroll-arrow">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+       stroke="var(--dlsl-green)" stroke-width="1.2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9l6 6 6-6"/>
+  </svg>
+</div>
+</div>
+</header>
+
+<section class="intro-section">
+    <div class="intro-wrapper">
+        <div class="intro">
+            <div class="logo-circle"></div>
+            <div class="intro-text">
+                <h2 class="blue">Senior Student Coordinating Board</h2>
+                <p class="intro-desc">
+                    The Senior Student Coordinating Board is a constituent division of the highest governing student body of De La Salle Lipa Integrated School. Recognized by the DLSL–IS administration as the sole liaison between the student body and the institution, it assumes all responsibilities inherent to student government. It serves as the principal representative body of the students, by the students, and for the students.
+
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mission-vision-section">
+  <div class="width">
+    <h2 class="big">Mission and Vision of De La Salle Lipa</h2>
+    <div class="mv-grid">
+      <div class="mv-box">
+        <h3> Mission</h3>
+        <p class="justify">Inspired by our faith in God, by our Catholic traditions, and by the charism of St. John Baptist De La Salle, educational innovator par excellence, we, together and by association, are committed to giving quality and human Christian education to all.</p>
+      </div>
+      <div class="mv-box">
+        <h3>Vision</h3>
+        <p class="justify">A Lasallian educational institution that builds a society founded on equity and justice, and on sustainable and inclusive development.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="carousel-section" class="news-section">
+  <div class="container1">
+    <h2 class="big">Latest </h2>
+    <div class="news-flex">
+      <div class="news-carousel-container">
+        <h3 class="big" style="margin-bottom:16px; font-size:25px;">Events</h3>
+        <div class="news-carousel">
+          <div class="slides">
+            <a href="https://www.instagram.com/p/DfBvTw3IK13/?img_index=1" class="slide">
+              <img src="light.jpg" class="slide-img">
+              <div class="caption">
+                <div class="news-date">OCTOBER 28, 2026</div>
+                <div class="news-title">OF THE STUDENTS, BY THE STUDENS, AND FOR THE STUDENTS</div>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/p/DerD8HioAPS/?img_index=1" class="slide">
+              <img src="brarmin.jpg" class="slide-img">
+              <div class="caption">
+                <div class="news-date">OCTOBER 19, 2026</div>
+                <div class="news-title">GREATNESS COMES HOME</div>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/p/DeTF58YIKCr/?img_index=1" class="slide">
+              <img src="career.jpg" class="slide-img">
+              <div class="caption">
+                <div class="news-date">OCTOBER 10, 2026</div>
+                <div class="news-title">BETWEEN DREAMS AND DESTINATIONS</div>
+              </div>
+            </a>
+          </div>
+          <div class="dots"></div>
+        </div>
+      </div>
+
+      <div class="portrait-carousel-container">
+        <h3 class="big" style="margin-bottom:16px; font-size:25px;">Announcements</h3>
+        <div class="portrait-carousel"><div class="portrait-slide">
+            <a href="https://www.instagram.com/p/DfZIOm-oDee/?img_index=1">
+              <img src="scopemain.jpg" class="portrait-slide-img" />
+            </a>
+            <div class="caption">
+              <div class="news-date">NOVEMBER 6, 2026</div>
+              <div class="news-title">BAGONG YUGTO SA TAPAT NA PAMUMUNO
+</div>
+            </div>
+          </div>
+          <div class="portrait-slide">
+            <a href="https://www.instagram.com/p/DfYzeUaIPwU/?img_index=1">
+              <img src="manifewinners.jpg" class="portrait-slide-img" />
+            </a>
+            <div class="caption">
+              <div class="news-date">NOVEMBER 6, 2026</div>
+              <div class="news-title">MANIFESTATION WINNERS PUB</div>
+            </div>
+          </div>
+          <div class="portrait-slide">
+            <a href="https://www.instagram.com/p/DfTp9IWIAxg/?img_index=1">
+              <img src="constiupd.jpg" class="portrait-slide-img" />
+            </a>
+            <div class="caption">
+              <div class="news-date">NOVEMBER 4, 2026</div>
+              <div class="news-title">LAYING THE FOUNDATION FOR REFORM</div>
+            </div>
+          </div>
+          <div class="portrait-dots"></div>
+        </div>
+      </div>
+    </div> 
+  </div> 
+</section>
+
+<section class="board-section">
+  <div class="container">
+    <h2 class="blue" style="text-align: center;">SSCB Executive Board</h2>
+    <div class="board-grid">
+
+      <div class="person-card">
+        <div class="avatar"><img src="tolentino.png"></div>
+        <div class="person-info">
+          <div class="name">Princess Venus B. Tolentino</div>
+          <div class="role">Integrated School President</div>
+          <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=princess_venus_tolentino@dlsl.edu.ph" target="_blank">Gmail</a>
+
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="avatar"><img src="pastolero.png"></div>
+        <div class="person-info">
+          <div class="name">Luis Gabriel F. Pastolero</div>
+          <div class="role">Grade 12 Vice President</div>
+          <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=luis_gabriel_pastolero@dlsl.edu.ph" target="_blank">Gmail</a>
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="avatar"><img src="david.png"></div>
+        <div class="person-info">
+          <div class="name">David Uriel B. Malabanan</div>
+          <div class="role">Grade 11 Vice President</div>
+          <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=david_uriel_malabanan@dlsl.edu.ph" target="_blank">Gmail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<div id="campusmap" class="tab-content">
+<div class="cmt-interface-container" id="campusmapstart">
+        
+        <div class="cmt-map-viewport-box" id="cmtViewportId">
+            
+            <div class="cmt-controls-overlay-panel">
+                <button class="cmt-reset-btn-control cmt-utility-hidden" id="cmtResetBtnId" onclick="cmtResetGlobalView()">
+                    🔍 Zoom Out Entire Map
+                </button>
+            </div>
+
+            <div class="cmt-map-canvas-layer" id="cmtMapCanvasId">
+                <div class="cmt-map-wrapper-frame" id="cmtMapWrapperId">
+                    
+                    <img src="map.PNG" alt="Campus Map" class="cmt-campus-image-element" id="cmtCampusImgId">
+                    
+                    <svg class="cmt-map-svg-overlay-pane" id="cmtRouteSvgId">
+                        <path id="cmtVisualPathId" class="cmt-route-line-vector" d="" fill="none"/>
+                    </svg>
+
+                    <div id="cmtUserLocationDotId" class="cmt-user-live-dot-element" style="top: 57.2%; left: 37.8%;">
+                        <div class="cmt-user-avatar-frame-box">
+                            <img src="https://inviteme.com.au/cdn/shop/files/img_work_products_01_1200x1200.png?v=1744342444" alt="Student Position Indicator">
+                        </div>
+                    </div>
+
+                    <div id="cmtDestinationStarId" class="cmt-destination-star-pin-marker cmt-utility-hidden">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/073/274/811/small/green-map-pin-location-marker-navigation-symbol-isolated-on-transparent-background-3d-illustration-modern-design-useful-for-travel-direction-and-gps-concepts-png.png" alt="Destination Target Star">
+                    </div>
+
+                <div id="pin-b1" class="cmt-pin-dot-node cmt-color-blue" style="left: 14.8%; top: 32.5%;" onclick="cmtFocusTargetBuilding('b1', 14.8, 32.5, this)"></div>
+<div id="pin-b2" class="cmt-pin-dot-node cmt-color-blue" style="left: 24.0%; top: 20%;" onclick="cmtFocusTargetBuilding('b2', 24.0, 20, this)" >></div>
+<div id="pin-b3" class="cmt-pin-dot-node cmt-color-blue" style="left: 33.5%; top: 35%;" onclick="cmtFocusTargetBuilding('b3', 33.5, 35, this)"></div>
+<div id="pin-b4" class="cmt-pin-dot-node cmt-color-blue" style="left: 28.2%; top: 47.0%;" onclick="cmtFocusTargetBuilding('b4', 28.2, 47.0, this)"></div>
+<div id="pin-b5" class="cmt-pin-dot-node cmt-color-blue" style="left: 32.8%; top: 51.5%;" onclick="cmtFocusTargetBuilding('b5', 32.8, 51.5, this)"></div>
+<div id="pin-b6" class="cmt-pin-dot-node cmt-color-blue" style="left: 21.5%; top: 59.5%;" onclick="cmtFocusTargetBuilding('b6', 21.5, 59.5, this)"></div>
+<div id="pin-b7" class="cmt-pin-dot-node cmt-color-blue" style="left: 36.8%; top: 56.5%;" onclick="cmtFocusTargetBuilding('b7', 36.8, 56.5, this)"></div>
+<div id="pin-b8" class="cmt-pin-dot-node cmt-color-blue" style="left: 36.5%; top: 46%;" onclick="cmtFocusTargetBuilding('b8', 36.5, 46, this)"></div>
+<div id="pin-b9" class="cmt-pin-dot-node cmt-color-blue" style="left: 45.5%; top: 50%;" onclick="cmtFocusTargetBuilding('b9', 45.5, 50, this)"></div>
+<div id="pin-b10" class="cmt-pin-dot-node cmt-color-blue" style="left: 40.8%; top: 36.8%;" onclick="cmtFocusTargetBuilding('b10', 40.8, 36.8, this)"></div>
+<div id="pin-b11" class="cmt-pin-dot-node cmt-color-blue" style="left: 43.2%; top: 28%;" onclick="cmtFocusTargetBuilding('b11', 43.2, 28, this)"></div>
+<div id="pin-b12" class="cmt-pin-dot-node cmt-color-blue" style="left: 49.5%; top: 33%;" onclick="cmtFocusTargetBuilding('b12', 49.5, 33, this)"></div>
+<div id="pin-b13" class="cmt-pin-dot-node cmt-color-blue" style="left: 59.0%; top: 31%;" onclick="cmtFocusTargetBuilding('b13', 59.0, 31, this)"></div>
+<div id="pin-b14" class="cmt-pin-dot-node cmt-color-blue" style="left: 71.8%; top: 49.5%;" onclick="cmtFocusTargetBuilding('b14', 71.8, 49.5, this)"></div>
+<div id="pin-b15" class="cmt-pin-dot-node cmt-color-blue" style="left: 78%; top: 40.5%;" onclick="cmtFocusTargetBuilding('b15', 78, 40.5, this)"></div>
+<div id="pin-b16" class="cmt-pin-dot-node cmt-color-blue" style="left: 79.2%; top: 44.5%;" onclick="cmtFocusTargetBuilding('b16', 79.2, 44.5, this)"></div>
+<div id="pin-b17" class="cmt-pin-dot-node cmt-color-blue" style="left: 73.5%; top: 37%;" onclick="cmtFocusTargetBuilding('b17', 73.5, 37, this)"></div>
+<div id="pin-b18" class="cmt-pin-dot-node cmt-color-blue" style="left: 72%; top: 32%;" onclick="cmtFocusTargetBuilding('b18', 72, 32, this)"></div>
+<div id="pin-b19" class="cmt-pin-dot-node cmt-color-blue" style="left: 65.5%; top: 20%;" onclick="cmtFocusTargetBuilding('b19', 65.5, 20, this)"></div>
+<div id="pin-b20" class="cmt-pin-dot-node cmt-color-blue" style="left: 77%; top: 20.5%;" onclick="cmtFocusTargetBuilding('b20', 77, 20.5, this)"></div>
+<div id="pin-b21" class="cmt-pin-dot-node cmt-color-blue" style="left: 81.8%; top: 23.5%;" onclick="cmtFocusTargetBuilding('b21', 81.8, 23.5, this)"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cmt-info-sidebar-panel" id="cmtInfoSidebarId">
+            <div class="cmt-bottom-sheet-handle-bar" onclick="cmtToggleMobileSidebarView()">
+                <div class="cmt-bottom-sheet-drag-line"></div>
+                <div class="cmt-bottom-sheet-arrow-indicator"></div>
+            </div>
+            
+            <div class="cmt-nav-widget-card">
+                <h4 style="font-family: 'Visby CF Heavy'; font-size: 35px; color: var(--dlsl-green); cursor: pointer; margin: 0;" onclick="cmtToggleMobileSidebarView()">Interactive DLSL Campus Map </h4>
+                
+                <div class="cmt-nav-field-group">
+                    <label for="cmtStartLocationId">Your Current Location</label>
+                    <select id="cmtStartLocationId" onchange="cmtHandleStartLocationChange()">
+                        <option value="" disabled selected>Select building...</option>
+                    </select>
+                </div>
+
+                <div class="cmt-nav-field-group">
+                    <label for="cmtEndLocationId">Your Destination</label>
+                    <select id="cmtEndLocationId" onchange="cmtHandleEndDropdownChange()">
+                        <option value="" disabled selected>Select building...</option>
+                    </select>
+                </div>
+                <button class="cmt-nav-btn-action" onclick="cmtEngageLiveTrackingSystem()">Navigate</button>
+            </div>
+
+            <div id="cmtDirectionsCardId" class="cmt-directions-panel-box cmt-utility-hidden">
+                <h5 id="cmtLiveDistanceTextId">Distance: Selecting target...</h5>
+                <ul class="cmt-directions-list-container" style="list-style: none; padding: 0;">
+                    <li style="margin-top: 5px; color: #666; font-size: 11px;">Note: Estimated distance only. </li>
+                </ul>
+            </div>
+
+            <div id="cmtSidebarPlaceholderId" class="cmt-placeholder-state-view">
+                <h3>Select a building</h3>
+                <p>Building information will show up here.</p>
+            </div>
+
+            <div id="cmtSidebarContentId" class="cmt-sidebar-content-scroll cmt-utility-hidden">
+                <div class="cmt-building-header-image-box">
+                    <img id="cmtBuildingImageId" src="" alt="Building Image" style="width:100%; height:100%; border-radius:8px;">
+                </div>
+                <div class="cmt-details-body-wrapper">
+                    <span id="cmtBuildingTagId" class="cmt-tag-badge">Academic Zone</span>
+                    <h2 id="cmtBuildingNameId" class="cmt-building-title-text">Building Name</h2>
+                    <div class="cmt-section-heading-text">About</div>
+                    <p id="cmtBuildingAboutId" class="cmt-building-about-paragraph"></p>
+    
+                    <div class="cmt-section-heading-text">Departments</div>
+                    <ul id="cmtBuildingDepartmentsId" class="cmt-department-list-items"></ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 
-</br>
+<div id="sao" class="tab-content">
+  <section class="board-section" >
     <div class="container">
+      <h2 class="blue" id="saostart">Student Activities Office</h2>
+      <p class="section-desc">
+       The Senior High School (SHS) arm of the Student Activities Office (SAO) is in charge of designing, implementing, and monitoring student activities for SHS, overseeing the execution of co-curricular and extracurricular activities for the Grade 11 and Grade 12 communities.
+      </p>
+      <br>
+      <div class="role-group single">
+        <div class="person-card">
+          <div class="avatar"><img src="msjo.jpg"></div>
+          <div class="person-info">
+            <div class="name">Ms. Jocelyn Rosos</div>
+            <div class="role">Moderator, Student Activities Office</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=jocelyn.rosos@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <h2 class="blue">Clubs under the Student Activities Office</h2>
+      <div class="columns-container">
+        <div class="column">
+            <div class="heading">Special Interest Clubs</div>
+            <ul class="club-list">
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=jolo.mendoza@dlsl.edu.ph" target="_blank">Arts and Letters</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=darwin.pena@dlsl.edu.ph" target="_blank">Art Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=marivic.arteza@dlsl.edu.ph" target="_blank">ANIMO EXPRESSIONISTAS</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=mona.liza.de.villa@dlsl.edu.ph" target="_blank">BATANG KOOP</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=lireyn.de.sagun@dlsl.edu.ph" target="_blank">Booklover's Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=evangeline.sagaoinit@dlsl.edu.ph" target="_blank">Crochet Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=julius.antonio@dlsl.edu.ph" target="_blank">CosANIMO Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=randell.airand.bunye@dlsl.edu.ph" target="_blank">Gaming Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=nerissa.hernandez@dlsl.edu.ph,remelyn.punongbayan@dlsl.edu.ph,caryll.aisa.maranan@dlsl.edu.ph" target="_blank">Gourmet Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=olive.maganito@dlsl.edu.ph" target="_blank">Illumin8 Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=roger.atienza@dlsl.edu.ph,jessele.ocfemia@dlsl.edu.ph,hazel.tabagan@dlsl.edu.ph,lovely.cheska.neria@dlsl.edu.ph" target="_blank">Lasallian Traveller's Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=diana.marie.frago@dlsl.edu.ph,jocelyn.rosos@dlsl.edu.ph,olive.tan@dlsl.edu.ph" target="_blank">Lasallian Volunpeers Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=vivian.dimaculangan@dlsl.edu.ph" target="_blank">Lasallian Youth Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=kevin.lobrin@dlsl.edu.ph" target="_blank">LASALYRIKO</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=monique.rivera@dlsl.edu.ph" target="_blank">LILA (League of Integrated Lasallian Advocates)</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=victor.angelo.hermoso@dlsl.edu.ph" target="_blank">Modern Dance Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=claudine.lajarca@dlsl.edu.ph" target="_blank">Multimedia Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=ryan.puertollano@dlsl.edu.ph" target="_blank">Polyphonic Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=christie.victoria.arcega@dlsl.edu.ph" target="_blank">Science High Society Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=toni.de.jesus@dlsl.edu.ph" target="_blank">SHS EARTH CLUB</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=christian.dave.antonio@dlsl.edu.ph" target="_blank">STALLION Volleyball Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=ma.melissa.ishikawa@dlsl.edu.ph" target="_blank">SCB</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <div class="heading">Society, Culture, and Religion</div>
+            <ul class="club-list">
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=heidi.larano@dsl.edu.ph" target="_blank">ANAK</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=renemarie.fabon@dlsl.edu.ph" target="_blank">Well-being Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=xymon.king.marasigan@dlsl.edu.ph" target="_blank">Student Campus Ministry Lectors and Commentators</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=ehlysohl.elefante@dlsl.edu.ph" target="_blank">Student Campus Ministry Altar Servers</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=dimdritz.roxas@dlsl.edu.ph" target="_blank">Student Campus Ministry Choir</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=fred.amul@dlsl.edu.ph" target="_blank">Youth For Christ</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=silverio.jr.vallejo@dlsl.edu.ph" target="_blank">PAALSA</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=joey.lirio@dlsl.edu.ph" target="_blank">SHS Rover</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=ginnina.gatdula@dlsl.edu.ph" target="_blank">SHS Cadets</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=julius.ballesteros@dlsl.edu.ph,lerma.ilao@dlsl.edu.ph,merryle.marquez@dlsl.edu.ph,isidro.mark.salarda@dlsl.edu.ph" target="_blank">The SHS Knights of DLSL</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <div class="heading">Academic Varsity Club</div>
+            <ul class="club-list">
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=elldhie.caunca@dlsl.edu.ph" target="_blank">Social Science Varsity</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=jamie.delapaz@dlsl.edu.ph" target="_blank">Debate Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=ruby.angeles@dlsl.edu.ph" target="_blank">Math Varsity</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=maria.leonora.leynes@dlsl.edu.ph" target="_blank">Research Varsity Program</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=diana.rose.litan@dlsl.edu.ph" target="_blank">Biology Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=romo.sanvictores@dlsl.edu.ph" target="_blank">Physics Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=embelle.racal@dlsl.edu.ph" target="_blank">Chemistry Club</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=karl.anthony.perez@disl.edu.ph" target="_blank">ABMazing</a></li>
+                <li class="club-item"><a class="club-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=lailanie.guitierrez@dlsl.edu.ph" target="_blank">ADLAW-SHS</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
-  <div class="form-wrapper">
+<div id="op" class="tab-content">
 
-<h2 style="font-family: 'Visby CF Heavy'; font-size: 36px; margin-bottom: 8px; color: var(--dlsl-green);" id="tapatan">TAPATAN 2026</h2>
+<header class="heroop">
+<div class="hero-content" id="opstart">
+ 
+<div class="scroll-arrow">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+       stroke="var(--dlsl-green)" stroke-width="1.2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9l6 6 6-6"/>
+  </svg>
+</div>
+</div>
+</header>
 
-    <iframe 
-      src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FSSCBDLSL%2Fvideos%2F4523207254631604%2F&show_text=false&width=560&t=0" allowfullscreen
-     >
-      Loading…
-    </iframe>
-  </div></div></br>
- <div class="container">
+ 
+<section id="officepres" class="board-section">
+    <div class="container">
+      <h2 class="blue" style="text-align: center;">Office of the IS President</h2>
+      <h3 style="text-align: center; font-size: 25px;">Functions of the Office</h3>
+      <p class="section-desc" style="text-align: center;">
+        The Office of the IS President serves as the core council of the Student Coordinating Board, representing the entire student body and spearheading the operations of student activities. The OIP oversees all internal committees and enforces that all elective officers are held to high standards of student conduct.
+      </p>
+      <br>
+      <div class="role-group single">
+        <div class="person-card">
+          <div class="avatar"><img src="tolentino.png"></div>
+          <div class="person-info">
+            <div class="name">Princess Venus B. Tolentino</div>
+            <div class="role">Integrated School President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=princess_venus_tolentino@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="role-group double">
+        <div class="person-card">
+          <div class="avatar"><img src="pastolero.png"></div>
+          <div class="person-info">
+            <div class="name">Luis Gabriel F. Pastolero</div>
+            <div class="role">Grade 12 Vice President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=luis_gabriel_pastolero@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwoepRhqL7kr97M_S5eY7QJCirLVKVh6F7IQ&s"></div>
+          <div class="person-info">
+            <div class="name">Grade 11 Vice President</div>
+            <div class="role">Grade 11 Vice President</div>
+            <a class="email-btn" href="" target="_blank">Gmail</a>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar"><img src="vizconde.png"></div>
+          <div class="person-info">
+            <div class="name">Marc Mackeuz L. Vizconde</div>
+            <div class="role">Junior High School Vice President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=marc_mackeuz_vizcondeo@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar"><img src="landicho.png"></div>
+          <div class="person-info">
+            <div class="name">Nayelie Anelice V. Landicho</div>
+            <div class="role">Grade School Vice President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=nayelie_anelice_landicho@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
+<div id="ovp" class="tab-content">
+
+<header class="heroovp" id="ovpstart">
+
+
+<div class="hero-content">
+<div class="scroll-arrow">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+       stroke="var(--dlsl-green)" stroke-width="1.2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9l6 6 6-6"/>
+  </svg>
+</div>
+</div>
+</header>
+
+  <section class="board-section">
+      <div class="container">
+      <h2 class="blue" style="text-align: center;">Office of the G12 Vice President</h2>
+      <h3 style="text-align: center; font-size: 25px;">Functions of the Office</h3>
+      <p class="section-desc" style="text-align: center;">
+       The Office of the Grade 12 Vice President supports the leadership of the OIP by ensuring smooth coordination across all student-led initiatives. The O12VP oversees the Committees on Creatives, Archives, and Communications, guiding their operations and ensuring that deliverables are aligned with the goals of the Grade 12 Community.
+      </p>
+      <br>
+      <div class="role-group single">
+        <div class="person-card">
+          <div class="avatar"><img src="pastolero.png"></div>
+          <div class="person-info">
+            <div class="name">Luis Gabriel F. Pastolero </div>
+            <div class="role">Grade 12 Vice President</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=luis_gabriel_pastolero@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <h3 class="gitna">Committee on Archives</h3>
+      <p style="color:#000;" class="gitna">The Committee on Archives is in charge of drafting activity proposals, safekeeping of council repository, and all logistical requirements needed for the realization of SSCB advocacies.
+</p>
+      <br>
+      <div class="role-group single">
+        <div class="person-card">
+          <div class="avatar"><img src="para.png"></div>
+          <div class="person-info">
+            <div class="name">Princess Giannah Brielle M. Para</div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=princess_giannah_brielle_para@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="role-group double">
+        <div class="person-card">
+          <div class="avatar"><img src="andaya.png"></div>
+          <div class="person-info">
+            <div class="name">Gene Marvin B. Andaya</div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=gene_marvin_andaya@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar"><img src="sarmiento.PNG"></div>
+          <div class="person-info">
+            <div class="name">Sophia J. Sarmiento </div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=sophia_sarmiento@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+     
+      <div class="committee-container">
+        <h3 class="gitna">Committee on Communications</h3>
+        <p style="color:#000;" class="gitna">The Committee on Communications is in charge of managing all internal and external affairs of the SSCB, including but not limited to letters, correspondences, announcements, and social media management.</p>
+        <br>
+        <div class="role-group single">
+          <div class="person-card">
+            <div class="avatar"><img src="ibarra.png"></div>
+            <div class="person-info">
+              <div class="name">Queen Kiandra L. Ibarra</div>
+              <div class="role">Grade 12  Representative</div>
+              <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=queen_kiandra_ibarra@dlsl.edu.ph" target="_blank">Gmail</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <h3 class="gitna">Committee on Creatives</h3>
+      <p style="color:#000;" class="gitna">The Committee on Creatives is in charge of branding, designing, and operating audio-visual publication materials in pursuit of promulgating news and auxiliary information on student activities and governance.</p>
+      <br>
+      <div class="role-group single">
+        <div class="person-card">
+          <div class="avatar"><img src="cabardo.jpeg"></div>
+          <div class="person-info">
+            <div class="name">Catherine Margareth I. Cabardo</div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=catherine_margareth_cabardo@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="role-group double">
+        <div class="person-card">
+          <div class="avatar"><img src="hornilla.png"></div>
+          <div class="person-info">
+            <div class="name">Mark Justine A. Hornilla</div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=mark_justine_hornilla@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+        <div class="person-card">
+          <div class="avatar"><img src="azores.png"></div>
+          <div class="person-info">
+            <div class="name">Ronel Albert Iosef S. Azores</div>
+            <div class="role">Grade 12 Representative</div>
+            <a class="email-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=ronel_albert_iosef_azores@dlsl.edu.ph" target="_blank">Gmail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="ovp11" class="tab-content">
+ <section class="board-section" >
+    <div class="container">
 
 <div class="elections-container" style="max-width: 1100px; margin: 0 auto; padding: 20px 0; font-family: 'Livvic', sans-serif;">
     
@@ -2365,19 +2852,19 @@ color: #00687a;
             </h3>
             <div style="position: relative; padding-left: 20px; border-left: 2px dashed #e2e8f0; display: flex; flex-direction: column; gap: 20px;">
                 <div>
-                    <span style="display: block; font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">July 17-23</span>
+                    <span style="display: block; font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">July 14-20</span>
                     <strong style="color: #1e293b; font-size: 16px;">Filing of Candidacy</strong>
                 </div>
                 <div>
-                    <span style="display: block; font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">July 24-31</span>
+                    <span style="display: block; font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">July 21-27</span>
                     <strong style="color: #1e293b; font-size: 16px;">Campaign Period</strong>
                 </div>
                 <div>
-                    <span style="display: block; font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">August 31</span>
+                    <span style="display: block; font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">July 28</span>
                     <strong style="color: #1e293b; font-size: 16px;">Miting de Avance</strong>
                 </div>
                 <div>
-                    <span style="display: block; font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">August 3</span>
+                    <span style="display: block; font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">July 29-30</span>
                     <strong style="color: #1e293b; font-size: 16px;">Elections Day</strong>
                 </div>
             </div>
@@ -3681,6 +4168,7 @@ function cmtPopulateSidebarDataDetails(data) {
         }
     }
 
+
     const picElement = document.getElementById('cmtBuildingImageId');
     if (picElement && data.pic) {
         picElement.src = data.pic;; 
@@ -3731,14 +4219,7 @@ window.addEventListener("DOMContentLoaded", () => {
 window.addEventListener('resize', () => {
     if (cmtIsTrackingMode) cmtRecomputeVectorRouteLine();
 });
-const iframe = document.getElementById('google-form-iframe');
-  
-  // Resizes container automatically on message from Google Forms
-  window.addEventListener('message', function(e) {
-    if (e.data && e.data.type === 'resize') {
-      iframe.style.height = e.data.height + 'px';
-    }
-  });
+
 </script>
 </body>
 </html>
